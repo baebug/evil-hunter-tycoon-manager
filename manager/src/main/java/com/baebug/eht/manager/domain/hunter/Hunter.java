@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,37 +29,8 @@ public class Hunter {
     @Embedded
     private Stat stat;                      // Embedded type
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "weapon_id")
-    private Weapon weapon;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "helmet_id")
-    private Helmet helmet;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "armor_id")
-    private Armor armor;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "gloveid")
-    private Glove glove;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "shoes_id")
-    private Shoes shoes;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "necklace_id")
-    private Necklace necklace;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ring_id")
-    private Ring ring;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "belt_id")
-    private Belt belt;
+    @OneToMany(mappedBy = "hunter", cascade = CascadeType.ALL)
+    private List<Item> items = new ArrayList<>();
 
     public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, Stat stat) {
         this.name = name;
@@ -67,6 +40,10 @@ public class Hunter {
     }
 
     //== 연관관계 편의 메서드 ==//
+    public void setItem(Item item) {
+        getItems().add(item);
+        item.setHunter(this);
+    }
 
 
     //== 생성 메서드 ==//

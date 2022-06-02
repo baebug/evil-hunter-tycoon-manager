@@ -7,6 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class Armor extends Item {
+public class Accessory extends Item {
 
 }

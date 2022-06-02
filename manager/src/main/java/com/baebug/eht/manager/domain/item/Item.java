@@ -11,23 +11,22 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "dtype")
 @Getter
-public abstract class Item {
+public class Item {
 
     @Id @GeneratedValue
     @Column(name = "item_id")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hunter_id")
+    private Hunter hunter;
+
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)  // 양방향 걸었음
     private List<ItemOptionEntity> itemOptions = new ArrayList<>();
 
-    /* 룬도 그냥 하나의 옵션으로 취급
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "option", column = @Column(name = "rune_option")),
-            @AttributeOverride(name = "value", column = @Column(name = "rune_value"))
-    })
-    private ItemOption rune;
-    */
+    public void setHunter(Hunter hunter) {
+        this.hunter = hunter;
+    }
 
     //== 연관관계 편의 메서드 ==//
     public void addItemOption(ItemOptionEntity itemOptionEntity) {
@@ -36,18 +35,21 @@ public abstract class Item {
     }
 
     //== 생성 메서드 ==//
-    /*
-    public static Item createItem(ItemOptionEntity... itemOptions) {
+    public static Item createItem(List<ItemOptionEntity> itemOptions) {
         Item item = new Item();
-        item.setRune(rune);
         for (ItemOptionEntity itemOption : itemOptions) {
             item.addItemOption(itemOption);
         }
 
         return item;
     }
-    */
 
     //== 비즈니스 로직 ==//
+    public void changeOption(List<ItemOptionEntity> itemOptions) {
+        getItemOptions().clear();
+        for (ItemOptionEntity itemOption : itemOptions) {
+            this.addItemOption(itemOption);
+        }
+    }
 
 }

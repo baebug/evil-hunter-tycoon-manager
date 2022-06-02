@@ -73,7 +73,7 @@ class HunterServiceTest {
         HunterDto hunterDto = new HunterDto();
         hunterDto.setName(name);
         hunterDto.setCharacteristic(Characteristic.Strong);
-        hunterDto.setHunterClass(HunterClass.Warrior);
+        hunterDto.setHunterClass(HunterClass.BERSERKER);
         hunterDto.setStat(new Stat(1, 1, 1, 1, 1, 1, 1, 1, 1));
 
         return hunterDto;
