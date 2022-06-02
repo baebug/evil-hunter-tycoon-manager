@@ -1,6 +1,5 @@
 package com.baebug.eht.manager.domain.item;
 
-import com.baebug.eht.manager.domain.hunter.Hunter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +9,10 @@ import javax.persistence.*;
 @Getter @Setter
 public class Weapon extends Item {
 
-    private Long atk_spd;
-
-    @OneToOne(mappedBy = "weapon", fetch = FetchType.LAZY)
-    private Hunter hunter;
+    private Double atk_spd;
 
     //== 생성 메서드 ==//
-    public static Item createWeapon(Long atk_spd, ItemOptionEntity... itemOptions) {
+    public static Item createItem(Double atk_spd, ItemOptionEntity... itemOptions) {
         Weapon item = new Weapon();
         item.setAtk_spd(atk_spd);
         for (ItemOptionEntity itemOption : itemOptions) {
