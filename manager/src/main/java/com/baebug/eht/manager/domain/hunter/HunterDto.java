@@ -1,4 +1,4 @@
-package com.baebug.eht.manager.domain;
+package com.baebug.eht.manager.domain.hunter;
 
 import lombok.Data;
 

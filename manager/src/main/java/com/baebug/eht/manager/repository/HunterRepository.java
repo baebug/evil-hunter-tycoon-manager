@@ -1,7 +1,7 @@
 package com.baebug.eht.manager.repository;
 
-import com.baebug.eht.manager.domain.Hunter;
-import com.baebug.eht.manager.domain.HunterClass;
+import com.baebug.eht.manager.domain.hunter.Hunter;
+import com.baebug.eht.manager.domain.hunter.HunterClass;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

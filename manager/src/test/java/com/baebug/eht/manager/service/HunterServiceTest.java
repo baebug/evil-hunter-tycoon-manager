@@ -1,8 +1,10 @@
 package com.baebug.eht.manager.service;
 
-import com.baebug.eht.manager.domain.*;
+import com.baebug.eht.manager.domain.hunter.Characteristic;
+import com.baebug.eht.manager.domain.hunter.HunterClass;
+import com.baebug.eht.manager.domain.hunter.HunterDto;
+import com.baebug.eht.manager.domain.hunter.Stat;
 import com.baebug.eht.manager.repository.HunterRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
