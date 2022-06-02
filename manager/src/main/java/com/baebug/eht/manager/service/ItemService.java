@@ -1,13 +1,11 @@
 package com.baebug.eht.manager.service;
 
 import com.baebug.eht.manager.domain.item.Item;
-import com.baebug.eht.manager.domain.item.ItemDto;
+import com.baebug.eht.manager.domain.dto.ItemDto;
 import com.baebug.eht.manager.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

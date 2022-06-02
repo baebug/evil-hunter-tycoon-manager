@@ -1,6 +1,7 @@
 package com.baebug.eht.manager.domain.item;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -8,9 +9,11 @@ import java.util.Arrays;
 import static com.baebug.eht.manager.domain.item.OptionList.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Item domain Test")
 class ItemTest {
 
     @Test
+    @DisplayName("장비 옵션 변경")
     public void update() throws Exception {
         // given
         Item item1 = Item.createItem(Arrays.asList(createItemOptionEntity(ATK, 10), createItemOptionEntity(DEF, 12)));

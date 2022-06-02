@@ -4,6 +4,7 @@ import com.baebug.eht.manager.domain.item.Item;
 import com.baebug.eht.manager.domain.item.ItemOption;
 import com.baebug.eht.manager.domain.item.ItemOptionEntity;
 import com.baebug.eht.manager.domain.item.OptionList;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,9 +12,11 @@ import java.util.Arrays;
 import static com.baebug.eht.manager.domain.item.OptionList.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Hunter domain Test")
 class HunterTest {
 
     @Test
+    @DisplayName("헌터 정보 변경")
     public void update() throws Exception {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.Strong, HunterClass.BERSERKER, new Stat());
@@ -30,6 +33,7 @@ class HunterTest {
     }
 
     @Test
+    @DisplayName("헌터에게 장비 추가")
     public void setItem() throws Exception {
         // given
         Hunter hunter = new Hunter("헌터A", Characteristic.Strong, HunterClass.BERSERKER, new Stat());

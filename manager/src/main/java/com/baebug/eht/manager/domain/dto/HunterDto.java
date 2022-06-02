@@ -1,5 +1,8 @@
-package com.baebug.eht.manager.domain.hunter;
+package com.baebug.eht.manager.domain.dto;
 
+import com.baebug.eht.manager.domain.hunter.Characteristic;
+import com.baebug.eht.manager.domain.hunter.HunterClass;
+import com.baebug.eht.manager.domain.hunter.Stat;
 import lombok.Data;
 
 @Data

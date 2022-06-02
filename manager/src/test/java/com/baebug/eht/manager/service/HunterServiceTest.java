@@ -2,7 +2,7 @@ package com.baebug.eht.manager.service;
 
 import com.baebug.eht.manager.domain.hunter.Characteristic;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
-import com.baebug.eht.manager.domain.hunter.HunterDto;
+import com.baebug.eht.manager.domain.dto.HunterDto;
 import com.baebug.eht.manager.domain.hunter.Stat;
 import com.baebug.eht.manager.repository.HunterRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+@DisplayName("통합 테스트")
 class HunterServiceTest {
 
     @Autowired HunterService hunterService;

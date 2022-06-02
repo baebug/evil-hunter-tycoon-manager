@@ -2,7 +2,7 @@ package com.baebug.eht.manager.service;
 
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
-import com.baebug.eht.manager.domain.hunter.HunterDto;
+import com.baebug.eht.manager.domain.dto.HunterDto;
 import com.baebug.eht.manager.repository.HunterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
