@@ -1,6 +1,6 @@
 package com.baebug.eht.manager.domain.dto;
 
-import com.baebug.eht.manager.domain.item.ItemOptionEntity;
+import com.baebug.eht.manager.domain.item.ItemOption;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -10,6 +10,6 @@ import java.util.List;
 public class ItemDto {
 
     private Double atk_spd;
-    private List<ItemOptionEntity> itemOptions = new ArrayList<>();
+    private List<ItemOption> itemOptions = new ArrayList<>();
 
 }

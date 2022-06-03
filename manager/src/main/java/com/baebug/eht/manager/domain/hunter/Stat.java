@@ -39,8 +39,35 @@ public class Stat {
         this.stamina = stamina;
     }
 
-    public void getGrade() {
+    public String getGrade() {
         int statSum = getAtk() + getDef() + getCrit() + getAtk_spd() + getEvasion() + getHp() + getSatiety() + getMood() + getStamina();
 
+        switch (statSum) {
+            case 0: case 1:
+                return "Normal";
+            case 2: case 3:
+                return "Normal+";
+            case 4: case 5:
+                return "Rare";
+            case 6: case 7:
+                return "Rare+";
+            case 8: case 9:
+                return "Superior";
+            case 10: case 11:
+                return "Superior+";
+            case 12: case 13:
+                return "Heroic";
+            case 14: case 15:
+                return "Heroic+";
+            case 16: case 17:
+                return "Legendary";
+            case 18: case 19:
+                return "Legendary+";
+            case 20: case 21:
+                return "Ultimate";
+            default:
+                return "Ultimate+";
+        }
     }
+
 }

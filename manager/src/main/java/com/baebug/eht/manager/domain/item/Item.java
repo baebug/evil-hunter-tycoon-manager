@@ -1,5 +1,6 @@
 package com.baebug.eht.manager.domain.item;
 
+import com.baebug.eht.manager.domain.dto.SpecDto;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import lombok.Getter;
 
@@ -22,22 +23,22 @@ public class Item {
     private Hunter hunter;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)  // 양방향 걸었음
-    private List<ItemOptionEntity> itemOptions = new ArrayList<>();
+    private List<ItemOption> itemOptions = new ArrayList<>();
 
     public void setHunter(Hunter hunter) {
         this.hunter = hunter;
     }
 
     //== 연관관계 편의 메서드 ==//
-    public void addItemOption(ItemOptionEntity itemOptionEntity) {
-        itemOptions.add(itemOptionEntity);
-        itemOptionEntity.setItem(this);
+    public void addItemOption(ItemOption itemOption) {
+        itemOptions.add(itemOption);
+        itemOption.setItem(this);
     }
 
     //== 생성 메서드 ==//
-    public static Item createItem(List<ItemOptionEntity> itemOptions) {
+    public static Item createItem(List<ItemOption> itemOptions) {
         Item item = new Item();
-        for (ItemOptionEntity itemOption : itemOptions) {
+        for (ItemOption itemOption : itemOptions) {
             item.addItemOption(itemOption);
         }
 
@@ -45,11 +46,16 @@ public class Item {
     }
 
     //== 비즈니스 로직 ==//
-    public void changeOption(List<ItemOptionEntity> itemOptions) {
+    public void changeOption(List<ItemOption> itemOptions) {
         getItemOptions().clear();
-        for (ItemOptionEntity itemOption : itemOptions) {
+        for (ItemOption itemOption : itemOptions) {
             this.addItemOption(itemOption);
         }
     }
 
+    public void calculate(SpecDto specDto) throws IllegalAccessException {
+        for (ItemOption itemOption : getItemOptions()) {
+            specDto.add(itemOption.getOption().getOption(), itemOption.getValue());
+        }
+    }
 }

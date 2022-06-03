@@ -1,5 +1,8 @@
 package com.baebug.eht.manager.domain.item;
 
+import lombok.Getter;
+
+@Getter
 public enum OptionList {
     ATK("전체 공격력", "atk"),
     DEF("전체 방어력", "def"),
@@ -25,11 +28,12 @@ public enum OptionList {
     RE_SATIETY("3%의 허기 회복", "re_satiety"),
     RE_MOOD("3%의 기분 회복", "re_mood");
 
-    private String desc;
-    private String option;
+    private final String desc;
+    private final String option;
 
     OptionList(String desc, String option) {
         this.desc = desc;
         this.option = option;
     }
+
 }

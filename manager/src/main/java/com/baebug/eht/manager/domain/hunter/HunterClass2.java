@@ -14,9 +14,6 @@ public enum HunterClass2 {
     CRUSADER("크루세이더"),
     DARK_PALADIN("다크팔라딘");
 
-    private String name;
-
     HunterClass2(String name) {
-        this.name = name;
     }
 }

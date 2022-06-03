@@ -14,9 +14,6 @@ public enum HunterClass3 {
     GUARDIAN("가디언"),
     EXECUTOR("익스큐터");
 
-    private String name;
-
     HunterClass3(String name) {
-        this.name = name;
     }
 }

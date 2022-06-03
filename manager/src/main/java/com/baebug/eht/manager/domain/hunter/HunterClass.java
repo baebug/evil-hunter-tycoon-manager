@@ -23,8 +23,8 @@ public enum HunterClass {
     PALADIN(Arrays.asList(TEMPLAR, CRUSADER, DARK_PALADIN), Arrays.asList(INQUISITOR, GUARDIAN, EXECUTOR)),
     SORCERER(Arrays.asList(ARCH_MAGE, DARK_MAGE, IGNIS), Arrays.asList(CONJURER, DARK_LORD, ILLUSIONIST));
 
-    private List<HunterClass2> second;
-    private List<HunterClass3> third;
+    private final List<HunterClass2> second;
+    private final List<HunterClass3> third;
 
     HunterClass(List<HunterClass2> second, List<HunterClass3> third) {
         this.second = second;
