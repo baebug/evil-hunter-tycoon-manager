@@ -23,6 +23,9 @@ public class Hunter {
     private int fury;
     private int quicken;
 
+    @Transient
+    private SpecDto spec = new SpecDto();
+
     @Enumerated(EnumType.STRING)
     private Characteristic characteristic;    // Enum type
 
@@ -40,54 +43,93 @@ public class Hunter {
     @JoinColumn(name = "tech_id")
     private TechEntity tech = new TechEntity();
 
-    public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) {
+    public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
         this.name = name;
         this.characteristic = characteristic;
         this.hunterClass = hunterClass;
         this.stat = stat;
+
+        this.calculate();
     }
 
-    public void setTech(TechEntity tech) {
+    public void setTech(TechEntity tech) throws IllegalAccessException {
         this.tech = tech;
+        this.calculate();
     }
 
-    public void setFury(int fury) {
+    public void setFury(int fury) throws IllegalAccessException {
         this.fury = fury;
+        this.calculate();
     }
 
-    public void setQuicken(int quicken) {
+    public void setQuicken(int quicken) throws IllegalAccessException {
         this.quicken = quicken;
+        this.calculate();
     }
 
     //== 연관관계 편의 메서드 ==//
-    public void setItem(Item item) {
+    public void setItem(Item item) throws IllegalAccessException {
         getItems().add(item);
         item.setHunter(this);
+        this.calculate();
     }
 
     //== 생성 메서드 ==//
-    public static Hunter createHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) {
+    public static Hunter createHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
         return new Hunter(name, characteristic, hunterClass, stat);
     }
 
     //== 비즈니스 로작? ==//
-    public void changeHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) {
+    public void changeHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
         this.name = name;
         this.characteristic = characteristic;
         this.hunterClass = hunterClass;
         this.stat = stat;
+
+        this.calculate();
     }
 
-    public SpecDto calculate(SpecDto specDto) throws IllegalAccessException {
-        getStat().calculate(specDto);
-        getTech().calculate(specDto);
-        getCharacteristic().calculate(specDto);
+    public void calculate() throws IllegalAccessException {
+        SpecDto tmp = new SpecDto();
+
+        getStat().calculate(tmp);
+        getTech().calculate(tmp);
+        getCharacteristic().calculate(tmp);
 
         for (Item item : getItems()) {
-            item.calculate(specDto);
+            item.calculate(tmp);
         }
 
-        return specDto;
+        this.spec = tmp;
+    }
+
+    public double getAtkSpd() {
+        double atkSpd = getSpec().getAtk_spd();
+        double spdRate = getSpec().getSpd() * .01;
+        double furyRate = calcFury(getFury());
+        double quickenRate = getQuicken() * .1;
+
+        return atkSpd * (1 - spdRate) / (furyRate + quickenRate);
+    }
+
+    public double getAtkSpd(double expected) {
+        double atkSpd = getSpec().getAtk_spd();
+        double actualSpd = getSpec().getSpd();
+        double furyRate = calcFury(getFury());
+        double quickenRate = getQuicken() * .1;
+
+        return 100 * (1 - (expected * (furyRate + quickenRate) / atkSpd)) - actualSpd;
+    }
+
+    private double calcFury(int n) {
+        switch (n) {
+            case 1:
+                return 2.38;
+            case 10:
+                return 4;
+            default:
+                return 1;
+        }
     }
 
 }
