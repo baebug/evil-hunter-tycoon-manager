@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +20,8 @@ public class Hunter {
     private Long id;
 
     private String name;
+    private int fury;
+    private int quicken;
 
     @Enumerated(EnumType.STRING)
     private Characteristic characteristic;    // Enum type
@@ -48,6 +49,14 @@ public class Hunter {
 
     public void setTech(TechEntity tech) {
         this.tech = tech;
+    }
+
+    public void setFury(int fury) {
+        this.fury = fury;
+    }
+
+    public void setQuicken(int quicken) {
+        this.quicken = quicken;
     }
 
     //== 연관관계 편의 메서드 ==//
