@@ -55,7 +55,7 @@ public class Item {
 
     public void calculate(SpecDto specDto) throws IllegalAccessException {
         for (ItemOption itemOption : getItemOptions()) {
-            specDto.add(itemOption.getOption().getOption(), itemOption.getValue());
+            specDto.add(itemOption.getOption().getOption(), (double) itemOption.getValue());
         }
     }
 }

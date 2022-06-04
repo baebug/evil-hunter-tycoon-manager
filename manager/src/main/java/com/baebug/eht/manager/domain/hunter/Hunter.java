@@ -28,20 +28,26 @@ public class Hunter {
     @Enumerated(EnumType.STRING)
     private HunterClass hunterClass;        // Enum type
 
-    @Embedded
-    private Stat stat;                      // Embedded type
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "stat_id")
+    private StatEntity stat;
 
     @OneToMany(mappedBy = "hunter", cascade = CascadeType.ALL)
     private List<Item> items = new ArrayList<>();
 
-    @OneToMany(mappedBy = "hunter", cascade = CascadeType.ALL)
-    private List<Tech> techs = new ArrayList<>();
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "tech_id")
+    private TechEntity tech = new TechEntity();
 
-    public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, Stat stat) {
+    public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) {
         this.name = name;
         this.characteristic = characteristic;
         this.hunterClass = hunterClass;
         this.stat = stat;
+    }
+
+    public void setTech(TechEntity tech) {
+        this.tech = tech;
     }
 
     //== 연관관계 편의 메서드 ==//
@@ -50,18 +56,13 @@ public class Hunter {
         item.setHunter(this);
     }
 
-    public void addTech(Tech tech) {
-        getTechs().add(tech);
-        tech.setHunter(this);
-    }
-
     //== 생성 메서드 ==//
-    public static Hunter createHunter(String name, Characteristic characteristic, HunterClass hunterClass, Stat stat) {
+    public static Hunter createHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) {
         return new Hunter(name, characteristic, hunterClass, stat);
     }
 
     //== 비즈니스 로작? ==//
-    public void changeHunter(String name, Characteristic characteristic, HunterClass hunterClass, Stat stat) {
+    public void changeHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) {
         this.name = name;
         this.characteristic = characteristic;
         this.hunterClass = hunterClass;
@@ -69,20 +70,13 @@ public class Hunter {
     }
 
     public SpecDto calculate(SpecDto specDto) throws IllegalAccessException {
-        for (Field statField : getStat().getClass().getDeclaredFields()) {
-            statField.setAccessible(true);
-            specDto.add(statField.getName(), (Integer) statField.get(getStat()));
-        }
+        getStat().calculate(specDto);
+        getTech().calculate(specDto);
+        getCharacteristic().calculate(specDto);
 
         for (Item item : getItems()) {
             item.calculate(specDto);
         }
-
-        for (Tech tech : getTechs()) {
-            tech.calculate(specDto);
-        }
-
-        specDto.add(characteristic.getOption(), characteristic.getValue());
 
         return specDto;
     }

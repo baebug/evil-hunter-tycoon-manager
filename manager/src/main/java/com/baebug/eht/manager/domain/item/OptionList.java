@@ -25,8 +25,8 @@ public enum OptionList {
     MATERIAL("재료 추가 획득", "material"),
     SATIETY("허기 소모량", "satiety"),
     MOOD("기분 소모량", "mood"),
-    RE_SATIETY("3%의 허기 회복", "re_satiety"),
-    RE_MOOD("3%의 기분 회복", "re_mood");
+    SATIETY_UP("3%의 허기 회복", "satiety_up"),
+    MOOD_UP("3%의 기분 회복", "mood_up");
 
     private final String desc;
     private final String option;

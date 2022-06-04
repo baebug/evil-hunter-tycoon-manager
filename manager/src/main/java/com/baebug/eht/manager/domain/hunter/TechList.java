@@ -29,4 +29,14 @@ public enum TechList {
         this.option = option;
         this.weight = weight;
     }
+
+    public static Double getWeight(String option) {
+        double w = .0;
+        for (TechList value : TechList.values()) {
+            if (value.getOption() == option) {
+                w = value.getWeight();
+            }
+        }
+        return w;
+    }
 }

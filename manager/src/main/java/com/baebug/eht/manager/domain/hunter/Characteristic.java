@@ -1,19 +1,23 @@
 package com.baebug.eht.manager.domain.hunter;
 
+import com.baebug.eht.manager.domain.dto.SpecDto;
+import lombok.Getter;
+
+@Getter
 public enum Characteristic {
-    Strong("힘이 쎈", "atk", 10),
-    Fragile("허약한", "atk", -10),
-    Swift("날쌘돌이", "spd", 10),
-    Thickheaded("둔한", "spd", -10),
-    Charismatic("리더쉽이 강한", "party", null),
-    DeadWeight("고문관", "party", null),
-    Heroic("영웅심리", "heroic", 7),
-    ManOfSteel("금강불괴", "def", 10),
-    Nimble("쏜살같은", "evasion", 3),
-    Sluggish("굼뜬", "evasion", -3),
-    Sharp("샤프한", "crit", 3),
-    Dull("둔탁한", "crit", -3),
-    Others("기타", null, null);
+    STRONG("힘이 쎈", "atk", 10),
+    FRAGILE("허약한", "atk", -10),
+    SWIFT("날쌘돌이", "spd", 10),
+    THICKHEADED("둔한", "spd", -10),
+    CHARISMATIC("리더쉽이 강한", "party", null),
+    DEADWEIGHT("고문관", "party", null),
+    HEROIC("영웅심리", "heroic", 7),
+    MAN_OF_STEEL("금강불괴", "def", 10),
+    NIMBLE("쏜살같은", "evasion", 3),
+    SLUGGISH("굼뜬", "evasion", -3),
+    SHARP("샤프한", "crit", 3),
+    DULL("둔탁한", "crit", -3),
+    OTHERS("기타", null, null);
 
     private final String characteristic;
     private final String option;
@@ -25,15 +29,10 @@ public enum Characteristic {
         this.value = value;
     }
 
-    public String getCharacteristic() {
-        return characteristic;
+    public void calculate(SpecDto specDto) throws IllegalAccessException {
+        if (getOption() != null && getValue() != null) {
+            specDto.add(getOption(), (double) getValue());
+        }
     }
 
-    public String getOption() {
-        return option;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
 }

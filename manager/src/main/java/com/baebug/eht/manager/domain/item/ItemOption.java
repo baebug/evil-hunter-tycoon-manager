@@ -18,13 +18,13 @@ public class ItemOption {
     private Long id;
 
     private OptionList option;
-    private Integer value;
+    private int value;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
-    public ItemOption(OptionList option, Integer value) {
+    public ItemOption(OptionList option, int value) {
         this.option = option;
         this.value = value;
     }

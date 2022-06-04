@@ -1,37 +1,38 @@
 package com.baebug.eht.manager.domain.hunter;
 
+import com.baebug.eht.manager.domain.dto.SpecDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
+import java.lang.reflect.Field;
 
-/**
- * Stat (ATK, DEF, CRIT, ATK_SPD, Evasion, Health, satiety, Mood, Stamina)
- */
-
-@Embeddable
+@Entity
+@Table(name = "stat")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Access(AccessType.FIELD)
-public class Stat {
+public class StatEntity {
+
+    @Id @GeneratedValue
+    @Column(name = "stat_id")
+    private Long id;
+
     private int atk;
     private int def;
     private int crit;
-    private int atk_spd;
+    private int spd;
     private int evasion;
     private int hp;
     private int satiety;
     private int mood;
     private int stamina;
 
-    public Stat(int atk, int def, int crit, int atk_spd, int evasion, int hp, int satiety, int mood, int stamina) {
+    public StatEntity(int atk, int def, int crit, int spd, int evasion, int hp, int satiety, int mood, int stamina) {
         this.atk = atk;
         this.def = def;
         this.crit = crit;
-        this.atk_spd = atk_spd;
+        this.spd = spd;
         this.evasion = evasion;
         this.hp = hp;
         this.satiety = satiety;
@@ -39,8 +40,19 @@ public class Stat {
         this.stamina = stamina;
     }
 
+    public void calculate(SpecDto specDto) throws IllegalAccessException {
+        for (Field field : getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            if (field.getName() != "id") {
+                int weight = StatList.getWeight(field.getName());
+                Double a = Double.valueOf(String.valueOf(field.get(this)));
+                specDto.add(field.getName(), a * weight);
+            }
+        }
+    }
+
     public String getGrade() {
-        int statSum = getAtk() + getDef() + getCrit() + getAtk_spd() + getEvasion() + getHp() + getSatiety() + getMood() + getStamina();
+        int statSum = getAtk() + getDef() + getCrit() + getSpd() + getEvasion() + getHp() + getSatiety() + getMood() + getStamina();
 
         switch (statSum) {
             case 0: case 1:

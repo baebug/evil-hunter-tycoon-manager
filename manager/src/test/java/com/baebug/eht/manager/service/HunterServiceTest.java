@@ -3,7 +3,7 @@ package com.baebug.eht.manager.service;
 import com.baebug.eht.manager.domain.hunter.Characteristic;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.dto.HunterDto;
-import com.baebug.eht.manager.domain.hunter.Stat;
+import com.baebug.eht.manager.domain.hunter.StatEntity;
 import com.baebug.eht.manager.repository.HunterRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -73,9 +73,9 @@ class HunterServiceTest {
     private HunterDto createHunterDto(String name) {
         HunterDto hunterDto = new HunterDto();
         hunterDto.setName(name);
-        hunterDto.setCharacteristic(Characteristic.Strong);
+        hunterDto.setCharacteristic(Characteristic.STRONG);
         hunterDto.setHunterClass(HunterClass.BERSERKER);
-        hunterDto.setStat(new Stat(1, 1, 1, 1, 1, 1, 1, 1, 1));
+        hunterDto.setStat(new StatEntity(1, 1, 1, 1, 1, 1, 1, 1, 1));
 
         return hunterDto;
     }
