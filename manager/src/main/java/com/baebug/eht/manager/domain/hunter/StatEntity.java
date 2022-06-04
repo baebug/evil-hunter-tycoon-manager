@@ -45,8 +45,8 @@ public class StatEntity {
             field.setAccessible(true);
             if (field.getName() != "id") {
                 int weight = StatList.getWeight(field.getName());
-                Double a = Double.valueOf(String.valueOf(field.get(this)));
-                specDto.add(field.getName(), a * weight);
+                Double d = Double.valueOf(String.valueOf(field.get(this)));
+                specDto.add(field.getName(), d * weight);
             }
         }
     }
