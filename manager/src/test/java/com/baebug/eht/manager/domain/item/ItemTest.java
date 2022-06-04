@@ -15,7 +15,7 @@ class ItemTest {
     @DisplayName("장비 옵션 변경")
     public void update() throws Exception {
         // given
-        Item item1 = Item.createItem(Arrays.asList(createItemOption(ATK, 10), createItemOption(DEF, 12)));
+        Item item1 = Accessory.createItem(Arrays.asList(createItemOption(ATK, 10), createItemOption(DEF, 12)));
 
         // when
         item1.changeOption(Arrays.asList(createItemOption(CRIT, 13), createItemOption(HP, 21), createItemOption(SPD, 8)));

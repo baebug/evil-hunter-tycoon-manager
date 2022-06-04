@@ -26,14 +26,14 @@ public class HunterService {
      * 대신 앞단을 만들어야 Dto 가 어떻게 생긴지 알겠지?
      */
     @Transactional
-    public Long join(HunterDto hunterDto) throws IllegalAccessException {
+    public Long join(HunterDto hunterDto) throws Exception {
         Hunter hunter = Hunter.createHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), hunterDto.getStat());
         hunterRepository.save(hunter);
         return hunter.getId();
     }
 
     @Transactional
-    public void update(Long hunterId, HunterDto hunterDto) throws IllegalAccessException {
+    public void update(Long hunterId, HunterDto hunterDto) throws Exception {
         Hunter hunter = hunterRepository.findById(hunterId);
         hunter.changeHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), hunterDto.getStat());
     }
@@ -67,4 +67,6 @@ public class HunterService {
         SpecDto commonSpec = commonBuff.calculate();
         hunter.calculate(commonSpec);
     }
+
+
 }

@@ -1,11 +1,13 @@
 package com.baebug.eht.manager.service;
 
-import com.baebug.eht.manager.domain.item.Item;
+import com.baebug.eht.manager.domain.item.*;
 import com.baebug.eht.manager.domain.dto.ItemDto;
 import com.baebug.eht.manager.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.PostConstruct;
 
 @Service
 @RequiredArgsConstructor
@@ -13,13 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final InitService initService;
 
     /**
      * item 추가, 삭제
      */
     @Transactional
     public Long join(ItemDto itemDto) {
-        Item item = Item.createItem(itemDto.getItemOptions());
+        Item item = Accessory.createItem(itemDto.getItemOptions());
         itemRepository.save(item);
 
         return item.getId();
@@ -48,4 +51,8 @@ public class ItemService {
         // 동적 쿼리 작성? default 값 넣으면 동적 아닌데. enum 받아서 dtype 이랑 비교?
     }
 
+    /*@PostConstruct
+    public void postC() throws IllegalAccessException {
+        initService.postC();
+    }*/
 }
