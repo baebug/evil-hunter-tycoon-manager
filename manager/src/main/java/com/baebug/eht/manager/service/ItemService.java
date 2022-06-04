@@ -1,13 +1,11 @@
 package com.baebug.eht.manager.service;
 
 import com.baebug.eht.manager.domain.item.*;
-import com.baebug.eht.manager.domain.dto.ItemDto;
+import com.baebug.eht.manager.domain.dto.ItemDTO;
 import com.baebug.eht.manager.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.PostConstruct;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +19,7 @@ public class ItemService {
      * item 추가, 삭제
      */
     @Transactional
-    public Long join(ItemDto itemDto) {
+    public Long join(ItemDTO itemDto) {
         Item item = Accessory.createItem(itemDto.getItemOptions());
         itemRepository.save(item);
 
@@ -29,7 +27,7 @@ public class ItemService {
     }
 
     @Transactional
-    public void update(Long itemId, ItemDto itemDto) {
+    public void update(Long itemId, ItemDTO itemDto) {
         Item item = itemRepository.findById(itemId);
         item.changeOption(itemDto.getItemOptions());
     }

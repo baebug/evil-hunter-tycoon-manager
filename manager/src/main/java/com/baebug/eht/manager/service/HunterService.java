@@ -1,10 +1,10 @@
 package com.baebug.eht.manager.service;
 
 import com.baebug.eht.manager.domain.buff.CommonBuff;
-import com.baebug.eht.manager.domain.dto.SpecDto;
+import com.baebug.eht.manager.domain.dto.SpecDTO;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
-import com.baebug.eht.manager.domain.dto.HunterDto;
+import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.repository.HunterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,18 +22,17 @@ public class HunterService {
 
     /**
      * Hunter 추가, 수정, 삭제
-     * Dto 가 넘어오면 Hunter 객체로 만들어서 Repository 로 넘겨준다.
-     * 대신 앞단을 만들어야 Dto 가 어떻게 생긴지 알겠지?
+     * DTO 가 넘어오면 Hunter 객체로 만들어서 Repository 로 넘겨준다.
      */
     @Transactional
-    public Long join(HunterDto hunterDto) throws Exception {
+    public Long join(HunterDTO hunterDto) throws Exception {
         Hunter hunter = Hunter.createHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), hunterDto.getStat());
         hunterRepository.save(hunter);
         return hunter.getId();
     }
 
     @Transactional
-    public void update(Long hunterId, HunterDto hunterDto) throws Exception {
+    public void update(Long hunterId, HunterDTO hunterDto) throws Exception {
         Hunter hunter = hunterRepository.findById(hunterId);
         hunter.changeHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), hunterDto.getStat());
     }
@@ -61,10 +60,11 @@ public class HunterService {
     }
 
     /**
-     * 스펙 계산하기
+     * 공용 버프로 증가하는 능력치 합산 후
+     * 헌터 객체 능력치 합산
      */
     public void calculate(Hunter hunter) throws IllegalAccessException {
-        SpecDto commonSpec = commonBuff.calculate();
+        SpecDTO commonSpec = commonBuff.calculate();
         hunter.calculate(commonSpec);
     }
 

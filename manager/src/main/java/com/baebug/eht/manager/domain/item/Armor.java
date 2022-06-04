@@ -6,6 +6,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * 방어구 객체 (투구, 갑옷, 장갑, 신발)
+ */
 @Entity
 @Getter @Setter
 public class Armor extends Item {

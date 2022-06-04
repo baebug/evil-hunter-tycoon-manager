@@ -2,6 +2,9 @@ package com.baebug.eht.manager.domain.hunter;
 
 import lombok.Getter;
 
+/**
+ * 스탯의 종류와 가중치
+ */
 @Getter
 public enum StatList {
     HP("체력", "hp", 10),
@@ -24,10 +27,13 @@ public enum StatList {
         this.weight = weight;
     }
 
+    /**
+     * Enum 을 순회하며 입력받은 문자열과 option 이 일치하면, 가중치를 반환한다.
+     */
     public static int getWeight(String option) {
         int w = 0;
         for (StatList value : StatList.values()) {
-            if (value.getOption() == option) {
+            if (value.getOption().equals(option)) {
                 w = value.getWeight();
             }
         }

@@ -1,13 +1,11 @@
 package com.baebug.eht.manager.domain.hunter;
 
-import com.baebug.eht.manager.domain.dto.SpecDto;
+import com.baebug.eht.manager.domain.dto.SpecDTO;
 import com.baebug.eht.manager.domain.item.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.annotation.Rollback;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static com.baebug.eht.manager.domain.item.OptionList.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -90,7 +88,7 @@ class HunterTest {
     @DisplayName("specDto 의 add 메서드 테스트")
     public void specDtoTest() throws Exception {
         // given
-        SpecDto specDto = new SpecDto();
+        SpecDTO specDto = new SpecDTO();
 
         // when
         specDto.add("atk", 10.0);
@@ -170,7 +168,6 @@ class HunterTest {
     public void buffTest() throws Exception {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
-
 
         // when
 

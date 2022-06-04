@@ -1,20 +1,29 @@
 package com.baebug.eht.manager.domain.hunter;
 
-import com.baebug.eht.manager.domain.dto.SpecDto;
+import com.baebug.eht.manager.domain.dto.SpecDTO;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.lang.reflect.Field;
 
+/**
+ * 비법 객체
+ */
 @Entity
 @Table(name = "tech")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TechEntity {
 
     @Id @GeneratedValue
     @Column(name = "tech_id")
     private Long id;
 
+    /**
+     * 0 부터 100 까지의 비법 레벨
+     */
     private int hp;
     private int max_mood;
     private int max_satiety;
@@ -30,24 +39,6 @@ public class TechEntity {
     private int mood;
     private int satiety;
     private int stamina;
-
-    protected TechEntity() {
-        this.hp = 0;
-        this.max_mood = 0;
-        this.max_satiety = 0;
-        this.max_stamina = 0;
-        this.atk = 0;
-        this.def = 0;
-        this.crit = 0;
-        this.spd = 0;
-        this.evasion = 0;
-        this.walk = 0;
-        this.skill1 = 0;
-        this.skill2 = 0;
-        this.mood = 0;
-        this.satiety = 0;
-        this.stamina = 0;
-    }
 
     public TechEntity(int hp, int max_mood, int max_satiety, int max_stamina, int atk, int def, int crit, int spd, int evasion, int walk, int skill1, int skill2, int mood, int satiety, int stamina) {
         this.hp = hp;
@@ -67,12 +58,16 @@ public class TechEntity {
         this.stamina = stamina;
     }
 
-    public void calculate(SpecDto specDto) throws IllegalAccessException {
+    /**
+     * 클래스의 필드를 순회하며 입력받은 옵션을 능력치로 합산한다.
+     * TechList 를 통해 옵션별 가중치를 적용한다.
+     */
+    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
         for (Field field : getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            if (field.getName() != "id") {
+            if (!field.getName().equals("id")) {
                 double weight = TechList.getWeight(field.getName());
-                specDto.add(field.getName(), (Integer) field.get(this) * weight);
+                specDTO.add(field.getName(), (Integer) field.get(this) * weight);
             }
         }
     }

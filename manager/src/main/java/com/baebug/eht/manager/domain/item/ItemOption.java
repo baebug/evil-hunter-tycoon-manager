@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * itemOption 객체
+ */
 @Entity
 @Table(name = "item_option")
 @Getter @Setter
@@ -28,5 +31,4 @@ public class ItemOption {
         this.option = option;
         this.value = value;
     }
-
 }

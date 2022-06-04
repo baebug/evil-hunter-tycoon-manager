@@ -1,11 +1,10 @@
 package com.baebug.eht.manager.service;
 
 import com.baebug.eht.manager.domain.buff.CommonBuff;
-import com.baebug.eht.manager.domain.dto.SpecDto;
 import com.baebug.eht.manager.domain.hunter.Characteristic;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
-import com.baebug.eht.manager.domain.dto.HunterDto;
+import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
 import com.baebug.eht.manager.repository.HunterRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +28,7 @@ class HunterServiceTest {
     @DisplayName("헌터 추가")
     public void inviteHunter() throws Exception {
         // given
-        HunterDto hunter1 = createHunterDto("헌터A");
+        HunterDTO hunter1 = createHunterDto("헌터A");
 
         // when
         Long savedId = hunterService.join(hunter1);
@@ -42,8 +41,8 @@ class HunterServiceTest {
     @DisplayName("헌터 수정")
     public void updateHunter() throws Exception {
         // given
-        HunterDto hunter1 = createHunterDto("헌터A");
-        HunterDto hunter2 = createHunterDto("헌터B");
+        HunterDTO hunter1 = createHunterDto("헌터A");
+        HunterDTO hunter2 = createHunterDto("헌터B");
 
         Long savedId = hunterService.join(hunter1);
 
@@ -58,8 +57,8 @@ class HunterServiceTest {
     @DisplayName("헌터 추방")
     public void exileHunter() throws Exception {
         // given
-        HunterDto hunter1 = createHunterDto("헌터A");
-        HunterDto hunter2 = createHunterDto("헌터B");
+        HunterDTO hunter1 = createHunterDto("헌터A");
+        HunterDTO hunter2 = createHunterDto("헌터B");
 
         Long savedId = hunterService.join(hunter1);
         hunterService.join(hunter2);
@@ -86,8 +85,8 @@ class HunterServiceTest {
 
     }
 
-    private HunterDto createHunterDto(String name) {
-        HunterDto hunterDto = new HunterDto();
+    private HunterDTO createHunterDto(String name) {
+        HunterDTO hunterDto = new HunterDTO();
         hunterDto.setName(name);
         hunterDto.setCharacteristic(Characteristic.STRONG);
         hunterDto.setHunterClass(HunterClass.BERSERKER);

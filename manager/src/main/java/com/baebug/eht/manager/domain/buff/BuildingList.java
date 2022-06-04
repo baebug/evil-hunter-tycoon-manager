@@ -1,8 +1,13 @@
 package com.baebug.eht.manager.domain.buff;
 
-import com.baebug.eht.manager.domain.hunter.TechList;
 import lombok.Getter;
 
+import java.util.Objects;
+
+/**
+ * 건물 버프의 종류와 가중치
+ * 모든 버프의 초기값과 가중치가 같아서, 현재는 사용하지 않는다.
+ */
 @Getter
 public enum BuildingList {
     CRIT_DMG("치명타 피해량 증가", "crit_dmg", .15),
@@ -27,7 +32,7 @@ public enum BuildingList {
     public static Double getWeight(String option) {
         double w = .0;
         for (BuildingList value : BuildingList.values()) {
-            if (value.getOption() == option) {
+            if (Objects.equals(value.getOption(), option)) {
                 w = value.getWeight();
             }
         }
