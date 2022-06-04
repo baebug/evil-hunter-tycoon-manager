@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -37,12 +35,13 @@ public class Hunter {
     @JoinColumn(name = "stat_id")
     private StatEntity stat;
 
-    @OneToMany(mappedBy = "hunter", cascade = CascadeType.ALL)
-    private List<Item> items = new ArrayList<>();
-
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "tech_id")
     private TechEntity tech = new TechEntity();
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "equipment_id")
+    private final Equipment equipment = new Equipment();
 
     public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
         this.name = name;
@@ -68,13 +67,6 @@ public class Hunter {
         this.calculate();
     }
 
-    //== 연관관계 편의 메서드 ==//
-    public void setItem(Item item) throws IllegalAccessException {
-        getItems().add(item);
-        item.setHunter(this);
-        this.calculate();
-    }
-
     //== 생성 메서드 ==//
     public static Hunter createHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
         return new Hunter(name, characteristic, hunterClass, stat);
@@ -90,6 +82,11 @@ public class Hunter {
         this.calculate();
     }
 
+    public void setEquipment(Weapon weapon, Armor helmet, Armor chest, Armor glove, Armor shoes, Accessory necklace, Accessory ring, Accessory belt) throws IllegalAccessException {
+        this.getEquipment().setEquipment(weapon, helmet, chest, glove, shoes, necklace, ring, belt);
+        this.calculate();
+    }
+
     public void calculate() throws IllegalAccessException {
         SpecDto tmp = new SpecDto();
 
@@ -97,9 +94,7 @@ public class Hunter {
         getTech().calculate(tmp);
         getCharacteristic().calculate(tmp);
 
-        for (Item item : getItems()) {
-            item.calculate(tmp);
-        }
+        getEquipment().calculate(tmp);
 
         this.spec = tmp;
     }
@@ -109,9 +104,7 @@ public class Hunter {
         getTech().calculate(specDto);
         getCharacteristic().calculate(specDto);
 
-        for (Item item : getItems()) {
-            item.calculate(specDto);
-        }
+        getEquipment().calculate(specDto);
 
         this.spec = specDto;
     }

@@ -1,7 +1,6 @@
 package com.baebug.eht.manager.domain.item;
 
 import com.baebug.eht.manager.domain.dto.SpecDto;
-import com.baebug.eht.manager.domain.hunter.Hunter;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -18,16 +17,8 @@ public class Item {
     @Column(name = "item_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hunter_id")
-    private Hunter hunter;
-
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)  // 양방향 걸었음
     private List<ItemOption> itemOptions = new ArrayList<>();
-
-    public void setHunter(Hunter hunter) {
-        this.hunter = hunter;
-    }
 
     //== 연관관계 편의 메서드 ==//
     public void addItemOption(ItemOption itemOption) {
@@ -36,14 +27,7 @@ public class Item {
     }
 
     //== 생성 메서드 ==//
-    public static Item createItem(List<ItemOption> itemOptions) {
-        Item item = new Item();
-        for (ItemOption itemOption : itemOptions) {
-            item.addItemOption(itemOption);
-        }
 
-        return item;
-    }
 
     //== 비즈니스 로직 ==//
     public void changeOption(List<ItemOption> itemOptions) {

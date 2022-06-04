@@ -1,10 +1,7 @@
 package com.baebug.eht.manager.domain.hunter;
 
 import com.baebug.eht.manager.domain.dto.SpecDto;
-import com.baebug.eht.manager.domain.item.Item;
-import com.baebug.eht.manager.domain.item.ItemOption;
-import com.baebug.eht.manager.domain.item.OptionList;
-import com.baebug.eht.manager.domain.item.Weapon;
+import com.baebug.eht.manager.domain.item.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.annotation.Rollback;
@@ -40,16 +37,16 @@ class HunterTest {
     public void setItem() throws Exception {
         // given
         Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
-        Item item1 = Item.createItem(Arrays.asList(createItemOption(ATK, 10), createItemOption(DEF, 12)));
-        Item item2 = Weapon.createItem(2.3, Arrays.asList(createItemOption(ATK, 10), createItemOption(CRIT, 21)));
+        Accessory acc = Accessory.createItem(Arrays.asList(createItemOption(ATK, 10), createItemOption(DEF, 12)));
+        Weapon weapon = Weapon.createItem(2.3, Arrays.asList(createItemOption(ATK, 10), createItemOption(CRIT, 21)));
 
         // when
-        hunter.setItem(item1);
-        hunter.setItem(item2);
+        hunter.getEquipment().setRing(acc);
+        hunter.getEquipment().setWeapon(weapon);
+        hunter.calculate();
+
 
         // then
-        assertEquals(2, hunter.getItems().size());
-        assertEquals(hunter, item1.getHunter());
         assertEquals(20, hunter.getSpec().getAtk());
         assertEquals(12, hunter.getSpec().getDef());
         assertEquals(21, hunter.getSpec().getCrit());
@@ -142,13 +139,13 @@ class HunterTest {
     public void getAtkSpdTest() throws Exception {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 2, 0, 0, 0, 0, 0));
-        Item item1 = Weapon.createItem(1.5, Arrays.asList(createItemOption(SPD, 5)));
+        Weapon item1 = Weapon.createItem(1.5, Arrays.asList(createItemOption(SPD, 5)));
         Hunter hunter2 = new Hunter("헌터B", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 2, 0, 0, 0, 0, 0));
-        Item item2 = Weapon.createItem(1.5, Arrays.asList(createItemOption(SPD, 70)));
+        Weapon item2 = Weapon.createItem(1.5, Arrays.asList(createItemOption(SPD, 70)));
 
         // when
-        hunter1.setItem(item1);
-        hunter2.setItem(item2);
+        hunter1.setEquipment(item1, new Armor(), new Armor(), new Armor(), new Armor(), new Accessory(), new Accessory(), new Accessory());
+        hunter2.setEquipment(item2, new Armor(), new Armor(), new Armor(), new Armor(), new Accessory(), new Accessory(), new Accessory());
 
         // then
         System.out.println("헌터A 의 현재 공격속도 = " + hunter1.getAtkSpd());

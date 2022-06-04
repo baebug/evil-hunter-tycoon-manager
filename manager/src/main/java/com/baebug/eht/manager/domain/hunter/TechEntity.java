@@ -1,9 +1,7 @@
 package com.baebug.eht.manager.domain.hunter;
 
 import com.baebug.eht.manager.domain.dto.SpecDto;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.lang.reflect.Field;

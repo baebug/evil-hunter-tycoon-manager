@@ -14,7 +14,7 @@ public class Weapon extends Item {
     private Double atk_spd;
 
     //== 생성 메서드 ==//
-    public static Item createItem(Double atk_spd, List<ItemOption> itemOptions) {
+    public static Weapon createItem(Double atk_spd, List<ItemOption> itemOptions) {
         Weapon item = new Weapon();
         item.setAtk_spd(atk_spd);
         for (ItemOption itemOption : itemOptions) {
