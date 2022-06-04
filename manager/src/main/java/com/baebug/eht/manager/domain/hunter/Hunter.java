@@ -15,7 +15,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Hunter {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "hunter_id")
     private Long id;
 
@@ -101,6 +102,18 @@ public class Hunter {
         }
 
         this.spec = tmp;
+    }
+
+    public void calculate(SpecDto specDto) throws IllegalAccessException {
+        getStat().calculate(specDto);
+        getTech().calculate(specDto);
+        getCharacteristic().calculate(specDto);
+
+        for (Item item : getItems()) {
+            item.calculate(specDto);
+        }
+
+        this.spec = specDto;
     }
 
     public double getAtkSpd() {

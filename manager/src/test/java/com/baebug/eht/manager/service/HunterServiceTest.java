@@ -1,6 +1,9 @@
 package com.baebug.eht.manager.service;
 
+import com.baebug.eht.manager.domain.buff.CommonBuff;
+import com.baebug.eht.manager.domain.dto.SpecDto;
 import com.baebug.eht.manager.domain.hunter.Characteristic;
+import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.dto.HunterDto;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
@@ -11,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -22,7 +23,7 @@ class HunterServiceTest {
 
     @Autowired HunterService hunterService;
     @Autowired HunterRepository hunterRepository;
-    @Autowired EntityManager em;
+    @Autowired CommonBuff commonBuff;
 
     @Test
     @DisplayName("헌터 추가")
@@ -70,6 +71,21 @@ class HunterServiceTest {
         assertEquals(1, hunterService.findHunters().size());
     }
 
+    @Test
+    @DisplayName("공용 버프 확인")
+    public void commonBuffTest() throws Exception {
+        // given
+        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
+
+        hunterService.calculate(hunter);
+        System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());
+
+        setCommonBuff();
+        hunterService.calculate(hunter);
+        System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());
+
+    }
+
     private HunterDto createHunterDto(String name) {
         HunterDto hunterDto = new HunterDto();
         hunterDto.setName(name);
@@ -78,6 +94,12 @@ class HunterServiceTest {
         hunterDto.setStat(new StatEntity(1, 1, 1, 1, 1, 1, 1, 1, 1));
 
         return hunterDto;
+    }
+
+    private void setCommonBuff() {
+        commonBuff.getGuild().setGuildBuff(15, 0, 15, 5, 5);
+        commonBuff.getDungeon().setDungeonBuff(200);
+        commonBuff.getBuilding().setBuildingBuff(300, 300, 300, 300, 300, 300);
     }
 
 }

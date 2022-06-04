@@ -168,6 +168,18 @@ class HunterTest {
         System.out.println("0.25 까지 도달을 위한 필요 공격속도 = " + hunter1.getAtkSpd(0.25));
     }
 
+    @Test
+    @DisplayName("버프 수치 테스트")
+    public void buffTest() throws Exception {
+        // given
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
+
+
+        // when
+
+        // then
+    }
+
     private ItemOption createItemOption(OptionList option, Integer value) {
         return new ItemOption(option, value);
 

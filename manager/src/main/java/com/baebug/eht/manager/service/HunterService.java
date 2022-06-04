@@ -1,5 +1,7 @@
 package com.baebug.eht.manager.service;
 
+import com.baebug.eht.manager.domain.buff.CommonBuff;
+import com.baebug.eht.manager.domain.dto.SpecDto;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.dto.HunterDto;
@@ -16,6 +18,7 @@ import java.util.List;
 public class HunterService {
 
     private final HunterRepository hunterRepository;
+    private final CommonBuff commonBuff;
 
     /**
      * Hunter 추가, 수정, 삭제
@@ -55,5 +58,13 @@ public class HunterService {
 
     public List<Hunter> findHuntersByClass(HunterClass hunterClass) {
         return hunterRepository.findByClass(hunterClass);
+    }
+
+    /**
+     * 스펙 계산하기
+     */
+    public void calculate(Hunter hunter) throws IllegalAccessException {
+        SpecDto commonSpec = commonBuff.calculate();
+        hunter.calculate(commonSpec);
     }
 }
