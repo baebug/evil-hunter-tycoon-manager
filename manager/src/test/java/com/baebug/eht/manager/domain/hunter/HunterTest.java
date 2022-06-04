@@ -7,6 +7,7 @@ import com.baebug.eht.manager.domain.item.OptionList;
 import com.baebug.eht.manager.domain.item.Weapon;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.annotation.Rollback;
 
 import java.util.Arrays;
 
