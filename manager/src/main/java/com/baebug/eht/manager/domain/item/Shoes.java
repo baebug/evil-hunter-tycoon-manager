@@ -6,5 +6,5 @@ import javax.persistence.Entity;
 
 @Entity
 @Getter
-public class Armor extends Gear {
+public class Shoes extends Gear {
 }

@@ -1,6 +1,6 @@
 package com.baebug.eht.manager.domain.hunter;
 
-import com.baebug.eht.manager.domain.dto.SpecDto;
+import com.baebug.eht.manager.domain.dto.SpecDTO;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.lang.reflect.Field;
 
+/**
+ * 스탯 객체
+ */
 @Entity
 @Table(name = "stat")
 @Getter
@@ -18,6 +21,12 @@ public class StatEntity {
     @Column(name = "stat_id")
     private Long id;
 
+    /**
+     * White, Gray  : 0
+     * Blue         : 1
+     * Orange       : 2
+     * Purple       : 3
+     */
     private int atk;
     private int def;
     private int crit;
@@ -40,17 +49,24 @@ public class StatEntity {
         this.stamina = stamina;
     }
 
-    public void calculate(SpecDto specDto) throws IllegalAccessException {
+    /**
+     * 클래스의 필드를 순회하며 입력받은 옵션을 능력치로 합산한다.
+     * StatList 를 통해 옵션별 가중치를 적용한다.
+     * Integer 를 Double 로 casting 하기 위해 String 타입으로 감싸준다.
+     */
+    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
         for (Field field : getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            if (field.getName() != "id") {
-                int weight = StatList.getWeight(field.getName());
-                Double a = Double.valueOf(String.valueOf(field.get(this)));
-                specDto.add(field.getName(), a * weight);
+            if (!field.getName().equals("id")) {
+                double weight = StatList.getWeight(field.getName());
+                specDTO.add(field.getName(), (Integer) field.get(this) * weight);
             }
         }
     }
 
+    /**
+     * 스탯을 합산한 뒤 결과값에 따라 등급을 반환한다.
+     */
     public String getGrade() {
         int statSum = getAtk() + getDef() + getCrit() + getSpd() + getEvasion() + getHp() + getSatiety() + getMood() + getStamina();
 
@@ -81,5 +97,4 @@ public class StatEntity {
                 return "Ultimate+";
         }
     }
-
 }

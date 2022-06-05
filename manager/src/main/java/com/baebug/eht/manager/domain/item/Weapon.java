@@ -1,34 +1,32 @@
 package com.baebug.eht.manager.domain.item;
 
-import com.baebug.eht.manager.domain.dto.SpecDto;
+import com.baebug.eht.manager.domain.dto.SpecDTO;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
+/**
+ * 무기 객체
+ * 무기 공격속도 옵션을 위해 카테고리를 분류했다.
+ */
 @Entity
-@Getter @Setter
+@Getter
 public class Weapon extends Item {
 
-    private Double atk_spd;
+    /**
+     * 무기 공격속도
+     */
+    private double atk_spd;
 
-    //== 생성 메서드 ==//
-    public static Item createItem(Double atk_spd, List<ItemOption> itemOptions) {
-        Weapon item = new Weapon();
-        item.setAtk_spd(atk_spd);
-        for (ItemOption itemOption : itemOptions) {
-            item.addItemOption(itemOption);
-        }
-
-        return item;
+    public void setAtk_spd(double atk_spd) {
+        this.atk_spd = atk_spd;
     }
 
-    public void calculate(SpecDto specDto) throws IllegalAccessException {
-        specDto.add("atk_spd", getAtk_spd());
+    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
+        specDTO.add("atk_spd", getAtk_spd());
 
         for (ItemOption itemOption : getItemOptions()) {
-            specDto.add(itemOption.getOption().getOption(), (double) itemOption.getValue());
+            specDTO.add(itemOption.getOption().getOption(), (double) itemOption.getValue());
         }
     }
 }

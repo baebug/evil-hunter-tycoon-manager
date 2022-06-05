@@ -14,6 +14,9 @@ public class HunterRepository {
 
     private final EntityManager em;
 
+    /**
+     * Hunter 저장, 삭제
+     */
     public void save(Hunter hunter) {
         em.persist(hunter);
     }
@@ -22,6 +25,10 @@ public class HunterRepository {
         em.remove(hunter);
     }
 
+    /**
+     * Hunter 조회
+     * 단일, 전체, HunterClass 기준
+     */
     public Hunter findById(Long hunterId) {
         return em.find(Hunter.class, hunterId);
     }

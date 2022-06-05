@@ -2,6 +2,11 @@ package com.baebug.eht.manager.domain.hunter;
 
 import lombok.Getter;
 
+import java.util.Objects;
+
+/**
+ * 비법의 종류와 가중치
+ */
 @Getter
 public enum TechList {
     HP("체력", "hp", .15),
@@ -30,10 +35,13 @@ public enum TechList {
         this.weight = weight;
     }
 
-    public static Double getWeight(String option) {
+    /**
+     * Enum 을 순회하며 입력받은 문자열과 option 이 일치하면, 가중치를 반환한다.
+     */
+    public static double getWeight(String option) {
         double w = .0;
         for (TechList value : TechList.values()) {
-            if (value.getOption() == option) {
+            if (value.getOption().equals(option)) {
                 w = value.getWeight();
             }
         }

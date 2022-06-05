@@ -6,8 +6,11 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Item 객체의 DTO
+ */
 @Data
-public class ItemDto {
+public class ItemDTO {
 
     private Double atk_spd;
     private List<ItemOption> itemOptions = new ArrayList<>();

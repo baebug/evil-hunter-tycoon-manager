@@ -1,8 +1,12 @@
 package com.baebug.eht.manager.domain.hunter;
 
-import com.baebug.eht.manager.domain.dto.SpecDto;
+import com.baebug.eht.manager.domain.dto.SpecDTO;
 import lombok.Getter;
 
+/**
+ * 능력치에 영항을 미치는 성격들
+ * 나머지는 OTHERS
+ */
 @Getter
 public enum Characteristic {
     STRONG("힘이 쎈", "atk", 10),
@@ -19,6 +23,9 @@ public enum Characteristic {
     DULL("둔탁한", "crit", -3),
     OTHERS("기타", null, null);
 
+    /**
+     * characteristic: 한글명
+     */
     private final String characteristic;
     private final String option;
     private final Integer value;
@@ -29,10 +36,14 @@ public enum Characteristic {
         this.value = value;
     }
 
-    public void calculate(SpecDto specDto) throws IllegalAccessException {
-        if (getOption() != null && getValue() != null) {
-            specDto.add(getOption(), (double) getValue());
-        }
+    /**
+     * 성격에 해당하는 능력치를 합산한다.
+     */
+    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
+        if (getValue() != null)
+            if (getOption() != null) {
+                specDTO.add(getOption(), (double) getValue());
+            }
     }
 
 }

@@ -5,8 +5,11 @@ import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
 import lombok.Data;
 
+/**
+ * Hunter 객체의 DTO
+ */
 @Data
-public class HunterDto {
+public class HunterDTO {
 
     private String name;
 
