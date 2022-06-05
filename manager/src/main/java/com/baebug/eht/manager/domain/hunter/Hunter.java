@@ -98,11 +98,15 @@ public class Hunter {
 
     /**
      * 헌터 장비를 교체하는 메서드
+     * 서비스에서 해야 할 일이라고 생각해서 일단 주석처리 하였다.
      */
-    public void setEquipment(Weapon weapon, Armor helmet, Armor chest, Armor glove, Armor shoes, Accessory necklace, Accessory ring, Accessory belt) throws IllegalAccessException {
-        this.getEquipment().setEquipment(weapon, helmet, chest, glove, shoes, necklace, ring, belt);
+
+    /*
+    public void setEquipment(Weapon weapon, Helmet helmet, Armor armor, Glove glove, Shoes shoes, Necklace necklace, Ring ring, Belt belt) throws IllegalAccessException {
+        this.getEquipment().setEquipment(weapon, helmet, armor, glove, shoes, necklace, ring, belt);
         this.calculate();
     }
+    */
 
     /**
      * SpecDTO 인스턴스를 새로 생성하여 능력치를 합산 후 저장한다.

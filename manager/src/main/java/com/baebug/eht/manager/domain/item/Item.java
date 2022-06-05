@@ -27,6 +27,17 @@ public class Item {
     private List<ItemOption> itemOptions = new ArrayList<>();
 
     /**
+     * 생성 메서드
+     */
+    public static Item createItem(List<ItemOption> itemOptions) {
+        Item item = new Item();
+        for (ItemOption itemOption : itemOptions) {
+            item.addItemOption(itemOption);
+        }
+        return item;
+    }
+
+    /**
      * 연관관계 편의 메서드
      */
     public void addItemOption(ItemOption itemOption) {

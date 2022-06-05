@@ -5,6 +5,8 @@ import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
 import com.baebug.eht.manager.domain.item.Accessory;
+import com.baebug.eht.manager.domain.item.Necklace;
+import com.baebug.eht.manager.domain.item.Ring;
 import com.baebug.eht.manager.domain.item.Weapon;
 import com.baebug.eht.manager.repository.HunterRepository;
 import com.baebug.eht.manager.repository.ItemRepository;
@@ -28,14 +30,11 @@ public class InitService {
         hunterRepository.save(hunter);
 
         Weapon weapon = new Weapon();
-        Accessory acc1 = new Accessory();
-        Accessory acc2 = new Accessory();
+        Necklace acc1 = new Necklace();
+        Ring acc2 = new Ring();
         itemRepository.save(weapon);
         itemRepository.save(acc1);
         itemRepository.save(acc2);
 
-        hunter.getEquipment().setWeapon(weapon);
-        hunter.getEquipment().setNecklace(acc1);
-        hunter.getEquipment().setRing(acc2);
     }
 }

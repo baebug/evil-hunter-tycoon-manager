@@ -8,10 +8,10 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class Armor extends Gear {
+public class Shoes extends Gear {
 
-    public static Armor createItem(List<ItemOption> itemOptions) {
-        Armor item = new Armor();
+    public static Shoes createItem(List<ItemOption> itemOptions) {
+        Shoes item = new Shoes();
         for (ItemOption itemOption : itemOptions) {
             item.addItemOption(itemOption);
         }
