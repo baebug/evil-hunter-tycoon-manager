@@ -35,12 +35,16 @@ class HunterTest {
     public void setItem() throws Exception {
         // given
         Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
-        Accessory acc = Accessory.createItem(Arrays.asList(createItemOption(ATK, 10), createItemOption(DEF, 12)));
-        Weapon weapon = Weapon.createItem(2.3, Arrays.asList(createItemOption(ATK, 10), createItemOption(CRIT, 21)));
 
         // when
-        hunter.getEquipment().setRing(acc);
-        hunter.getEquipment().setWeapon(weapon);
+        Weapon weapon = hunter.getEquipment().getWeapon();
+        Necklace necklace = hunter.getEquipment().getNecklace();
+        Shoes shoes = hunter.getEquipment().getShoes();
+
+        weapon.setAtk_spd(2.3);
+        weapon.changeOption(Arrays.asList(createItemOption(ATK, 10), createItemOption(CRIT, 21)));
+        necklace.changeOption(Arrays.asList(createItemOption(ATK, 10), createItemOption(DEF, 12)));
+        shoes.changeOption(Arrays.asList(createItemOption(EVASION, 10), createItemOption(CRIT_DMG, 12)));
         hunter.calculate();
 
 
@@ -137,13 +141,16 @@ class HunterTest {
     public void getAtkSpdTest() throws Exception {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 2, 0, 0, 0, 0, 0));
-        Weapon item1 = Weapon.createItem(1.5, Arrays.asList(createItemOption(SPD, 5)));
         Hunter hunter2 = new Hunter("헌터B", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 2, 0, 0, 0, 0, 0));
-        Weapon item2 = Weapon.createItem(1.5, Arrays.asList(createItemOption(SPD, 70)));
 
         // when
-        hunter1.setEquipment(item1, new Armor(), new Armor(), new Armor(), new Armor(), new Accessory(), new Accessory(), new Accessory());
-        hunter2.setEquipment(item2, new Armor(), new Armor(), new Armor(), new Armor(), new Accessory(), new Accessory(), new Accessory());
+        hunter1.getEquipment().getWeapon().setAtk_spd(1.5);
+        hunter1.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(SPD, 5)));
+        hunter1.calculate();
+
+        hunter2.getEquipment().getWeapon().setAtk_spd(1.5);
+        hunter2.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(SPD, 70)));
+        hunter2.calculate();
 
         // then
         System.out.println("헌터A 의 현재 공격속도 = " + hunter1.getAtkSpd());
@@ -161,17 +168,6 @@ class HunterTest {
         // then
         System.out.println("헌터의 현재 공격속도 = " + hunter1.getAtkSpd());
         System.out.println("0.25 까지 도달을 위한 필요 공격속도 = " + hunter1.getAtkSpd(0.25));
-    }
-
-    @Test
-    @DisplayName("버프 수치 테스트")
-    public void buffTest() throws Exception {
-        // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
-
-        // when
-
-        // then
     }
 
     private ItemOption createItemOption(OptionList option, Integer value) {

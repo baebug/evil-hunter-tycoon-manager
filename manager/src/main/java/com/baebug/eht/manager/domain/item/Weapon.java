@@ -1,7 +1,9 @@
 package com.baebug.eht.manager.domain.item;
 
 import com.baebug.eht.manager.domain.dto.SpecDTO;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
