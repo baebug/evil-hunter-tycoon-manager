@@ -7,37 +7,27 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class ItemService {
 
     private final ItemRepository itemRepository;
-    private final InitService initService;
 
     /**
-     * item 추가, 삭제
+     * itemDTO 를 바탕으로 해당 Item 객체를 업데이트 한다.
+     * @param itemId        대상 장비의 id 값
+     * @param itemDto       업데이트 할 정보
      */
-    @Transactional
-    public Long join(ItemDTO itemDto) {
-        Item item = Accessory.createItem(itemDto.getItemOptions());
-        itemRepository.save(item);
-
-        return item.getId();
-    }
-
     @Transactional
     public void update(Long itemId, ItemDTO itemDto) {
         Item item = itemRepository.findById(itemId);
+        if (item.getClass() == Weapon.class) {
+            ((Weapon) item).setAtk_spd(itemDto.getAtk_spd());
+        }
         item.changeOption(itemDto.getItemOptions());
     }
 
-    @Transactional
-    public void delete(Item item) {
-        itemRepository.remove(item);
-    }
 
     /**
      * Item 조회 로직
@@ -50,9 +40,4 @@ public class ItemService {
     public void findItems() {
         // 동적 쿼리 작성? default 값 넣으면 동적 아닌데. enum 받아서 dtype 이랑 비교?
     }
-/*
-    @PostConstruct
-    public void postC() throws Exception {
-        initService.postC();
-    }*/
 }
