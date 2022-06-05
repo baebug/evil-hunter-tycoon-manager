@@ -29,12 +29,12 @@ public class InitService {
         Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
         hunterRepository.save(hunter);
 
-        Weapon weapon = new Weapon();
-        Necklace acc1 = new Necklace();
-        Ring acc2 = new Ring();
-        itemRepository.save(weapon);
-        itemRepository.save(acc1);
-        itemRepository.save(acc2);
+//        Weapon weapon = new Weapon();
+//        Necklace acc1 = new Necklace();
+//        Ring acc2 = new Ring();
+//        itemRepository.save(weapon);
+//        itemRepository.save(acc1);
+//        itemRepository.save(acc2);
 
     }
 }

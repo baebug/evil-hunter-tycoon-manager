@@ -16,14 +16,14 @@ import java.util.List;
 @Getter
 public class Item {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
 
     /**
-     * itemOption 과 일대다의 연관관계를 맺고 있다.
+     * Transient 어노테이션을 통해 itemOption 은 DB 에 올리지않는다.
      */
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)  // 양방향 걸었음
+    @Transient
     private List<ItemOption> itemOptions = new ArrayList<>();
 
     /**
@@ -38,11 +38,10 @@ public class Item {
     }
 
     /**
-     * 연관관계 편의 메서드
+     * itemOption 을 추가하는 메서드
      */
     public void addItemOption(ItemOption itemOption) {
         itemOptions.add(itemOption);
-        itemOption.setItem(this);
     }
 
     /**

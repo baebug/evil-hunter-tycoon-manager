@@ -16,8 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Hunter {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "hunter_id")
     private Long id;
 
@@ -42,8 +41,7 @@ public class Hunter {
     @JoinColumn(name = "tech_id")
     private TechEntity tech = new TechEntity();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "equipment_id")
+    @Embedded
     private final Equipment equipment = new Equipment();
 
     /**

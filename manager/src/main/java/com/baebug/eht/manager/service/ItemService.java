@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -48,9 +50,9 @@ public class ItemService {
     public void findItems() {
         // 동적 쿼리 작성? default 값 넣으면 동적 아닌데. enum 받아서 dtype 이랑 비교?
     }
-
-    /*@PostConstruct
-    public void postC() throws IllegalAccessException {
+/*
+    @PostConstruct
+    public void postC() throws Exception {
         initService.postC();
     }*/
 }
