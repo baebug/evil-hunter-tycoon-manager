@@ -13,7 +13,19 @@ public class HunterDTO {
 
     private String name;
 
-    private Characteristic characteristic;    // Enum type
-    private HunterClass hunterClass;        // Enum type
-    private StatEntity stat;                      // Embedded type
+    private Characteristic characteristic;
+    private HunterClass hunterClass;
+    private StatEntity stat;
+    private String desc;
+
+    public HunterDTO() {
+    }
+
+    public HunterDTO(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat, String desc) {
+        this.name = name;
+        this.characteristic = characteristic;
+        this.hunterClass = hunterClass;
+        this.stat = stat;
+        this.desc = desc;
+    }
 }

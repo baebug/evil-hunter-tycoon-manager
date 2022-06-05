@@ -16,13 +16,14 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Hunter {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hunter_id")
     private Long id;
 
     private String name;
     private int fury;
     private int quicken;
+    private String desc;
 
     @Transient
     private SpecDTO spec = new SpecDTO();
@@ -45,8 +46,19 @@ public class Hunter {
     private final Equipment equipment = new Equipment();
 
     /**
-     * 이름, 성격, 직업, 스탯을 입력받아 Hunter 객체의 인스턴스를 생성하고 능력치를 합산한다.
+     * 이름, 성격, 직업, 스탯, 메모를 입력받아 Hunter 객체의 인스턴스를 생성하고 능력치를 합산한다.
      */
+    public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat, String desc) throws IllegalAccessException {
+        this.name = name;
+        this.characteristic = characteristic;
+        this.hunterClass = hunterClass;
+        this.stat = stat;
+        this.desc = desc;
+
+        this.calculate();
+    }
+
+    /*
     public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
         this.name = name;
         this.characteristic = characteristic;
@@ -55,6 +67,7 @@ public class Hunter {
 
         this.calculate();
     }
+    */
 
     /**
      * Tech 객체를 입력받는 메서드
@@ -78,8 +91,8 @@ public class Hunter {
     /**
      * 생성 메서드
      */
-    public static Hunter createHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
-        return new Hunter(name, characteristic, hunterClass, stat);
+    public static Hunter createHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat, String desc) throws IllegalAccessException {
+        return new Hunter(name, characteristic, hunterClass, stat, desc);
     }
 
     /**

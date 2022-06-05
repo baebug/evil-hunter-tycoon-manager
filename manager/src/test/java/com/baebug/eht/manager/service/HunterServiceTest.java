@@ -41,7 +41,7 @@ class HunterServiceTest {
         Long savedId = hunterService.join(hunter1);
 
         // then
-        assertEquals(1, hunterService.findHunters().size());
+        assertEquals(4, hunterService.findHunters().size());
     }
 
     @Test
@@ -72,13 +72,13 @@ class HunterServiceTest {
         hunterService.exile(savedId);
 
         // then
-        assertEquals(1, hunterService.findHunters().size());
+        assertEquals(4, hunterService.findHunters().size());
     }
 
     @Test
     public void 공용_버프_확인() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
+        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
 
         hunterService.calculate(hunter);
         System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>헌터 목록</h2>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-start"
+                    onclick="location.href='addForm.html'"
+                    th:onclick="|location.href='@{/hunters/add}'|"
+                    type="button">마을 버프</button>
+            <button class="btn btn-primary float-end"
+                    onclick="location.href='addForm.html'"
+                    th:onclick="|location.href='@{/hunters/add}'|"
+                    type="button">헌터 추가</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <p class="d-inline" th:text="'드롭바로 검색'"></p>
+            <button>검색</button>
+
+        </div>
+    </div>
+    <div>
+        <table class="table text-center">
+            <thead>
+            <tr>
+                <th>등급</th>
+                <th>성격</th>
+                <th>이름</th>
+                <th>클래스</th>
+                <th>메모</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hunter : ${hunters}">
+                <td th:text="${hunter.stat.getGrade()}">등급</td>
+                <td th:text="${hunter.characteristic.option} ? ${hunter.characteristic.characteristic} : ''">성격</td>
+                <td><a href="item.html" th:href="@{|/hunters/${hunter.id}|}" th:text="${hunter.name}">이름</a></td>
+                <td th:text="${hunter.hunterClass.desc}">클래스</td>
+                <td th:text="${hunter.desc}">메모</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div> <!-- /container -->
+
+</body>
+</html>

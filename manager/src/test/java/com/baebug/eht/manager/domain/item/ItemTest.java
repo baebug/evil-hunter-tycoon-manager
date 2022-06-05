@@ -33,7 +33,7 @@ class ItemTest {
     @DisplayName("헌터 생성 시 장비 생성 테스트")
     public void autoCreateItem() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, HunterClass.PALADIN, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0));
+        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, HunterClass.PALADIN, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
 
         hunter.getEquipment().getWeapon().getItemOptions().add(createItemOption(ATK, 10));
 

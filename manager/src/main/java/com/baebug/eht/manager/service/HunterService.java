@@ -28,7 +28,7 @@ public class HunterService {
      */
     @Transactional
     public Long join(HunterDTO hunterDto) throws IllegalAccessException {
-        Hunter hunter = Hunter.createHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), hunterDto.getStat());
+        Hunter hunter = Hunter.createHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), hunterDto.getStat(), hunterDto.getDesc());
         hunterRepository.save(hunter);
         return hunter.getId();
     }
