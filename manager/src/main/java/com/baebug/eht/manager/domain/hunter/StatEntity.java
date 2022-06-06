@@ -28,15 +28,15 @@ public class StatEntity {
      * Orange       : 2
      * Purple       : 3
      */
-    private int atk;
-    private int def;
-    private int crit;
-    private int spd;
-    private int evasion;
-    private int hp;
-    private int satiety;
-    private int mood;
-    private int stamina;
+    private Integer atk;
+    private Integer def;
+    private Integer crit;
+    private Integer spd;
+    private Integer evasion;
+    private Integer hp;
+    private Integer satiety;
+    private Integer mood;
+    private Integer stamina;
 
     /**
      * statDTO 를 입력받아 필드를 초기화한다.

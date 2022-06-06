@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="pt-5 pb-2 text-center">
+        <h2>헌터 정보</h2>
+        <div class="pt-3">
+            <h5>
+                [[${hunter.characteristic.option} ? ${hunter.characteristic.characteristic} : '']] [[${hunter.name}]] ([[${hunter.hunterClass.topClassName()}]])
+            </h5>
+            <h6>[[${hunter.stat.getGrade()}]]</h6>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary"
+                    onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{/hunters}'|"
+                    type="button">헌터 목록</button>
+            <form action="#" th:action="@{|${hunter.id}/delete|}" th:method="delete" style="display: inline">
+                <input type="hidden" name="_method" value="delete" />
+                <button class="btn btn-danger float-end" type="submit" id="submitButton" th:onclick="if(!confirm('헌터를 삭제하시겠습니까?')) return false">헌터 삭제</button>
+            </form>
+            <button class="btn btn-primary float-end mx-3"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/edit|}'|"
+                    type="button">헌터 수정</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/equipment|}'|"
+                    type="button">장비</button>
+            <button onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/tech|}'|"
+                    type="button">비법</button>
+        </div>
+    </div>
+    <div>
+        <div class="status">
+            <table class="table table-sm text-center table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-3">옵션</th>
+                    <th class="col-md-3">수치</th>
+                    <th class="col-md-6">상세</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>공격력</td>
+                    <td th:text="'+' + ${hunter.spec.atk} + '%'">+182%</td>
+                    <td>비법 10 + 건물 30 + 지던 30 + 장비 112</td>
+                </tr>
+                <tr>
+                    <td>공속</td>
+                    <td th:text="'+' + ${hunter.spec.spd} + '%'">+40%</td>
+                    <td>성격 10 + 비법 10 + 장비 20</td>
+                </tr>
+                <tr>
+                    <td>회피</td>
+                    <td th:text="'+' + ${hunter.spec.evasion} + '%'">+33%</td>
+                    <td>비법 10 + 장비 20</td>
+                </tr>
+                <tr>
+                    <td>치명</td>
+                    <td th:text="'+' + ${hunter.spec.crit} + '%'">+46%</td>
+                    <td>장비 46</td>
+                </tr>
+                <tr>
+                    <td>치피</td>
+                    <td th:text="'+' + ${hunter.spec.crit_dmg} + '%'">+101%</td>
+                    <td>비법 10 + 건물 30 + 장비 61</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            0.25 까지 3% 부족 (대충 이런 식으로)
+        </div>
+    </div>
+
+</div> <!-- /container -->
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>

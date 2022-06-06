@@ -11,10 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -33,6 +31,7 @@ public class HunterController {
     public String hunters(Model model) {
         List<Hunter> hunters = hunterService.findHunters();
         model.addAttribute("hunters", hunters);
+
         return "hunters/hunterList";
     }
 
@@ -45,17 +44,61 @@ public class HunterController {
         model.addAttribute("classLists2", HunterClassList2.values());
         model.addAttribute("classLists3", HunterClassList3.values());
         model.addAttribute("statGrades", StatGrade.values());
+
         return "hunters/addForm";
     }
 
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute HunterDTO hunterDTO,
                       BindingResult bindingResult) throws IllegalAccessException {
-
         if (bindingResult.hasErrors()) {
             return "hunters/addForm";
         }
         Long savedId = hunterService.join(hunterDTO);
+
+        return "redirect:/hunters";
+    }
+
+    @GetMapping("/{hunterId}")
+    public String hunter(@PathVariable("hunterId") Long hunterId, Model model) throws IllegalAccessException {
+        Hunter hunter = hunterService.findHunter(hunterId);
+        hunterService.calculate(hunter);
+        model.addAttribute("hunter", hunter);
+
+        return "hunters/hunter";
+    }
+
+    @GetMapping("/{hunterId}/edit")
+    public String editForm(@PathVariable long hunterId, Model model) {
+        Hunter hunter = hunterService.findHunter(hunterId);
+        model.addAttribute("hunter", hunter);
+
+        model.addAttribute("characteristics", Characteristic.values());
+        model.addAttribute("classLists1", HunterClassList1.values());
+        model.addAttribute("classLists2", HunterClassList2.values());
+        model.addAttribute("classLists3", HunterClassList3.values());
+        model.addAttribute("statGrades", StatGrade.values());
+
+        return "hunters/editForm";
+    }
+
+    @PostMapping("/{hunterId}/edit")
+    public java.lang.String edit(@PathVariable Long hunterId,
+                                 @Valid @ModelAttribute HunterDTO hunterDTO,
+                                 BindingResult bindingResult) throws IllegalAccessException {
+        if (bindingResult.hasErrors()) {
+            return "hunters/editForm";
+        }
+
+        hunterService.update(hunterId, hunterDTO);
+
+        return "redirect:/hunters/{hunterId}";
+    }
+
+    @PostMapping("/{hunterId}/delete")
+    public String  delete(@PathVariable Long hunterId) {
+        hunterService.exile(hunterId);
+
         return "redirect:/hunters";
     }
 
@@ -78,9 +121,9 @@ public class HunterController {
         statDTO.setStamina(3);
 
         HunterClassDTO hunterClassDTO = new HunterClassDTO();
-        hunterClassDTO.setFirst(HunterClassList1.BERSERKER);
-        hunterClassDTO.setSecond(HunterClassList2.SLAYER);
-        hunterClassDTO.setThird(HunterClassList3.BARBARIAN);
+        hunterClassDTO.setFirstClass(HunterClassList1.BERSERKER);
+        hunterClassDTO.setSecondClass(HunterClassList2.SLAYER);
+        hunterClassDTO.setThirdClass(HunterClassList3.BARBARIAN);
 
         hunterDTO.setStat(statDTO);
         hunterDTO.setHunterClass(hunterClassDTO);

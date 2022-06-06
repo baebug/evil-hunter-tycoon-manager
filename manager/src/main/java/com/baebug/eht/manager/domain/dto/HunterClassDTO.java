@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 public class HunterClassDTO {
 
     @NotNull
-    private HunterClassList1 first;
-    private HunterClassList2 second;
-    private HunterClassList3 third;
+    private HunterClassList1 firstClass;
+    private HunterClassList2 secondClass;
+    private HunterClassList3 thirdClass;
 
 }
