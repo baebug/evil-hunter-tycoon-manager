@@ -46,11 +46,11 @@
             </thead>
             <tbody>
             <tr th:each="hunter : ${hunters}">
-                <td th:text="${hunter.getStat().getGrade()}">등급</td>
-                <td th:text="${hunter.getCharacteristic().option} ? ${hunter.getCharacteristic().characteristic} : ''">성격</td>
-                <td><a href="item.html" th:href="@{|/hunters/${hunter.getId()}|}" th:text="${hunter.getName()}">이름</a></td>
-                <td th:text="${hunter.getHunterClass().desc}">클래스</td>
-                <td th:text="${hunter.getDesc()}">메모</td>
+                <td th:text="${hunter.stat.getGrade()}">등급</td>
+                <td th:text="${hunter.characteristic.option} ? ${hunter.characteristic.characteristic} : ''">성격</td>
+                <td><a href="item.html" th:href="@{|/hunters/${hunter.id}|}" th:text="${hunter.name}">이름</a></td>
+                <td th:text="${hunter.hunterClass.firstClass.name}">클래스</td>
+                <td th:text="${hunter.desc}">메모</td>
             </tr>
             </tbody>
         </table>

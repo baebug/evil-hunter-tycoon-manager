@@ -43,26 +43,26 @@
                 </div>
                 <div class="col">
                     <label for="hunterName">1차 직업</label>
-                    <select th:field="*{hunterClass}" class="form-select" required>
+                    <select th:field="*{hunterClass.first}" class="form-select" required>
                         <option value="">-------</option>
-                        <option th:each="class : ${classes}" th:value="${class}"
-                                th:text="${class.desc}">Berserker</option>
+                        <option th:each="class : ${classLists1}" th:value="${class}"
+                                th:text="${class.name}">Berserker</option>
                     </select>
                 </div>
                 <div class="col">
                     <label for="hunterName">2차 직업</label>
-                    <select th:field="*{hunterClass}" class="form-select" required>
+                    <select th:field="*{hunterClass.second}" class="form-select">
                         <option value="">-------</option>
-                        <option th:each="class : ${classes}" th:value="${class}"
-                                th:text="${class.desc}">Berserker</option>
+                        <option th:each="class : ${classLists2}" th:value="${class}"
+                                th:text="${class.name}">Berserker</option>
                     </select>
                 </div>
                 <div class="col">
                     <label for="hunterName">3차 직업</label>
-                    <select th:field="*{hunterClass}" class="form-select" required>
+                    <select th:field="*{hunterClass.third}" class="form-select">
                         <option value="">-------</option>
-                        <option th:each="class : ${classes}" th:value="${class}"
-                                th:text="${class.desc}">Berserker</option>
+                        <option th:each="class : ${classLists3}" th:value="${class}"
+                                th:text="${class.name}">Berserker</option>
                     </select>
                 </div>
             </div>

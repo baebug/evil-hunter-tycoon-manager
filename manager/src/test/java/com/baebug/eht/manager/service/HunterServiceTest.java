@@ -1,13 +1,10 @@
 package com.baebug.eht.manager.service;
 
 import com.baebug.eht.manager.domain.buff.CommonBuff;
-import com.baebug.eht.manager.domain.dto.HunterItemDTO;
-import com.baebug.eht.manager.domain.dto.ItemDTO;
-import com.baebug.eht.manager.domain.dto.StatDTO;
+import com.baebug.eht.manager.domain.dto.*;
 import com.baebug.eht.manager.domain.hunter.Characteristic;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
-import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
 import com.baebug.eht.manager.domain.item.ItemOption;
 import com.baebug.eht.manager.domain.item.OptionList;
@@ -79,7 +76,7 @@ class HunterServiceTest {
     @Test
     public void 공용_버프_확인() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(new StatDTO()), "");
 
         hunterService.calculate(hunter);
         System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());
@@ -108,7 +105,7 @@ class HunterServiceTest {
         HunterDTO hunterDto = new HunterDTO();
         hunterDto.setName(name);
         hunterDto.setCharacteristic(Characteristic.STRONG);
-        hunterDto.setHunterClass(HunterClass.BERSERKER);
+        hunterDto.setHunterClass(new HunterClassDTO());
         hunterDto.setStat(new StatDTO());
 
         return hunterDto;

@@ -1,5 +1,6 @@
 package com.baebug.eht.manager.domain.item;
 
+import com.baebug.eht.manager.domain.dto.HunterClassDTO;
 import com.baebug.eht.manager.domain.dto.StatDTO;
 import com.baebug.eht.manager.domain.hunter.Characteristic;
 import com.baebug.eht.manager.domain.hunter.Hunter;
@@ -34,7 +35,7 @@ class ItemTest {
     @DisplayName("헌터 생성 시 장비 생성 테스트")
     public void autoCreateItem() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, HunterClass.PALADIN, new StatEntity(new StatDTO()), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, new HunterClass(new HunterClassDTO()), new StatEntity(new StatDTO()), "");
 
         hunter.getEquipment().getWeapon().getItemOptions().add(createItemOption(ATK, 10));
 

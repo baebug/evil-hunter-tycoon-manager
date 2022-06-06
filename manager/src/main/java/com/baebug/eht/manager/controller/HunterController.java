@@ -1,5 +1,6 @@
 package com.baebug.eht.manager.controller;
 
+import com.baebug.eht.manager.domain.dto.HunterClassDTO;
 import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.dto.StatDTO;
 import com.baebug.eht.manager.domain.hunter.*;
@@ -40,7 +41,9 @@ public class HunterController {
         model.addAttribute("hunter", new HunterDTO());
 
         model.addAttribute("characteristics", Characteristic.values());
-        model.addAttribute("classes", HunterClass.values());
+        model.addAttribute("classLists1", HunterClassList1.values());
+        model.addAttribute("classLists2", HunterClassList2.values());
+        model.addAttribute("classLists3", HunterClassList3.values());
         model.addAttribute("statGrades", StatGrade.values());
         return "hunters/addForm";
     }
@@ -61,7 +64,6 @@ public class HunterController {
         HunterDTO hunterDTO = new HunterDTO();
         hunterDTO.setName("테스트");
         hunterDTO.setCharacteristic(Characteristic.STRONG);
-        hunterDTO.setHunterClass(HunterClass.BERSERKER);
         hunterDTO.setDesc("test desc");
 
         StatDTO statDTO = new StatDTO();
@@ -75,7 +77,13 @@ public class HunterController {
         statDTO.setMood(3);
         statDTO.setStamina(3);
 
+        HunterClassDTO hunterClassDTO = new HunterClassDTO();
+        hunterClassDTO.setFirst(HunterClassList1.BERSERKER);
+        hunterClassDTO.setSecond(HunterClassList2.SLAYER);
+        hunterClassDTO.setThird(HunterClassList3.BARBARIAN);
+
         hunterDTO.setStat(statDTO);
+        hunterDTO.setHunterClass(hunterClassDTO);
 
         Long hunter = hunterService.join(hunterDTO);
     }
