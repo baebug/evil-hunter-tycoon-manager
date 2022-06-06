@@ -1,5 +1,6 @@
 package com.baebug.eht.manager.domain.hunter;
 
+import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.dto.SpecDTO;
 import com.baebug.eht.manager.domain.item.*;
 import lombok.AccessLevel;
@@ -54,20 +55,7 @@ public class Hunter {
         this.hunterClass = hunterClass;
         this.stat = stat;
         this.desc = desc;
-
-        this.calculate();
     }
-
-    /*
-    public Hunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
-        this.name = name;
-        this.characteristic = characteristic;
-        this.hunterClass = hunterClass;
-        this.stat = stat;
-
-        this.calculate();
-    }
-    */
 
     /**
      * Tech 객체를 입력받는 메서드
@@ -75,17 +63,14 @@ public class Hunter {
      */
     public void setTech(TechEntity tech) throws IllegalAccessException {
         this.tech = tech;
-        this.calculate();
     }
 
     public void setFury(int fury) throws IllegalAccessException {
         this.fury = fury;
-        this.calculate();
     }
 
     public void setQuicken(int quicken) throws IllegalAccessException {
         this.quicken = quicken;
-        this.calculate();
     }
 
     /**
@@ -98,26 +83,13 @@ public class Hunter {
     /**
      * 헌터 정보를 수정하는 메서드
      */
-    public void changeHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat) throws IllegalAccessException {
+    public void changeHunter(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat, String desc) throws IllegalAccessException {
         this.name = name;
         this.characteristic = characteristic;
         this.hunterClass = hunterClass;
         this.stat = stat;
-
-        this.calculate();
+        this.desc = desc;
     }
-
-    /**
-     * 헌터 장비를 교체하는 메서드
-     * 서비스에서 해야 할 일이라고 생각해서 일단 주석처리 하였다.
-     */
-
-    /*
-    public void setEquipment(Weapon weapon, Helmet helmet, Armor armor, Glove glove, Shoes shoes, Necklace necklace, Ring ring, Belt belt) throws IllegalAccessException {
-        this.getEquipment().setEquipment(weapon, helmet, armor, glove, shoes, necklace, ring, belt);
-        this.calculate();
-    }
-    */
 
     /**
      * SpecDTO 인스턴스를 새로 생성하여 능력치를 합산 후 저장한다.

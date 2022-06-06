@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>헌터 등록 폼</h2>
+    </div>
+
+    <h4 class="mb-3">입력</h4>
+
+    <form action="hunter.html" th:action th:object="${hunter}" method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <label for="hunterName">헌터 이름</label>
+                    <input type="text" id="hunterName" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요" required />
+                </div>
+                <div class="col">
+                    <label for="hunterDescription">메모</label>
+                    <input type="text" id="hunterDescription" th:field="*{desc}" class="form-control" placeholder="메모를 입력하세요">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="hunterCharacteristic">성격</label>
+                    <select id="hunterCharacteristic" th:field="*{characteristic}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="characteristic : ${characteristics}" th:value="${characteristic}"
+                                th:text="${characteristic.characteristic}">Ultimate</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="hunterName">1차 직업</label>
+                    <select th:field="*{hunterClass}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="class : ${classes}" th:value="${class}"
+                                th:text="${class.desc}">Berserker</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="hunterName">2차 직업</label>
+                    <select th:field="*{hunterClass}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="class : ${classes}" th:value="${class}"
+                                th:text="${class.desc}">Berserker</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="hunterName">3차 직업</label>
+                    <select th:field="*{hunterClass}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="class : ${classes}" th:value="${class}"
+                                th:text="${class.desc}">Berserker</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <label>공격력</label>
+                    <select th:field="*{stat.atk}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>방어력</label>
+                    <select th:field="*{stat.def}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>치명타</label>
+                    <select th:field="*{stat.crit}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <label>공격속도</label>
+                    <select th:field="*{stat.spd}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>회피력</label>
+                    <select th:field="*{stat.evasion}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>체력</label>
+                    <select th:field="*{stat.hp}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <label>허기</label>
+                    <select th:field="*{stat.satiety}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>기분</label>
+                    <select th:field="*{stat.mood}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>기력</label>
+                    <select th:field="*{stat.stamina}" class="form-select" required>
+                        <option value="">-------</option>
+                        <option th:each="statGrade : ${statGrades}" th:value="${statGrade.code}"
+                                th:text="${statGrade}">FAST</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">헌터 등록</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        onclick="location.href='hunters.html'"
+                        th:onclick="|location.href='@{/hunters}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+
+    </form>
+
+</div> <!-- /container -->
+</body>
+</html>
