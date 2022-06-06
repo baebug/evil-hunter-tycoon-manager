@@ -34,7 +34,7 @@ class ItemTest {
     @DisplayName("헌터 생성 시 장비 생성 테스트")
     public void autoCreateItem() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, HunterClass.PALADIN, new StatEntity(new StatDTO()), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, HunterClass.PALADIN, new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
 
         hunter.getEquipment().getWeapon().getItemOptions().add(createItemOption(ATK, 10));
 
@@ -47,6 +47,21 @@ class ItemTest {
 
     private ItemOption createItemOption(OptionList option, Integer value) {
         return new ItemOption(option, value);
+    }
+
+    private StatDTO createStatDto(int atk, int def, int crit, int spd, int evasion, int hp, int satiety, int mood, int stamina) {
+        StatDTO statDTO = new StatDTO();
+        statDTO.setAtk(atk);
+        statDTO.setDef(def);
+        statDTO.setCrit(crit);
+        statDTO.setSpd(spd);
+        statDTO.setEvasion(evasion);
+        statDTO.setHp(hp);
+        statDTO.setSatiety(satiety);
+        statDTO.setMood(mood);
+        statDTO.setStamina(stamina);
+
+        return statDTO;
     }
 
 }
