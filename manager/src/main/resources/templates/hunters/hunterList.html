@@ -49,7 +49,7 @@
                 <td th:text="${hunter.stat.getGrade()}">등급</td>
                 <td th:text="${hunter.characteristic.option} ? ${hunter.characteristic.characteristic} : ''">성격</td>
                 <td><a href="item.html" th:href="@{|/hunters/${hunter.id}|}" th:text="${hunter.name}">이름</a></td>
-                <td th:text="${hunter.hunterClass.firstClass.name}">클래스</td>
+                <td th:text="${hunter.hunterClass.topClassName()}">클래스</td>
                 <td th:text="${hunter.desc}">메모</td>
             </tr>
             </tbody>

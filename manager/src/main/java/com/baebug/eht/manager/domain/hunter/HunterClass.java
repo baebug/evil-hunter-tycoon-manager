@@ -29,4 +29,10 @@ public class HunterClass {
         this.secondClass = hunterClassDTO.getSecond();
         this.thirdClass = hunterClassDTO.getThird();
     }
+
+    public String topClassName() {
+        if (this.getThirdClass() != null) return this.getThirdClass().getName();
+        else if (this.getSecondClass() != null) return this.getSecondClass().getName();
+        return this.getFirstClass().getName();
+    }
 }

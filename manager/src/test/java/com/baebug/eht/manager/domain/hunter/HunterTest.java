@@ -36,7 +36,6 @@ class HunterTest {
         // then
         assertEquals(hunterDTO.getName(), hunter1.getName());
         assertEquals(hunterDTO.getCharacteristic(), hunter1.getCharacteristic());
-        assertEquals(hunterDTO.getHunterClass(), hunter1.getHunterClass());
     }
 
     @Test
