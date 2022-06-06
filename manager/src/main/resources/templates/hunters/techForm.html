@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>비법 수정 폼</h2>
+    </div>
+
+    <h4 class="mb-3">입력</h4>
+
+    <form action="hunter.html" th:action th:object="${tech}" method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/hp.png}" class="img-thumbnail w-25">
+                        <label th:text="'체력 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{hp}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/mood_max.png}" class="img-thumbnail w-25">
+                        <label th:text="'기분 최대치 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{mood_max}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/satiety_max.png}" class="img-thumbnail w-25">
+                        <label th:text="'허기 최대치 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{satiety_max}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/stamina_max.png}" class="img-thumbnail w-25">
+                        <label th:text="'기력 최대치 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{stamina_max}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/atk.png}" class="img-thumbnail w-25">
+                        <label th:text="'공격력 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{atk}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/def.png}" class="img-thumbnail w-25">
+                        <label th:text="'방어력 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{def}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/crit.png}" class="img-thumbnail w-25">
+                        <label th:text="'치명타 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{crit}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/spd.png}" class="img-thumbnail w-25">
+                        <label th:text="'공격속도 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{spd}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/evasion.png}" class="img-thumbnail w-25">
+                        <label th:text="'회피력 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{evasion}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/walk.png}" class="img-thumbnail w-25">
+                        <label th:text="'이동속도 증가'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{walk}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/skill1.png}" class="img-thumbnail w-25">
+                        <label th:text="'스킬1 쿨타임 감소'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{skill1}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/skill2.png}" class="img-thumbnail w-25">
+                        <label th:text="'스킬2 쿨타임 감소'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{skill2}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/mood.png}" class="img-thumbnail w-25">
+                        <label th:text="'기분 소모량 감소'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{mood}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/satiety.png}" class="img-thumbnail w-25">
+                        <label th:text="'허기 소모량 감소'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{satiety}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/stamina.png}" class="img-thumbnail w-25">
+                        <label th:text="'기력 소모량 감소'"></label>
+                    </div>
+                    <input max="100" min="0" th:field="*{stamina}" placeholder="Lv" step="1" type="number" required>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn-primary" type="submit">헌터 등록</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn-secondary"
+                        onclick="location.href='hunters.html'"
+                        th:onclick="|location.href='@{|/hunters/${hunterId}|}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+
+    </form>
+
+</div> <!-- /container -->
+</body>
+</html>

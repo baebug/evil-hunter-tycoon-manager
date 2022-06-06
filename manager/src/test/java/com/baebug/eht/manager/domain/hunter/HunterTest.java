@@ -1,9 +1,6 @@
 package com.baebug.eht.manager.domain.hunter;
 
-import com.baebug.eht.manager.domain.dto.HunterClassDTO;
-import com.baebug.eht.manager.domain.dto.HunterDTO;
-import com.baebug.eht.manager.domain.dto.SpecDTO;
-import com.baebug.eht.manager.domain.dto.StatDTO;
+import com.baebug.eht.manager.domain.dto.*;
 import com.baebug.eht.manager.domain.item.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -122,7 +119,7 @@ Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(ne
         // given
         Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
 
-        TechEntity tech = new TechEntity(100, 10, 10, 10, 50, 0, 100, 50, 0, 10, 10, 10, 50, 100, 10);
+        TechEntity tech = new TechEntity(createTechDTO(100, 10, 10, 10, 50, 0, 100, 50, 0, 10, 10, 10, 50, 100, 10));
 
         // when
         hunter.setTech(tech);
@@ -206,6 +203,27 @@ Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(ne
         statDTO.setStamina(stamina);
 
         return statDTO;
+    }
+
+    private TechDTO createTechDTO(int hp, int mood_max, int satiety_max, int stamina_max, int atk, int def, int crit, int spd, int evasion, int walk, int skill1, int skill2, int mood, int satiety, int stamina) {
+        TechDTO techDTO = new TechDTO();
+        techDTO.setHp(hp);
+        techDTO.setMood_max(mood_max);
+        techDTO.setSatiety_max(satiety_max);
+        techDTO.setStamina_max(stamina_max);
+        techDTO.setAtk(atk);
+        techDTO.setDef(def);
+        techDTO.setCrit(crit);
+        techDTO.setSpd(spd);
+        techDTO.setEvasion(evasion);
+        techDTO.setWalk(walk);
+        techDTO.setSkill1(skill1);
+        techDTO.setSkill2(skill2);
+        techDTO.setMood(mood);
+        techDTO.setSatiety(satiety);
+        techDTO.setStamina(stamina);
+
+        return techDTO;
     }
 
 }

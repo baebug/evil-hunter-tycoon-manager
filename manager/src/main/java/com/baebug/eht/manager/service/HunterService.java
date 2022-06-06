@@ -3,10 +3,12 @@ package com.baebug.eht.manager.service;
 import com.baebug.eht.manager.domain.buff.CommonBuff;
 import com.baebug.eht.manager.domain.dto.HunterItemDTO;
 import com.baebug.eht.manager.domain.dto.SpecDTO;
+import com.baebug.eht.manager.domain.dto.TechDTO;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
+import com.baebug.eht.manager.domain.hunter.TechEntity;
 import com.baebug.eht.manager.repository.HunterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,13 @@ public class HunterService {
         HunterClass hunterClass = new HunterClass(hunterDto.getHunterClass());
         Hunter hunter = hunterRepository.findById(hunterId);
         hunter.changeHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterClass, stat, hunterDto.getDesc());
+    }
+
+    @Transactional
+    public void updateTech(Long hunterId, TechDTO techDTO) throws IllegalAccessException {
+        TechEntity tech = new TechEntity(techDTO);
+        Hunter hunter = hunterRepository.findById(hunterId);
+        hunter.setTech(tech);
     }
 
     /**

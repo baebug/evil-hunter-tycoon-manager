@@ -1,6 +1,7 @@
 package com.baebug.eht.manager.domain.hunter;
 
 import com.baebug.eht.manager.domain.dto.SpecDTO;
+import com.baebug.eht.manager.domain.dto.TechDTO;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,9 +26,9 @@ public class TechEntity {
      * 0 부터 100 까지의 비법 레벨
      */
     private int hp;
-    private int max_mood;
-    private int max_satiety;
-    private int max_stamina;
+    private int mood_max;
+    private int satiety_max;
+    private int stamina_max;
     private int atk;
     private int def;
     private int crit;
@@ -40,22 +41,22 @@ public class TechEntity {
     private int satiety;
     private int stamina;
 
-    public TechEntity(int hp, int max_mood, int max_satiety, int max_stamina, int atk, int def, int crit, int spd, int evasion, int walk, int skill1, int skill2, int mood, int satiety, int stamina) {
-        this.hp = hp;
-        this.max_mood = max_mood;
-        this.max_satiety = max_satiety;
-        this.max_stamina = max_stamina;
-        this.atk = atk;
-        this.def = def;
-        this.crit = crit;
-        this.spd = spd;
-        this.evasion = evasion;
-        this.walk = walk;
-        this.skill1 = skill1;
-        this.skill2 = skill2;
-        this.mood = mood;
-        this.satiety = satiety;
-        this.stamina = stamina;
+    public TechEntity(TechDTO techDTO) {
+        this.hp = techDTO.getHp();
+        this.mood_max = techDTO.getMood_max();
+        this.satiety_max = techDTO.getSatiety_max();
+        this.stamina_max = techDTO.getStamina_max();
+        this.atk = techDTO.getAtk();
+        this.def = techDTO.getDef();
+        this.crit = techDTO.getCrit();
+        this.spd = techDTO.getSpd();
+        this.evasion = techDTO.getEvasion();
+        this.walk = techDTO.getWalk();
+        this.skill1 = techDTO.getSkill1();
+        this.skill2 = techDTO.getSkill2();
+        this.mood = techDTO.getMood();
+        this.satiety = techDTO.getSatiety();
+        this.stamina = techDTO.getStamina();
     }
 
     /**

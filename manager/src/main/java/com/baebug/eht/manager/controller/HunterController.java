@@ -3,6 +3,7 @@ package com.baebug.eht.manager.controller;
 import com.baebug.eht.manager.domain.dto.HunterClassDTO;
 import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.dto.StatDTO;
+import com.baebug.eht.manager.domain.dto.TechDTO;
 import com.baebug.eht.manager.domain.hunter.*;
 import com.baebug.eht.manager.service.HunterService;
 import com.baebug.eht.manager.service.ItemService;
@@ -54,7 +55,7 @@ public class HunterController {
         if (bindingResult.hasErrors()) {
             return "hunters/addForm";
         }
-        Long savedId = hunterService.join(hunterDTO);
+        hunterService.join(hunterDTO);
 
         return "redirect:/hunters";
     }
@@ -74,18 +75,18 @@ public class HunterController {
         model.addAttribute("hunter", hunter);
 
         model.addAttribute("characteristics", Characteristic.values());
-        model.addAttribute("classLists1", HunterClassList1.values());
-        model.addAttribute("classLists2", HunterClassList2.values());
-        model.addAttribute("classLists3", HunterClassList3.values());
+        model.addAttribute("classList1", HunterClassList1.values());
+        model.addAttribute("classList2", HunterClassList2.values());
+        model.addAttribute("classList3", HunterClassList3.values());
         model.addAttribute("statGrades", StatGrade.values());
 
         return "hunters/editForm";
     }
 
     @PostMapping("/{hunterId}/edit")
-    public java.lang.String edit(@PathVariable Long hunterId,
-                                 @Valid @ModelAttribute HunterDTO hunterDTO,
-                                 BindingResult bindingResult) throws IllegalAccessException {
+    public String edit(@PathVariable Long hunterId,
+                       @Valid @ModelAttribute HunterDTO hunterDTO,
+                       BindingResult bindingResult) throws IllegalAccessException {
         if (bindingResult.hasErrors()) {
             return "hunters/editForm";
         }
@@ -96,11 +97,42 @@ public class HunterController {
     }
 
     @PostMapping("/{hunterId}/delete")
-    public String  delete(@PathVariable Long hunterId) {
+    public String delete(@PathVariable Long hunterId) {
         hunterService.exile(hunterId);
 
         return "redirect:/hunters";
     }
+
+    @GetMapping("/{hunterId}/tech")
+    public String techForm(@PathVariable Long hunterId, Model model) {
+        Hunter hunter = hunterService.findHunter(hunterId);
+        model.addAttribute("hunterId", hunterId);
+        model.addAttribute("tech", hunter.getTech());
+        model.addAttribute("techList", TechList.values());
+
+        return "hunters/techForm";
+    }
+
+    @PostMapping("/{hunterId}/tech")
+    public String tech(@PathVariable Long hunterId,
+                       @Valid @ModelAttribute TechDTO techDTO,
+                       BindingResult bindingResult) throws IllegalAccessException {
+        if (bindingResult.hasErrors()) {
+            return "hunters/techForm";
+        }
+
+        hunterService.updateTech(hunterId, techDTO);
+
+        return "redirect:/hunters/{hunterId}";
+    }
+
+
+
+
+
+
+
+
 
     @PostConstruct
     public void init() throws IllegalAccessException {
