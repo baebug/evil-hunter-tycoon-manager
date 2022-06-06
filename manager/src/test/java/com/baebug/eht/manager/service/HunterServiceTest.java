@@ -79,7 +79,7 @@ class HunterServiceTest {
     @Test
     public void 공용_버프_확인() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(createStatDto(0,0,0,0,0,0,0,0, 0)), "");
 
         hunterService.calculate(hunter);
         System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());
@@ -109,7 +109,7 @@ class HunterServiceTest {
         hunterDto.setName(name);
         hunterDto.setCharacteristic(Characteristic.STRONG);
         hunterDto.setHunterClass(HunterClass.BERSERKER);
-        hunterDto.setStat(new StatDTO());
+        hunterDto.setStat(createStatDto(0,0,0,0,0,0,0,0,0));
 
         return hunterDto;
     }
@@ -133,6 +133,21 @@ class HunterServiceTest {
         commonBuff.getGuild().setGuildBuff(15, 0, 15, 5, 5);
         commonBuff.getDungeon().setDungeonBuff(200);
         commonBuff.getBuilding().setBuildingBuff(300, 300, 300, 300, 300, 300);
+    }
+
+    private StatDTO createStatDto(int atk, int def, int crit, int spd, int evasion, int hp, int satiety, int mood, int stamina) {
+        StatDTO statDTO = new StatDTO();
+        statDTO.setAtk(atk);
+        statDTO.setDef(def);
+        statDTO.setCrit(crit);
+        statDTO.setSpd(spd);
+        statDTO.setEvasion(evasion);
+        statDTO.setHp(hp);
+        statDTO.setSatiety(satiety);
+        statDTO.setMood(mood);
+        statDTO.setStamina(stamina);
+
+        return statDTO;
     }
 
 }
