@@ -25,9 +25,9 @@ public class HunterClass {
     private HunterClassList3 thirdClass;
 
     public HunterClass(HunterClassDTO hunterClassDTO) {
-        this.firstClass = hunterClassDTO.getFirst();
-        this.secondClass = hunterClassDTO.getSecond();
-        this.thirdClass = hunterClassDTO.getThird();
+        this.firstClass = hunterClassDTO.getFirstClass();
+        this.secondClass = hunterClassDTO.getSecondClass();
+        this.thirdClass = hunterClassDTO.getThirdClass();
     }
 
     public String topClassName() {
