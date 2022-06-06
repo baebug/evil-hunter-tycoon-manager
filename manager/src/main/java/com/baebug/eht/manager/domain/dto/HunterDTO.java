@@ -5,27 +5,28 @@ import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Hunter 객체의 DTO
  */
 @Data
 public class HunterDTO {
 
+    @NotBlank
     private String name;
-
-    private Characteristic characteristic;
-    private HunterClass hunterClass;
-    private StatEntity stat;
+    @Size(max = 10)
     private String desc;
+
+    @NotNull
+    private Characteristic characteristic;
+    @NotNull
+    private HunterClass hunterClass;
+    private StatDTO stat = new StatDTO();
 
     public HunterDTO() {
     }
 
-    public HunterDTO(String name, Characteristic characteristic, HunterClass hunterClass, StatEntity stat, String desc) {
-        this.name = name;
-        this.characteristic = characteristic;
-        this.hunterClass = hunterClass;
-        this.stat = stat;
-        this.desc = desc;
-    }
 }

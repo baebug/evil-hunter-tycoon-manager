@@ -1,6 +1,8 @@
 package com.baebug.eht.manager.domain.hunter;
 
+import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.dto.SpecDTO;
+import com.baebug.eht.manager.domain.dto.StatDTO;
 import com.baebug.eht.manager.domain.item.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,23 +20,28 @@ class HunterTest {
     public void update() throws Exception {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(), "");
-        Hunter hunter2 = new Hunter("헌터B", Characteristic.SWIFT, HunterClass.SORCERER, new StatEntity(), "");
+        HunterDTO hunterDTO = new HunterDTO();
+        StatDTO statDTO = new StatDTO();
+        hunterDTO.setName("hunter");
+        hunterDTO.setCharacteristic(Characteristic.OTHERS);
+        hunterDTO.setHunterClass(HunterClass.SORCERER);
+        hunterDTO.setDesc("check");
+        hunterDTO.setStat(statDTO);
 
         // when
-        hunter1.changeHunter(hunter2.getName(), hunter2.getCharacteristic(), hunter2.getHunterClass(), hunter2.getStat());
+        hunter1.changeHunter(hunterDTO.getName(), hunterDTO.getCharacteristic(), hunterDTO.getHunterClass(), new StatEntity(hunterDTO.getStat()), hunterDTO.getDesc());
 
         // then
-        assertEquals(hunter2.getName(), hunter1.getName());
-        assertEquals(hunter2.getCharacteristic(), hunter1.getCharacteristic());
-        assertEquals(hunter2.getHunterClass(), hunter1.getHunterClass());
-        assertEquals(hunter2.getStat(), hunter1.getStat());
+        assertEquals(hunterDTO.getName(), hunter1.getName());
+        assertEquals(hunterDTO.getCharacteristic(), hunter1.getCharacteristic());
+        assertEquals(hunterDTO.getHunterClass(), hunter1.getHunterClass());
     }
 
     @Test
     @DisplayName("장비 능력치 적용 테스트")
     public void setItem() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
 
         // when
         Weapon weapon = hunter.getEquipment().getWeapon();
@@ -59,10 +66,13 @@ class HunterTest {
     @DisplayName("성격 능력치 적용 테스트")
     public void setCharacteristic() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
-        Hunter hunter2 = new Hunter("헌터B", Characteristic.SWIFT, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
+        Hunter hunter2 = new Hunter("헌터B", Characteristic.SWIFT, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
 
         // when
+        hunter1.calculate();
+        hunter2.calculate();
+
 
         // then
         assertEquals(10, hunter1.getSpec().getAtk());
@@ -73,10 +83,16 @@ class HunterTest {
     @DisplayName("스탯 능력치 적용 테스트")
     public void setStat() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
-        Hunter hunter2 = new Hunter("헌터B", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(1, 2, 3, 1, 2, 3, 1, 2, 3), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
+        StatDTO statDTO = new StatDTO();
+        statDTO.setAtk(1);
+        statDTO.setCrit(3);
+        statDTO.setEvasion(2);
+        Hunter hunter2 = new Hunter("헌터B", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(statDTO), "");
 
         // when
+        hunter1.calculate();
+        hunter2.calculate();
 
         // then
         assertEquals(0, hunter1.getSpec().getAtk());
@@ -105,11 +121,12 @@ class HunterTest {
     @DisplayName("비법 능력치 적용 테스트")
     public void specTest() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
         TechEntity tech = new TechEntity(100, 10, 10, 10, 50, 0, 100, 50, 0, 10, 10, 10, 50, 100, 10);
 
         // when
         hunter.setTech(tech);
+        hunter.calculate();
 
         // then
         assertEquals(15, hunter.getSpec().getHp());
@@ -128,20 +145,18 @@ class HunterTest {
     @DisplayName("헌터 등급 테스트")
     public void getGradeTest() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
-        Hunter hunter2 = new Hunter("헌터B", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(3, 3, 3, 3, 3, 3, 3, 3, 3), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
 
         // then
         assertEquals("Normal", hunter1.getStat().getGrade());
-        assertEquals("Ultimate+", hunter2.getStat().getGrade());
     }
 
     @Test
     @DisplayName("무기를 보유한 헌터의 공격속도 출력")
     public void getAtkSpdTest() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 2, 0, 0, 0, 0, 0), "");
-        Hunter hunter2 = new Hunter("헌터B", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 2, 0, 0, 0, 0, 0), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
+        Hunter hunter2 = new Hunter("헌터B", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
 
         // when
         hunter1.getEquipment().getWeapon().setAtk_spd(1.5);
@@ -163,7 +178,7 @@ class HunterTest {
     @DisplayName("무기를 보유하지 않은 헌터의 공격속도 출력")
     public void getAtkSpdTest2() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
 
         // then
         System.out.println("헌터의 현재 공격속도 = " + hunter1.getAtkSpd());

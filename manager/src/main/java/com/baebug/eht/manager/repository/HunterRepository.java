@@ -34,7 +34,7 @@ public class HunterRepository {
     }
 
     public List<Hunter> findAll() {
-        return em.createQuery("select h from Hunter h", Hunter.class)
+        return em.createQuery("select h from Hunter h join fetch h.stat", Hunter.class)
                 .getResultList();
     }
 

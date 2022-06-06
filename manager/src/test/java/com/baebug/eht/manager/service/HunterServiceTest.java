@@ -3,6 +3,7 @@ package com.baebug.eht.manager.service;
 import com.baebug.eht.manager.domain.buff.CommonBuff;
 import com.baebug.eht.manager.domain.dto.HunterItemDTO;
 import com.baebug.eht.manager.domain.dto.ItemDTO;
+import com.baebug.eht.manager.domain.dto.StatDTO;
 import com.baebug.eht.manager.domain.hunter.Characteristic;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
@@ -41,7 +42,7 @@ class HunterServiceTest {
         Long savedId = hunterService.join(hunter1);
 
         // then
-        assertEquals(4, hunterService.findHunters().size());
+        assertEquals(2, hunterService.findHunters().size());
     }
 
     @Test
@@ -72,13 +73,13 @@ class HunterServiceTest {
         hunterService.exile(savedId);
 
         // then
-        assertEquals(4, hunterService.findHunters().size());
+        assertEquals(2, hunterService.findHunters().size());
     }
 
     @Test
     public void 공용_버프_확인() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, HunterClass.BERSERKER, new StatEntity(new StatDTO()), "");
 
         hunterService.calculate(hunter);
         System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());
@@ -108,7 +109,7 @@ class HunterServiceTest {
         hunterDto.setName(name);
         hunterDto.setCharacteristic(Characteristic.STRONG);
         hunterDto.setHunterClass(HunterClass.BERSERKER);
-        hunterDto.setStat(new StatEntity(1, 1, 1, 1, 1, 1, 1, 1, 1));
+        hunterDto.setStat(new StatDTO());
 
         return hunterDto;
     }

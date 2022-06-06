@@ -6,6 +6,7 @@ import com.baebug.eht.manager.domain.dto.SpecDTO;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.dto.HunterDTO;
+import com.baebug.eht.manager.domain.hunter.StatEntity;
 import com.baebug.eht.manager.repository.HunterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class HunterService {
      */
     @Transactional
     public Long join(HunterDTO hunterDto) throws IllegalAccessException {
-        Hunter hunter = Hunter.createHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), hunterDto.getStat(), hunterDto.getDesc());
+        StatEntity stat = new StatEntity(hunterDto.getStat());
+        Hunter hunter = Hunter.createHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), stat, hunterDto.getDesc());
         hunterRepository.save(hunter);
         return hunter.getId();
     }
@@ -40,8 +42,9 @@ public class HunterService {
      */
     @Transactional
     public void update(Long hunterId, HunterDTO hunterDto) throws IllegalAccessException {
+        StatEntity stat = new StatEntity(hunterDto.getStat());
         Hunter hunter = hunterRepository.findById(hunterId);
-        hunter.changeHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), hunterDto.getStat());
+        hunter.changeHunter(hunterDto.getName(), hunterDto.getCharacteristic(), hunterDto.getHunterClass(), stat, hunterDto.getDesc());
     }
 
     /**

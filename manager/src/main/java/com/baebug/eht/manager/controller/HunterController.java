@@ -1,20 +1,22 @@
 package com.baebug.eht.manager.controller;
 
 import com.baebug.eht.manager.domain.dto.HunterDTO;
-import com.baebug.eht.manager.domain.hunter.Characteristic;
-import com.baebug.eht.manager.domain.hunter.Hunter;
-import com.baebug.eht.manager.domain.hunter.HunterClass;
-import com.baebug.eht.manager.domain.hunter.StatEntity;
+import com.baebug.eht.manager.domain.dto.StatDTO;
+import com.baebug.eht.manager.domain.hunter.*;
 import com.baebug.eht.manager.service.HunterService;
 import com.baebug.eht.manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -33,15 +35,36 @@ public class HunterController {
         return "hunters/hunterList";
     }
 
+    @GetMapping("/add")
+    public String addForm(Model model) {
+        model.addAttribute("hunter", new HunterDTO());
+
+        model.addAttribute("characteristics", Characteristic.values());
+        model.addAttribute("classes", HunterClass.values());
+        model.addAttribute("statGrades", StatGrade.values());
+        return "hunters/addForm";
+    }
+
+    @PostMapping("/add")
+    public String add(@Valid @ModelAttribute HunterDTO hunterDTO,
+                      BindingResult bindingResult) throws IllegalAccessException {
+
+        if (bindingResult.hasErrors()) {
+            return "hunters/addForm";
+        }
+        Long savedId = hunterService.join(hunterDTO);
+        return "redirect:/hunters";
+    }
+
     @PostConstruct
     public void init() throws IllegalAccessException {
-        HunterDTO hunter1 = new HunterDTO("test1", Characteristic.CHARISMATIC, HunterClass.BERSERKER, new StatEntity(0, 0, 0, 0, 0, 0, 0, 0, 0), "test");
-        HunterDTO hunter2 = new HunterDTO("test2", Characteristic.SWIFT, HunterClass.SORCERER, new StatEntity(2, 2, 2, 2, 2, 2, 2, 2, 2), "테스트2");
-        HunterDTO hunter3 = new HunterDTO("test3", Characteristic.OTHERS, HunterClass.RANGER, new StatEntity(1, 1, 1, 1, 1, 1, 1, 1, 1), "메모메모");
+        HunterDTO hunterDTO = new HunterDTO();
+        hunterDTO.setName("테스트");
+        hunterDTO.setCharacteristic(Characteristic.STRONG);
+        hunterDTO.setHunterClass(HunterClass.BERSERKER);
+        hunterDTO.setDesc("test desc");
 
-        hunterService.join(hunter1);
-        hunterService.join(hunter2);
-        hunterService.join(hunter3);
+        Long hunter = hunterService.join(hunterDTO);
     }
 
 }

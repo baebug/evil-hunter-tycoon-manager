@@ -1,6 +1,7 @@
 package com.baebug.eht.manager.domain.hunter;
 
 import com.baebug.eht.manager.domain.dto.SpecDTO;
+import com.baebug.eht.manager.domain.dto.StatDTO;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,16 +38,20 @@ public class StatEntity {
     private int mood;
     private int stamina;
 
-    public StatEntity(int atk, int def, int crit, int spd, int evasion, int hp, int satiety, int mood, int stamina) {
-        this.atk = atk;
-        this.def = def;
-        this.crit = crit;
-        this.spd = spd;
-        this.evasion = evasion;
-        this.hp = hp;
-        this.satiety = satiety;
-        this.mood = mood;
-        this.stamina = stamina;
+    /**
+     * statDTO 를 입력받아 필드를 초기화한다.
+     * @param statDTO       DTO
+     */
+    public StatEntity(StatDTO statDTO) {
+        this.atk = statDTO.getAtk();
+        this.def = statDTO.getDef();
+        this.crit = statDTO.getCrit();
+        this.spd = statDTO.getSpd();
+        this.evasion = statDTO.getEvasion();
+        this.hp = statDTO.getHp();
+        this.satiety = statDTO.getSatiety();
+        this.mood = statDTO.getMood();
+        this.stamina = statDTO.getStamina();
     }
 
     /**
