@@ -41,9 +41,9 @@ public class HunterController {
         model.addAttribute("hunter", new HunterDTO());
 
         model.addAttribute("characteristics", Characteristic.values());
-        model.addAttribute("classLists1", HunterClassList1.values());
-        model.addAttribute("classLists2", HunterClassList2.values());
-        model.addAttribute("classLists3", HunterClassList3.values());
+        model.addAttribute("classList1", HunterClassList1.values());
+        model.addAttribute("classList2", HunterClassList2.values());
+        model.addAttribute("classList3", HunterClassList3.values());
         model.addAttribute("statGrades", StatGrade.values());
 
         return "hunters/addForm";
@@ -106,7 +106,7 @@ public class HunterController {
     @GetMapping("/{hunterId}/tech")
     public String techForm(@PathVariable Long hunterId, Model model) {
         Hunter hunter = hunterService.findHunter(hunterId);
-        model.addAttribute("hunterId", hunterId);
+        model.addAttribute("hunter", hunter);
         model.addAttribute("tech", hunter.getTech());
 
         return "hunters/techForm";
@@ -123,6 +123,14 @@ public class HunterController {
         hunterService.updateTech(hunterId, techDTO);
 
         return "redirect:/hunters/{hunterId}";
+    }
+
+    @GetMapping("/{hunterId}/equipment")
+    public String equipment(@PathVariable Long hunterId, Model model) {
+        Hunter hunter = hunterService.findHunter(hunterId);
+        model.addAttribute("hunter", hunter);
+
+        return "hunters/equipment";
     }
 
 

@@ -154,23 +154,18 @@ Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(ne
     public void getAtkSpdTest() throws Exception {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
-        Hunter hunter2 = new Hunter("헌터B", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
 
 
         // when
-        hunter1.getEquipment().getWeapon().setAtk_spd(1.5);
-        hunter1.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(SPD, 10)));
+        hunter1.getEquipment().getWeapon().setAtk_spd(1.8);
+        hunter1.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(ATK, 10)));
         hunter1.calculate();
 
-        hunter2.getEquipment().getWeapon().setAtk_spd(1.5);
-        hunter2.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(SPD, 75)));
-        hunter2.calculate();
 
         // then
         System.out.println("헌터A 의 현재 공격속도 = " + hunter1.getAtkSpd());
-        System.out.println("헌터A 의 필요 공격속도 = " + hunter1.getAtkSpd(0.25));
-        System.out.println("헌터B 의 현재 공격속도 = " + hunter2.getAtkSpd());
-        System.out.println("헌터B 의 필요 공격속도 = " + hunter2.getAtkSpd(0.25));
+        System.out.println("0.25 의 필요 공격속도 = " + hunter1.getAtkSpd(0.25));
+        System.out.println("1.27 의 필요 공격속도 = " + hunter1.getAtkSpd(1.27));
     }
 
     @Test

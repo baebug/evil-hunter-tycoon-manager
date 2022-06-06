@@ -4,21 +4,51 @@
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            max-width: 560px;
-        }
-    </style>
 </head>
 <body>
 
-<div class="container">
-
-    <div class="py-5 text-center">
-        <h2>비법 수정 폼</h2>
+<div class="container" style="max-width: 600px">
+    <div class="pt-5 pb-2 text-center">
+        <h2>헌터 정보</h2>
+        <div class="pt-3">
+            <h5>
+                [[${hunter.characteristic.option} ? ${hunter.characteristic.characteristic} : '']] [[${hunter.name}]] ([[${hunter.hunterClass.topClassName()}]])
+            </h5>
+            <h6>[[${hunter.stat.getGrade()}]]</h6>
+        </div>
     </div>
 
-    <h4 class="mb-3">입력</h4>
+    <div class="row">
+        <div class="col">
+            <button class="btn-primary"
+                    onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{/hunters}'|"
+                    type="button">헌터 목록</button>
+            <form action="#" th:action="@{|../${hunter.id}/delete|}" th:method="delete" style="display: inline">
+                <input type="hidden" name="_method" value="delete" />
+                <button class="btn-danger float-end" type="submit" id="submitButton" th:onclick="if(!confirm('헌터를 삭제하시겠습니까?')) return false">헌터 삭제</button>
+            </form>
+            <button class="btn-primary float-end mx-3"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/edit|}'|"
+                    type="button">헌터 수정</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div class="row my-4">
+        <div class="col">
+            <button onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}|}'|"
+                    type="button">정보</button>
+            <button onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/equipment|}'|"
+                    type="button">장비</button>
+            <button onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/tech|}'|"
+                    type="button">비법</button>
+        </div>
+    </div>
 
     <form action="hunter.html" th:action th:object="${tech}" method="post">
         <div class="container">
@@ -154,12 +184,12 @@
 
         <div class="row">
             <div class="col">
-                <button class="w-100 btn-primary" type="submit">헌터 등록</button>
+                <button class="w-100 btn-primary" type="submit">비법 수정</button>
             </div>
             <div class="col">
                 <button class="w-100 btn-secondary"
                         onclick="location.href='hunters.html'"
-                        th:onclick="|location.href='@{|/hunters/${hunterId}|}'|"
+                        th:onclick="|location.href='@{|/hunters/${hunter.id}|}'|"
                         type="button">취소</button>
             </div>
         </div>
