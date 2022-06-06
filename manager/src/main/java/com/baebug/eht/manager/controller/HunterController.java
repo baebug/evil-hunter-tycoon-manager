@@ -108,7 +108,6 @@ public class HunterController {
         Hunter hunter = hunterService.findHunter(hunterId);
         model.addAttribute("hunterId", hunterId);
         model.addAttribute("tech", hunter.getTech());
-        model.addAttribute("techList", TechList.values());
 
         return "hunters/techForm";
     }
