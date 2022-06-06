@@ -159,11 +159,11 @@ Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(ne
 
         // when
         hunter1.getEquipment().getWeapon().setAtk_spd(1.5);
-        hunter1.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(SPD, 5)));
+        hunter1.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(SPD, 10)));
         hunter1.calculate();
 
         hunter2.getEquipment().getWeapon().setAtk_spd(1.5);
-        hunter2.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(SPD, 70)));
+        hunter2.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(SPD, 75)));
         hunter2.calculate();
 
         // then
