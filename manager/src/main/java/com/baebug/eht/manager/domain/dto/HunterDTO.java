@@ -23,7 +23,7 @@ public class HunterDTO {
     @NotNull
     private Characteristic characteristic;
     @NotNull
-    private HunterClass hunterClass;
+    private HunterClassDTO hunterClass = new HunterClassDTO();
     private StatDTO stat = new StatDTO();
 
     public HunterDTO() {

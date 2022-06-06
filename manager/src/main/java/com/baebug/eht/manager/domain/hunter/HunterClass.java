@@ -1,30 +1,32 @@
 package com.baebug.eht.manager.domain.hunter;
 
+import com.baebug.eht.manager.domain.dto.HunterClassDTO;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static com.baebug.eht.manager.domain.hunter.HunterClass2.*;
-import static com.baebug.eht.manager.domain.hunter.HunterClass3.*;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * 헌터의 직업
  */
 @Getter
-public enum HunterClass {
-    BERSERKER("버서커", Arrays.asList(DUELIST, SLAYER, WARRIOR), Arrays.asList(BARBARIAN, SWORD_SAINT, DESTROYER)),
-    RANGER("레인저", Arrays.asList(HAWK_EYE, SNIPER, SUMMONIC_ARCHER), Arrays.asList(MINSTREL, SCOUT, ARCANE_ARCHER)),
-    PALADIN("팔라딘", Arrays.asList(TEMPLAR, CRUSADER, DARK_PALADIN), Arrays.asList(INQUISITOR, GUARDIAN, EXECUTOR)),
-    SORCERER("소서러", Arrays.asList(ARCH_MAGE, DARK_MAGE, IGNIS), Arrays.asList(CONJURER, DARK_LORD, ILLUSIONIST));
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class HunterClass {
 
-    private final String desc;
-    private final List<HunterClass2> second;
-    private final List<HunterClass3> third;
+    @Enumerated(EnumType.STRING)
+    private HunterClassList1 firstClass;
+    @Enumerated(EnumType.STRING)
+    private HunterClassList2 secondClass;
+    @Enumerated(EnumType.STRING)
+    private HunterClassList3 thirdClass;
 
-    HunterClass(String desc, List<HunterClass2> second, List<HunterClass3> third) {
-        this.desc = desc;
-        this.second = second;
-        this.third = third;
+    public HunterClass(HunterClassDTO hunterClassDTO) {
+        this.firstClass = hunterClassDTO.getFirst();
+        this.secondClass = hunterClassDTO.getSecond();
+        this.thirdClass = hunterClassDTO.getThird();
     }
 }

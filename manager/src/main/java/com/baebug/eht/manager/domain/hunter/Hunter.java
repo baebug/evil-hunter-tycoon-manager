@@ -32,7 +32,7 @@ public class Hunter {
     @Enumerated(EnumType.STRING)
     private Characteristic characteristic;    // Enum type
 
-    @Enumerated(EnumType.STRING)
+    @Embedded
     private HunterClass hunterClass;        // Enum type
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
