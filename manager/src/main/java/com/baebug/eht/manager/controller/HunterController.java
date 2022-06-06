@@ -64,6 +64,19 @@ public class HunterController {
         hunterDTO.setHunterClass(HunterClass.BERSERKER);
         hunterDTO.setDesc("test desc");
 
+        StatDTO statDTO = new StatDTO();
+        statDTO.setAtk(3);
+        statDTO.setDef(3);
+        statDTO.setCrit(3);
+        statDTO.setSpd(3);
+        statDTO.setEvasion(3);
+        statDTO.setHp(3);
+        statDTO.setSatiety(3);
+        statDTO.setMood(3);
+        statDTO.setStamina(3);
+
+        hunterDTO.setStat(statDTO);
+
         Long hunter = hunterService.join(hunterDTO);
     }
 

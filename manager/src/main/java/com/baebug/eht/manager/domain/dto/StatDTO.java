@@ -8,22 +8,22 @@ import javax.validation.constraints.NotNull;
 public class StatDTO {
 
     @NotNull
-    private Integer atk = 0;
+    private Integer atk;
     @NotNull
-    private Integer def = 0;
+    private Integer def;
     @NotNull
-    private Integer crit = 0;
+    private Integer crit;
     @NotNull
-    private Integer spd = 0;
+    private Integer spd;
     @NotNull
-    private Integer evasion = 0;
+    private Integer evasion;
     @NotNull
-    private Integer hp = 0;
+    private Integer hp;
     @NotNull
-    private Integer satiety = 0;
+    private Integer satiety;
     @NotNull
-    private Integer mood = 0;
+    private Integer mood;
     @NotNull
-    private Integer stamina = 0;
+    private Integer stamina;
 
 }
