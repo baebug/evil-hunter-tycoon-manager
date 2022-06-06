@@ -41,5 +41,9 @@ public class TechDTO {
     private int satiety;
     @NotNull
     private int stamina;
+    @NotNull
+    private int quicken;
+    @NotNull
+    private int fury;
 
 }

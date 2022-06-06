@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 비법 객체
@@ -41,6 +43,9 @@ public class TechEntity {
     private int satiety;
     private int stamina;
 
+    private int fury;
+    private int quicken;
+
     public TechEntity(TechDTO techDTO) {
         this.hp = techDTO.getHp();
         this.mood_max = techDTO.getMood_max();
@@ -57,6 +62,9 @@ public class TechEntity {
         this.mood = techDTO.getMood();
         this.satiety = techDTO.getSatiety();
         this.stamina = techDTO.getStamina();
+
+        this.quicken = techDTO.getQuicken();
+        this.fury = techDTO.getFury();
     }
 
     /**
@@ -66,7 +74,7 @@ public class TechEntity {
     public void calculate(SpecDTO specDTO) throws IllegalAccessException {
         for (Field field : getClass().getDeclaredFields()) {
             field.setAccessible(true);
-            if (!field.getName().equals("id")) {
+            if (!field.getName().equals("id") && !field.getName().equals("fury") && !field.getName().equals("quicken")) {
                 double weight = TechList.getWeight(field.getName());
                 specDTO.add(field.getName(), (Integer) field.get(this) * weight);
             }

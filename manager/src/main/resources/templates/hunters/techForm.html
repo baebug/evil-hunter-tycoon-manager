@@ -129,6 +129,25 @@
                     <input max="100" min="0" th:field="*{stamina}" placeholder="Lv" step="1" type="number" required>
                 </div>
             </div>
+
+            <hr class="my-4">
+
+            <div class="row">
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/quicken.png}" class="img-thumbnail w-25">
+                        <label th:text="'퀴큰 레벨'"></label>
+                    </div>
+                    <input max="5" min="0" th:field="*{quicken}" placeholder="Lv" step="1" type="number" required>
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div>
+                        <img th:src="@{/src/img/tech/fury.png}" class="img-thumbnail w-25">
+                        <label th:text="'퓨리 레벨'"></label>
+                    </div>
+                    <input max="10" min="0" th:field="*{fury}" placeholder="Lv" step="1" type="number" required>
+                </div>
+            </div>
         </div>
 
         <hr class="my-4">

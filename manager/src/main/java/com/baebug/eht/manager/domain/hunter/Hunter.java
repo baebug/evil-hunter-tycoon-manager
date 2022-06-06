@@ -22,8 +22,6 @@ public class Hunter {
     private Long id;
 
     private String name;
-    private int fury;
-    private int quicken;
     private String desc;
 
     @Transient
@@ -35,11 +33,11 @@ public class Hunter {
     @Embedded
     private HunterClass hunterClass;        // Enum type
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "stat_id")
     private StatEntity stat;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "tech_id")
     private TechEntity tech = new TechEntity();
 
@@ -61,16 +59,8 @@ public class Hunter {
      * Tech 객체를 입력받는 메서드
      * 변경사항이 생기면 능력치를 새로 합산한다.
      */
-    public void setTech(TechEntity tech) throws IllegalAccessException {
+    public void setTech(TechEntity tech) {
         this.tech = tech;
-    }
-
-    public void setFury(int fury) throws IllegalAccessException {
-        this.fury = fury;
-    }
-
-    public void setQuicken(int quicken) throws IllegalAccessException {
-        this.quicken = quicken;
     }
 
     /**
@@ -125,8 +115,8 @@ public class Hunter {
     public double getAtkSpd() {
         double atkSpd = getSpec().getAtk_spd();
         double spdRate = getSpec().getSpd() * .01;
-        double furyRate = calcFury(getFury());
-        double quickenRate = getQuicken() * .1;
+        double furyRate = calcFury(getTech().getFury());
+        double quickenRate = getTech().getQuicken() * .1;
 
         return atkSpd * (1 - spdRate) / (furyRate + quickenRate);
     }
@@ -138,8 +128,8 @@ public class Hunter {
     public double getAtkSpd(double expected) {
         double atkSpd = getSpec().getAtk_spd();
         double actualSpd = getSpec().getSpd();
-        double furyRate = calcFury(getFury());
-        double quickenRate = getQuicken() * .1;
+        double furyRate = calcFury(getTech().getFury());
+        double quickenRate = getTech().getQuicken() * .1;
 
         return 100 * (1 - (expected * (furyRate + quickenRate) / atkSpd)) - actualSpd;
     }
