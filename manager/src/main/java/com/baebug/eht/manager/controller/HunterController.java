@@ -2,6 +2,8 @@ package com.baebug.eht.manager.controller;
 
 import com.baebug.eht.manager.domain.dto.*;
 import com.baebug.eht.manager.domain.hunter.*;
+import com.baebug.eht.manager.domain.item.Item;
+import com.baebug.eht.manager.domain.item.OptionList;
 import com.baebug.eht.manager.service.HunterService;
 import com.baebug.eht.manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -34,7 +35,7 @@ public class HunterController {
     }
 
     @GetMapping("/add")
-    public String addForm(Model model) {
+    public String addHunterForm(Model model) {
         model.addAttribute("hunter", new HunterDTO());
 
         model.addAttribute("characteristics", Characteristic.values());
@@ -43,14 +44,14 @@ public class HunterController {
         model.addAttribute("classList3", HunterClassList3.values());
         model.addAttribute("statGrades", StatGrade.values());
 
-        return "hunters/addForm";
+        return "hunters/addHunterForm";
     }
 
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute HunterDTO hunterDTO,
-                      BindingResult bindingResult) throws IllegalAccessException {
+    public String addHunter(@Valid @ModelAttribute HunterDTO hunterDTO,
+                            BindingResult bindingResult) throws IllegalAccessException {
         if (bindingResult.hasErrors()) {
-            return "hunters/addForm";
+            return "hunters/addHunterForm";
         }
         hunterService.join(hunterDTO);
 
@@ -69,7 +70,7 @@ public class HunterController {
     }
 
     @GetMapping("/{hunterId}/edit")
-    public String editForm(@PathVariable long hunterId, Model model) {
+    public String editHunterForm(@PathVariable long hunterId, Model model) {
         Hunter hunter = hunterService.findHunter(hunterId);
         model.addAttribute("hunter", hunter);
 
@@ -79,15 +80,15 @@ public class HunterController {
         model.addAttribute("classList3", HunterClassList3.values());
         model.addAttribute("statGrades", StatGrade.values());
 
-        return "hunters/editForm";
+        return "hunters/editHunterForm";
     }
 
     @PostMapping("/{hunterId}/edit")
-    public String edit(@PathVariable Long hunterId,
-                       @Valid @ModelAttribute HunterDTO hunterDTO,
-                       BindingResult bindingResult) throws IllegalAccessException {
+    public String editHunter(@PathVariable Long hunterId,
+                             @Valid @ModelAttribute HunterDTO hunterDTO,
+                             BindingResult bindingResult) throws IllegalAccessException {
         if (bindingResult.hasErrors()) {
-            return "hunters/editForm";
+            return "hunters/editHunterForm";
         }
 
         hunterService.update(hunterId, hunterDTO);
@@ -96,7 +97,7 @@ public class HunterController {
     }
 
     @PostMapping("/{hunterId}/delete")
-    public String delete(@PathVariable Long hunterId) {
+    public String deleteHunter(@PathVariable Long hunterId) {
         hunterService.exile(hunterId);
 
         return "redirect:/hunters";
@@ -114,8 +115,14 @@ public class HunterController {
     @PostMapping("/{hunterId}/tech")
     public String tech(@PathVariable Long hunterId,
                        @Valid @ModelAttribute TechDTO techDTO,
-                       BindingResult bindingResult) throws IllegalAccessException {
+                       BindingResult bindingResult,
+                       Model model) throws IllegalAccessException {
         if (bindingResult.hasErrors()) {
+
+            Hunter hunter = hunterService.findHunter(hunterId);
+            model.addAttribute("hunter", hunter);
+            model.addAttribute("tech", hunter.getTech());
+
             return "hunters/techForm";
         }
 
@@ -124,23 +131,76 @@ public class HunterController {
         return "redirect:/hunters/{hunterId}";
     }
 
-    @GetMapping("/{hunterId}/equipment")
+    @GetMapping("/{hunterId}/equipments")
     public String equipment(@PathVariable Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
         SpecDTO equipmentSpec = hunterService.getEquipmentSpec(hunter);
 
+        SpecDTO weaponSpec = hunterService.getItemSpec(hunter.getEquipment().getWeapon());
+        SpecDTO helmetSpec = hunterService.getItemSpec(hunter.getEquipment().getHelmet());
+        SpecDTO armorSpec = hunterService.getItemSpec(hunter.getEquipment().getArmor());
+        SpecDTO gloveSpec = hunterService.getItemSpec(hunter.getEquipment().getGlove());
+        SpecDTO shoesSpec = hunterService.getItemSpec(hunter.getEquipment().getShoes());
+        SpecDTO necklaceSpec = hunterService.getItemSpec(hunter.getEquipment().getNecklace());
+        SpecDTO ringSpec = hunterService.getItemSpec(hunter.getEquipment().getRing());
+        SpecDTO beltSpec = hunterService.getItemSpec(hunter.getEquipment().getBelt());
+        SpecDTO runeSpec = hunterService.getItemSpec(hunter.getEquipment().getRune());
+
         model.addAttribute("hunter", hunter);
         model.addAttribute("equipmentSpec", equipmentSpec);
 
-        return "hunters/equipment";
+        model.addAttribute("weaponSpec", weaponSpec);
+        model.addAttribute("helmetSpec", helmetSpec);
+        model.addAttribute("armorSpec", armorSpec);
+        model.addAttribute("gloveSpec", gloveSpec);
+        model.addAttribute("shoesSpec", shoesSpec);
+        model.addAttribute("necklaceSpec", necklaceSpec);
+        model.addAttribute("ringSpec", ringSpec);
+        model.addAttribute("beltSpec", beltSpec);
+        model.addAttribute("runeSpec", runeSpec);
+
+        return "equipments/equipment";
     }
 
+    @GetMapping("/{hunterId}/equipments/{itemId}")
+    public String editEquipmentForm(@PathVariable Long hunterId,
+                                    @PathVariable Long itemId,
+                                    Model model) throws IllegalAccessException {
+        Hunter hunter = hunterService.findHunter(hunterId);
+        Item item = itemService.findItem(itemId);
+        SpecDTO equipmentSpec = hunterService.getEquipmentSpec(hunter);
 
+        model.addAttribute("hunter", hunter);
+        model.addAttribute("item", item);
+        model.addAttribute("itemOptionList", OptionList.values());
 
+        return "equipments/editEquipmentForm";
+    }
 
+    @PostMapping("/{hunterId}/equipments/{itemId}")
+    public String editEquipment(@PathVariable Long hunterId,
+                                @PathVariable Long itemId,
+                                @Valid @ModelAttribute ItemDTO itemDTO,
+                                BindingResult bindingResult,
+                                Model model) throws IllegalAccessException {
 
+        if (bindingResult.hasErrors()) {
+            Hunter hunter = hunterService.findHunter(hunterId);
+            Item item = itemService.findItem(itemId);
 
+            model.addAttribute("hunter", hunter);
+            model.addAttribute("item", item);
+            model.addAttribute("itemOptionList", OptionList.values());
 
+            log.info("{}", bindingResult.getAllErrors());
+
+            return "equipments/editEquipmentForm";
+        }
+
+        itemService.update(itemId, itemDTO);
+
+        return "redirect:/hunters/{hunterId}/equipments";
+    }
 
 
     @PostConstruct

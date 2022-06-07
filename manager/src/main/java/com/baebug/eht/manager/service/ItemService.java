@@ -17,15 +17,15 @@ public class ItemService {
     /**
      * itemDTO 를 바탕으로 해당 Item 객체를 업데이트 한다.
      * @param itemId        대상 장비의 id 값
-     * @param itemDto       업데이트 할 정보
+     * @param itemDTO       업데이트 할 정보
      */
     @Transactional
-    public void update(Long itemId, ItemDTO itemDto) {
+    public void update(Long itemId, ItemDTO itemDTO) {
         Item item = itemRepository.findById(itemId);
         if (item.getClass() == Weapon.class) {
-            ((Weapon) item).setAtk_spd(itemDto.getAtk_spd());
+//            ((Weapon) item).setAtk_spd(itemDto.getAtk_spd());
         }
-        item.changeOption(itemDto.getItemOptions());
+        item.changeOption(itemDTO);
     }
 
 

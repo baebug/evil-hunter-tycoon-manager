@@ -15,17 +15,15 @@
 <div class="container">
 
     <div class="py-5 text-center">
-        <h2>헌터 수정 폼</h2>
+        <h2>헌터 등록 폼</h2>
     </div>
-
-    <h4 class="mb-3">입력</h4>
 
     <form action="hunter.html" th:action th:object="${hunter}" method="post">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <label for="hunterName">헌터 이름</label>
-                    <input type="text" id="hunterName" th:field="*{name}" class="form-control" required />
+                    <input type="text" id="hunterName" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요" required />
                 </div>
                 <div class="col">
                     <label for="hunterDescription">메모</label>
@@ -152,16 +150,17 @@
             </div>
         </div>
 
+
         <hr class="my-4">
 
         <div class="row">
             <div class="col">
-                <button class="w-100 btn-primary" type="submit">헌터 수정</button>
+                <button class="w-100 btn-primary" type="submit">헌터 등록</button>
             </div>
             <div class="col">
                 <button class="w-100 btn-secondary"
                         onclick="location.href='hunters.html'"
-                        th:onclick="|location.href='@{|/hunters/${hunter.id}|}'|"
+                        th:onclick="|location.href='@{/hunters}'|"
                         type="button">취소</button>
             </div>
         </div>

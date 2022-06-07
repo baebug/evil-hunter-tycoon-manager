@@ -9,6 +9,7 @@ import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
 import com.baebug.eht.manager.domain.hunter.TechEntity;
+import com.baebug.eht.manager.domain.item.Item;
 import com.baebug.eht.manager.repository.HunterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -107,6 +108,16 @@ public class HunterService {
 
         return hunterItemDTO;
     }
+
+    /**
+     * 특정 아이템의 능력치를 계산한다.
+     */
+    public SpecDTO getItemSpec(Item item) throws IllegalAccessException {
+        item.setItemSpec();
+
+        return item.getItemSpec();
+    }
+
 
     /**
      * 헌터의 장비 능력치를 계산한다.

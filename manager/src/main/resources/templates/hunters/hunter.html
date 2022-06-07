@@ -42,7 +42,7 @@
                     th:onclick="|location.href='@{|/hunters/${hunter.id}|}'|"
                     type="button">정보</button>
             <button onclick="location.href='hunters.html'"
-                    th:onclick="|location.href='@{|/hunters/${hunter.id}/equipment|}'|"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/equipments|}'|"
                     type="button">장비</button>
             <button onclick="location.href='hunters.html'"
                     th:onclick="|location.href='@{|/hunters/${hunter.id}/tech|}'|"
@@ -63,34 +63,49 @@
                 <tbody>
                 <tr>
                     <td>공격력</td>
-                    <td th:text="'+' + ${hunter.spec.atk} + '%'">+182%</td>
-                    <td>비법 10 + 건물 30 + 지던 30 + 장비 112</td>
+                    <td th:text="${hunter.spec.atk} + ' %'">+182%</td>
+                    <td>상세</td>
                 </tr>
                 <tr>
                     <td>공속</td>
-                    <td th:text="'+' + ${hunter.spec.spd} + '%'">+40%</td>
-                    <td>성격 10 + 비법 10 + 장비 20</td>
+                    <td th:text="${hunter.spec.spd} + ' %'">+40%</td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <td>회피</td>
-                    <td th:text="'+' + ${hunter.spec.evasion} + '%'">+33%</td>
-                    <td>비법 10 + 장비 20</td>
+                    <td th:text="${hunter.spec.evasion} + ' %'">+33%</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>치명</td>
-                    <td th:text="'+' + ${hunter.spec.crit} + '%'">+46%</td>
-                    <td>장비 46</td>
+                    <td th:text="${hunter.spec.crit} + ' %'">+46%</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>치피</td>
-                    <td th:text="'+' + ${hunter.spec.crit_dmg} + '%'">+101%</td>
-                    <td>비법 10 + 건물 30 + 장비 61</td>
+                    <td th:text="${hunter.spec.crit_dmg} + ' %'">+101%</td>
+                    <td></td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="text-center">
-            0.25 까지 3% 부족 (대충 이런 식으로)
+            <table th:border="0" th:class="d-inline-block">
+                <tr>
+                    <th th:text="'현재 공격속도'"></th>
+                    <th th:text="${hunter.getAtkSpd()}"></th>
+                </tr>
+                <tr>
+                    <td th:text="'0.5 까지'"></td>
+                    <td th:text="${hunter.getAtkSpd(0.5)}"></td>
+                </tr>
+                    <td th:text="'0.25 까지'"></td>
+                    <td th:text="${hunter.getAtkSpd(0.25)}"></td>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
         </div>
     </div>
 

@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>장비 수정 폼</h2>
+    </div>
+
+    <form action="hunter.html" th:action th:object="${item}" method="post">
+        <div class="container">
+            <div class="row">
+                <label for="option1">옵션 1</label>
+                <div class="row">
+                    <div class="col-9">
+                        <select id="option1" th:field="*{option1.option}" class="form-select">
+                            <option value="">-------</option>
+                            <option th:each="itemOption : ${itemOptionList}" th:value="${itemOption}"
+                                    th:text="${itemOption.desc}">Ultimate</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="value1" th:field="*{option1.value}" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="option2">옵션 2</label>
+                <div class="row">
+                    <div class="col-9">
+                        <select id="option2" th:field="*{option2.option}" class="form-select">
+                            <option value="">-------</option>
+                            <option th:each="itemOption : ${itemOptionList}" th:value="${itemOption}"
+                                    th:text="${itemOption.desc}">Ultimate</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="value2" th:field="*{option2.value}" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="option3">옵션 3</label>
+                <div class="row">
+                    <div class="col-9">
+                        <select id="option3" th:field="*{option3.option}" class="form-select">
+                            <option value="">-------</option>
+                            <option th:each="itemOption : ${itemOptionList}" th:value="${itemOption}"
+                                    th:text="${itemOption.desc}">Ultimate</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="value3" th:field="*{option3.value}" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="option4">옵션 4</label>
+                <div class="row">
+                    <div class="col-9">
+                        <select id="option4" th:field="*{option4.option}" class="form-select">
+                            <option value="">-------</option>
+                            <option th:each="itemOption : ${itemOptionList}" th:value="${itemOption}"
+                                    th:text="${itemOption.desc}">Ultimate</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="value4" th:field="*{option4.value}" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="option5">옵션 5</label>
+                <div class="row">
+                    <div class="col-9">
+                        <select id="option5" th:field="*{option5.option}" class="form-select">
+                            <option value="">-------</option>
+                            <option th:each="itemOption : ${itemOptionList}" th:value="${itemOption}"
+                                    th:text="${itemOption.desc}">Ultimate</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="value5" th:field="*{option5.value}" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="option6">옵션 6</label>
+                <div class="row">
+                    <div class="col-9">
+                        <select id="option6" th:field="*{option6.option}" class="form-select">
+                            <option value="">-------</option>
+                            <option th:each="itemOption : ${itemOptionList}" th:value="${itemOption}"
+                                    th:text="${itemOption.desc}">Ultimate</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="value6" th:field="*{option6.value}" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="option7">옵션 7</label>
+                <div class="row">
+                    <div class="col-9">
+                        <select id="option7" th:field="*{option7.option}" class="form-select">
+                            <option value="">-------</option>
+                            <option th:each="itemOption : ${itemOptionList}" th:value="${itemOption}"
+                                    th:text="${itemOption.desc}">Ultimate</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="value7" th:field="*{option7.value}" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label for="option8">옵션 8</label>
+                <div class="row">
+                    <div class="col-9">
+                        <select id="option8" th:field="*{option8.option}" class="form-select">
+                            <option value="">-------</option>
+                            <option th:each="itemOption : ${itemOptionList}" th:value="${itemOption}"
+                                    th:text="${itemOption.desc}">Ultimate</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="value8" th:field="*{option8.value}" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn-primary" type="submit">옵션 저장</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn-secondary"
+                        onclick="location.href='hunters.html'"
+                        th:onclick="|location.href='@{|/hunters/${hunter.id}/equipments|}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+
+    </form>
+
+</div> <!-- /container -->
+</body>
+</html>

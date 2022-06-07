@@ -120,14 +120,12 @@ class HunterServiceTest {
     private ItemDTO createItemDTO(double atk_spd, List<ItemOption> options) {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setAtk_spd(atk_spd);
-        itemDTO.setItemOptions(options);
 
         return itemDTO;
     }
 
     private ItemDTO createItemDTO(List<ItemOption> options) {
         ItemDTO itemDTO = new ItemDTO();
-        itemDTO.setItemOptions(options);
 
         return itemDTO;
     }

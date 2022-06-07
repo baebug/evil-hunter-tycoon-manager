@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="pt-5 pb-2 text-center">
+        <h2>헌터 정보</h2>
+        <div class="pt-3">
+            <h5>
+                [[${hunter.characteristic.option} ? ${hunter.characteristic.characteristic} : '']] [[${hunter.name}]] ([[${hunter.hunterClass.topClassName()}]])
+            </h5>
+            <h6>[[${hunter.stat.getGrade()}]]</h6>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn-primary"
+                    onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{/hunters}'|"
+                    type="button">헌터 목록</button>
+            <form action="#" th:action="@{|../${hunter.id}/delete|}" th:method="delete" style="display: inline">
+                <input type="hidden" name="_method" value="delete" />
+                <button class="btn-danger float-end" type="submit" id="submitButton" th:onclick="if(!confirm('헌터를 삭제하시겠습니까?')) return false">헌터 삭제</button>
+            </form>
+            <button class="btn-primary float-end mx-3"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/edit|}'|"
+                    type="button">헌터 수정</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div class="row my-4">
+        <div class="col">
+            <button onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}|}'|"
+                    type="button">정보</button>
+            <button onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/equipments|}'|"
+                    type="button">장비</button>
+            <button onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}/tech|}'|"
+                    type="button">비법</button>
+        </div>
+    </div>
+
+    <div>
+        <div class="status">
+            <table class="table table-sm text-center table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-1"><a href="#" class="text-black text-decoration-none">옵션</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.weapon.id}|}" class="text-black text-decoration-none">무기</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.helmet.id}|}" href="#" class="text-black text-decoration-none">투구</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.armor.id}|}" href="#" class="text-black text-decoration-none">갑옷</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.glove.id}|}" href="#" class="text-black text-decoration-none">장갑</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.shoes.id}|}" href="#" class="text-black text-decoration-none">신발</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.necklace.id}|}" href="#" class="text-black text-decoration-none">목걸</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.ring.id}|}" href="#" class="text-black text-decoration-none">반지</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.belt.id}|}" href="#" class="text-black text-decoration-none">벨트</a></th>
+                    <th class="col-md-1"><a th:href="@{|equipments/${hunter.equipment.rune.id}|}" href="#" class="text-black text-decoration-none">룬</a></th>
+                    <th class="col-md-2">합계</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>공격속도</td>
+                    <td th:text="${weaponSpec.spd} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.spd, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.spd} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.spd, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.spd} &gt; 0 ? ${#numbers.formatInteger(armorSpec.spd, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.spd} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.spd, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.spd} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.spd, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.spd} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.spd, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.spd} &gt; 0 ? ${#numbers.formatInteger(ringSpec.spd, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.spd} &gt; 0 ? ${#numbers.formatInteger(beltSpec.spd, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.spd} &gt; 0 ? ${#numbers.formatInteger(runeSpec.spd, 1)} : ''">10</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.spd, 1)} + ' %'">+40%</td>
+                </tr>
+                <tr>
+                    <td>회피</td>
+                    <td th:text="${weaponSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.evasion, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.evasion, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(armorSpec.evasion, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.evasion, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.evasion, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.evasion, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(ringSpec.evasion, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(beltSpec.evasion, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(runeSpec.evasion, 1)} : ''">10</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.evasion, 1)} + ' %'">+33%</td>
+                </tr>
+                <tr>
+                    <td>치확</td>
+                    <td th:text="${weaponSpec.crit} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.crit, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.crit} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.crit, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.crit} &gt; 0 ? ${#numbers.formatInteger(armorSpec.crit, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.crit} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.crit, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.crit} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.crit, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.crit} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.crit, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.crit} &gt; 0 ? ${#numbers.formatInteger(ringSpec.crit, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.crit} &gt; 0 ? ${#numbers.formatInteger(beltSpec.crit, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.crit} &gt; 0 ? ${#numbers.formatInteger(runeSpec.crit, 1)} : ''">16</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.crit, 1)} + ' %'">+46%</td>
+                </tr>
+                <tr>
+                    <td>치피</td>
+                    <td th:text="${weaponSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.crit_dmg, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.crit_dmg, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(armorSpec.crit_dmg, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.crit_dmg, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.crit_dmg, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.crit_dmg, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(ringSpec.crit_dmg, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(beltSpec.crit_dmg, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(runeSpec.crit_dmg, 1)} : ''">11</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.crit_dmg, 1)} + ' %'">+101%</td>
+                </tr>
+                <tr>
+                    <td>공격력</td>
+                    <td th:text="${weaponSpec.atk} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.atk} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.atk} &gt; 0 ? ${#numbers.formatInteger(armorSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.atk} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.atk} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.atk} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.atk} &gt; 0 ? ${#numbers.formatInteger(ringSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.atk} &gt; 0 ? ${#numbers.formatInteger(beltSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.atk} &gt; 0 ? ${#numbers.formatInteger(runeSpec.atk, 1)} : ''">1</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.atk, 1)} + ' %'">+182%</td>
+                </tr>
+                <tr>
+                    <td>영장</td>
+                    <td th:text="${weaponSpec.primate} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.primate} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.primate} &gt; 0 ? ${#numbers.formatInteger(armorSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.primate} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.primate} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.primate} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.primate} &gt; 0 ? ${#numbers.formatInteger(ringSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.primate} &gt; 0 ? ${#numbers.formatInteger(beltSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.primate} &gt; 0 ? ${#numbers.formatInteger(runeSpec.primate, 1)} : ''">1</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.primate, 1)} + ' %'">+182%</td>
+                </tr>
+                <tr>
+                    <td>체력</td>
+                    <td th:text="${weaponSpec.hp} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.hp} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.hp} &gt; 0 ? ${#numbers.formatInteger(armorSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.hp} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.hp} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.hp} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.hp} &gt; 0 ? ${#numbers.formatInteger(ringSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.hp} &gt; 0 ? ${#numbers.formatInteger(beltSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.hp} &gt; 0 ? ${#numbers.formatInteger(runeSpec.hp, 1)} : ''">1</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.hp, 1)} + ' %'">+182%</td>
+                </tr>
+                <tr>
+                    <td>뎀감</td>
+                    <td th:text="${weaponSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(armorSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(ringSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(beltSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(runeSpec.dmg_taken, 1)} : ''">1</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.dmg_taken, 1)} + ' %'">+182%</td>
+                </tr>
+                <tr>
+                    <td>보공</td>
+                    <td th:text="${weaponSpec.boss} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.boss} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.boss} &gt; 0 ? ${#numbers.formatInteger(armorSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.boss} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.boss} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.boss} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.boss} &gt; 0 ? ${#numbers.formatInteger(ringSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.boss} &gt; 0 ? ${#numbers.formatInteger(beltSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.boss} &gt; 0 ? ${#numbers.formatInteger(runeSpec.boss, 1)} : ''">1</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.boss, 1)} + ' %'">+182%</td>
+                </tr>
+                <tr>
+                    <td>흡혈</td>
+                    <td th:text="${weaponSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(weaponSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${helmetSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(helmetSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${armorSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(armorSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${gloveSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(gloveSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${shoesSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(shoesSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${necklaceSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(necklaceSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${ringSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(ringSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${beltSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(beltSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${runeSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(runeSpec.life_steal, 1)} : ''">1</td>
+                    <td th:text="${#numbers.formatInteger(equipmentSpec.life_steal, 1)} + ' %'">+182%</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <table th:border="0" th:class="d-inline-block">
+                <tr>
+                    <th th:text="'현재 공격속도'"></th>
+                    <th th:text="${hunter.getAtkSpd()}"></th>
+                </tr>
+                <tr>
+                    <td th:text="'0.5 까지'"></td>
+                    <td th:text="${hunter.getAtkSpd(0.5)}"></td>
+                </tr>
+                <td th:text="'0.25 까지'"></td>
+                <td th:text="${hunter.getAtkSpd(0.25)}"></td>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn-secondary"
+                    onclick="location.href='hunters.html'"
+                    th:onclick="|location.href='@{|/hunters/${hunter.id}|}'|"
+                    type="button">뒤로 가기</button>
+        </div>
+    </div>
+
+
+</div> <!-- /container -->
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>

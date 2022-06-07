@@ -4,6 +4,7 @@ import com.baebug.eht.manager.domain.dto.SpecDTO;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
 
 /**
  * 무기 객체
@@ -23,10 +24,7 @@ public class Weapon extends Item {
     }
 
     public void calculate(SpecDTO specDTO) throws IllegalAccessException {
-        specDTO.add("atk_spd", getAtk_spd());
-
-        for (ItemOption itemOption : getItemOptions()) {
-            specDTO.add(itemOption.getOption().getOption(), (double) itemOption.getValue());
-        }
+        super.calculate(specDTO);
+        specDTO.add("atk_spd", atk_spd);
     }
 }

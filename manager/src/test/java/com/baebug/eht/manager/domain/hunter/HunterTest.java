@@ -20,7 +20,7 @@ class HunterTest {
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(), new StatEntity(), "");
         HunterDTO hunterDTO = new HunterDTO();
         HunterClassDTO hunterClassDTO = new HunterClassDTO();
-        StatDTO statDTO = createStatDto(0,0,0,0,0,0,0,0,0);
+        StatDTO statDTO = createStatDTO(0,0,0,0,0,0,0,0,0);
         hunterDTO.setName("hunter");
         hunterDTO.setCharacteristic(Characteristic.OTHERS);
         hunterDTO.setHunterClass(hunterClassDTO);
@@ -39,23 +39,19 @@ class HunterTest {
     @DisplayName("장비 능력치 적용 테스트")
     public void setItem() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
 
         // when
         Weapon weapon = hunter.getEquipment().getWeapon();
-        Necklace necklace = hunter.getEquipment().getNecklace();
-        Shoes shoes = hunter.getEquipment().getShoes();
 
+        ItemDTO itemDTO = createItemDTO(createItemOption(ATK, 10), createItemOption(CRIT, 21), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption());
         weapon.setAtk_spd(2.3);
-        weapon.changeOption(Arrays.asList(createItemOption(ATK, 10), createItemOption(CRIT, 21)));
-        necklace.changeOption(Arrays.asList(createItemOption(ATK, 10), createItemOption(DEF, 12)));
-        shoes.changeOption(Arrays.asList(createItemOption(EVASION, 10), createItemOption(CRIT_DMG, 12)));
+        weapon.changeOption(itemDTO.getOption1(), itemDTO.getOption2(), itemDTO.getOption3(), itemDTO.getOption4(), itemDTO.getOption5(), itemDTO.getOption6(), itemDTO.getOption7(), itemDTO.getOption8());
         hunter.setEquipmentSpec();
 
 
         // then
-        assertEquals(20, hunter.getSpec().getAtk());
-        assertEquals(12, hunter.getSpec().getDef());
+        assertEquals(10, hunter.getSpec().getAtk());
         assertEquals(21, hunter.getSpec().getCrit());
         assertEquals(2.3, hunter.getSpec().getAtk_spd());
     }
@@ -64,8 +60,8 @@ class HunterTest {
     @DisplayName("성격 능력치 적용 테스트")
     public void setCharacteristic() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
-        Hunter hunter2 = new Hunter("헌터B", Characteristic.SWIFT, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter2 = new Hunter("헌터B", Characteristic.SWIFT, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
 
 
         // when
@@ -82,8 +78,8 @@ class HunterTest {
     @DisplayName("스탯 능력치 적용 테스트")
     public void setStat() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
-        Hunter hunter2 = new Hunter("헌터B", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(1,0,3,0,2,0,0,0,0)), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter2 = new Hunter("헌터B", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(1,0,3,0,2,0,0,0,0)), "");
 
 
         // when
@@ -117,7 +113,7 @@ class HunterTest {
     @DisplayName("비법 능력치 적용 테스트")
     public void specTest() throws Exception {
         // given
-        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter = new Hunter("헌터A", Characteristic.CHARISMATIC, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
 
         TechEntity tech = new TechEntity(createTechDTO(100, 10, 10, 10, 50, 0, 100, 50, 0, 10, 10, 10, 50, 100, 10));
 
@@ -142,7 +138,7 @@ class HunterTest {
     @DisplayName("헌터 등급 테스트")
     public void getGradeTest() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
 
 
         // then
@@ -153,12 +149,12 @@ class HunterTest {
     @DisplayName("무기를 보유한 헌터의 공격속도 출력")
     public void getAtkSpdTest() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
 
 
         // when
         hunter1.getEquipment().getWeapon().setAtk_spd(1.8);
-        hunter1.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(ATK, 10)));
+        hunter1.getEquipment().getWeapon().changeOption(createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption());
         hunter1.setEquipmentSpec();
 
 
@@ -172,7 +168,7 @@ class HunterTest {
     @DisplayName("무기를 보유하지 않은 헌터의 공격속도 출력")
     public void getAtkSpdTest2() throws Exception {
         // given
-        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
 
 
         // then
@@ -180,12 +176,29 @@ class HunterTest {
         System.out.println("0.25 까지 도달을 위한 필요 공격속도 = " + hunter1.getAtkSpd(0.25));
     }
 
-    private ItemOption createItemOption(OptionList option, Integer value) {
-        return new ItemOption(option, value);
-
+    private ItemOption createItemOption() {
+        return new ItemOption(null, 0);
     }
 
-    private StatDTO createStatDto(int atk, int def, int crit, int spd, int evasion, int hp, int satiety, int mood, int stamina) {
+    private ItemOption createItemOption(OptionList option, Integer value) {
+        return new ItemOption(option, value);
+    }
+
+    private ItemDTO createItemDTO(ItemOption option1, ItemOption option2, ItemOption option3, ItemOption option4, ItemOption option5, ItemOption option6, ItemOption option7, ItemOption option8) {
+        ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setOption1(option1);
+        itemDTO.setOption2(option2);
+        itemDTO.setOption3(option3);
+        itemDTO.setOption4(option4);
+        itemDTO.setOption5(option5);
+        itemDTO.setOption6(option6);
+        itemDTO.setOption7(option7);
+        itemDTO.setOption8(option8);
+
+        return itemDTO;
+    }
+
+    private StatDTO createStatDTO(int atk, int def, int crit, int spd, int evasion, int hp, int satiety, int mood, int stamina) {
         StatDTO statDTO = new StatDTO();
         statDTO.setAtk(atk);
         statDTO.setDef(def);

@@ -13,32 +13,36 @@ import java.lang.reflect.Field;
 @Embeddable
 @Getter
 public class Equipment {
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "weapon_id")
     private Weapon weapon = new Weapon();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "helmet_id")
     private Helmet helmet = new Helmet();
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "armor_id")
     private Armor armor = new Armor();
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "glove_id")
     private Glove glove = new Glove();
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shoes_id")
     private Shoes shoes = new Shoes();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "necklace_id")
     private Necklace necklace = new Necklace();
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ring_id")
     private Ring ring = new Ring();
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "belt_id")
     private Belt belt = new Belt();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rune_id")
+    private Rune rune = new Rune();
 
     /**
      * 입력받은 specDTO 에 착용중인 장비의 능력치를 합산한다.
