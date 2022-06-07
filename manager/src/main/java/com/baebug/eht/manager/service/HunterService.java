@@ -123,10 +123,10 @@ public class HunterService {
      * 헌터의 장비 능력치를 계산한다.
      * @param hunter        대상 헌터 객체
      */
-    public SpecDTO getEquipmentSpec(Hunter hunter) throws IllegalAccessException {
-        hunter.setEquipmentSpec();
+    public SpecDTO getItemSpec(Hunter hunter) throws IllegalAccessException {
+        hunter.setItemSpec();
 
-        return hunter.getSpec();
+        return hunter.getItemSpec();
     }
 
     /**
@@ -137,7 +137,7 @@ public class HunterService {
         hunter.setTotalSpec();
         commonBuff.calculate(hunter);
 
-        return hunter.getSpec();
+        return hunter.getTotalSpec();
     }
 
 

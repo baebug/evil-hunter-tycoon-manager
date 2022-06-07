@@ -19,7 +19,18 @@
     </div>
 
     <form action="hunter.html" th:action th:object="${item}" method="post">
+
         <div class="container">
+            <div class="my-2" th:if="${isWeapon}">
+                <div class="row">
+                    <label for="atkSpd">무기 공격 속도</label>
+                    <div class="row">
+                        <div class="col-3">
+                            <input type="number" step="0.1" id="atkSpd" th:field="*{atk_spd}" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <label for="option1">옵션 1</label>
                 <div class="row">

@@ -23,7 +23,7 @@ public class ItemService {
     public void update(Long itemId, ItemDTO itemDTO) {
         Item item = itemRepository.findById(itemId);
         if (item.getClass() == Weapon.class) {
-//            ((Weapon) item).setAtk_spd(itemDto.getAtk_spd());
+            ((Weapon) item).setAtk_spd(itemDTO.getAtk_spd());
         }
         item.changeOption(itemDTO);
     }

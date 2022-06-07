@@ -80,7 +80,7 @@
                     <td th:text="${ringSpec.spd} &gt; 0 ? ${#numbers.formatInteger(ringSpec.spd, 1)} : ''">1</td>
                     <td th:text="${beltSpec.spd} &gt; 0 ? ${#numbers.formatInteger(beltSpec.spd, 1)} : ''">1</td>
                     <td th:text="${runeSpec.spd} &gt; 0 ? ${#numbers.formatInteger(runeSpec.spd, 1)} : ''">10</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.spd, 1)} + ' %'">+40%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.spd, 1)} + ' %'">+40%</td>
                 </tr>
                 <tr>
                     <td>회피</td>
@@ -93,7 +93,7 @@
                     <td th:text="${ringSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(ringSpec.evasion, 1)} : ''">1</td>
                     <td th:text="${beltSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(beltSpec.evasion, 1)} : ''">1</td>
                     <td th:text="${runeSpec.evasion} &gt; 0 ? ${#numbers.formatInteger(runeSpec.evasion, 1)} : ''">10</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.evasion, 1)} + ' %'">+33%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.evasion, 1)} + ' %'">+33%</td>
                 </tr>
                 <tr>
                     <td>치확</td>
@@ -106,7 +106,7 @@
                     <td th:text="${ringSpec.crit} &gt; 0 ? ${#numbers.formatInteger(ringSpec.crit, 1)} : ''">1</td>
                     <td th:text="${beltSpec.crit} &gt; 0 ? ${#numbers.formatInteger(beltSpec.crit, 1)} : ''">1</td>
                     <td th:text="${runeSpec.crit} &gt; 0 ? ${#numbers.formatInteger(runeSpec.crit, 1)} : ''">16</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.crit, 1)} + ' %'">+46%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.crit, 1)} + ' %'">+46%</td>
                 </tr>
                 <tr>
                     <td>치피</td>
@@ -119,7 +119,7 @@
                     <td th:text="${ringSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(ringSpec.crit_dmg, 1)} : ''">1</td>
                     <td th:text="${beltSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(beltSpec.crit_dmg, 1)} : ''">1</td>
                     <td th:text="${runeSpec.crit_dmg} &gt; 0 ? ${#numbers.formatInteger(runeSpec.crit_dmg, 1)} : ''">11</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.crit_dmg, 1)} + ' %'">+101%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.crit_dmg, 1)} + ' %'">+101%</td>
                 </tr>
                 <tr>
                     <td>공격력</td>
@@ -132,7 +132,7 @@
                     <td th:text="${ringSpec.atk} &gt; 0 ? ${#numbers.formatInteger(ringSpec.atk, 1)} : ''">1</td>
                     <td th:text="${beltSpec.atk} &gt; 0 ? ${#numbers.formatInteger(beltSpec.atk, 1)} : ''">1</td>
                     <td th:text="${runeSpec.atk} &gt; 0 ? ${#numbers.formatInteger(runeSpec.atk, 1)} : ''">1</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.atk, 1)} + ' %'">+182%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.atk, 1)} + ' %'">+182%</td>
                 </tr>
                 <tr>
                     <td>영장</td>
@@ -145,7 +145,7 @@
                     <td th:text="${ringSpec.primate} &gt; 0 ? ${#numbers.formatInteger(ringSpec.primate, 1)} : ''">1</td>
                     <td th:text="${beltSpec.primate} &gt; 0 ? ${#numbers.formatInteger(beltSpec.primate, 1)} : ''">1</td>
                     <td th:text="${runeSpec.primate} &gt; 0 ? ${#numbers.formatInteger(runeSpec.primate, 1)} : ''">1</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.primate, 1)} + ' %'">+182%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.primate, 1)} + ' %'">+182%</td>
                 </tr>
                 <tr>
                     <td>체력</td>
@@ -158,7 +158,7 @@
                     <td th:text="${ringSpec.hp} &gt; 0 ? ${#numbers.formatInteger(ringSpec.hp, 1)} : ''">1</td>
                     <td th:text="${beltSpec.hp} &gt; 0 ? ${#numbers.formatInteger(beltSpec.hp, 1)} : ''">1</td>
                     <td th:text="${runeSpec.hp} &gt; 0 ? ${#numbers.formatInteger(runeSpec.hp, 1)} : ''">1</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.hp, 1)} + ' %'">+182%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.hp, 1)} + ' %'">+182%</td>
                 </tr>
                 <tr>
                     <td>뎀감</td>
@@ -171,7 +171,7 @@
                     <td th:text="${ringSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(ringSpec.dmg_taken, 1)} : ''">1</td>
                     <td th:text="${beltSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(beltSpec.dmg_taken, 1)} : ''">1</td>
                     <td th:text="${runeSpec.dmg_taken} &gt; 0 ? ${#numbers.formatInteger(runeSpec.dmg_taken, 1)} : ''">1</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.dmg_taken, 1)} + ' %'">+182%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.dmg_taken, 1)} + ' %'">+182%</td>
                 </tr>
                 <tr>
                     <td>보공</td>
@@ -184,7 +184,7 @@
                     <td th:text="${ringSpec.boss} &gt; 0 ? ${#numbers.formatInteger(ringSpec.boss, 1)} : ''">1</td>
                     <td th:text="${beltSpec.boss} &gt; 0 ? ${#numbers.formatInteger(beltSpec.boss, 1)} : ''">1</td>
                     <td th:text="${runeSpec.boss} &gt; 0 ? ${#numbers.formatInteger(runeSpec.boss, 1)} : ''">1</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.boss, 1)} + ' %'">+182%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.boss, 1)} + ' %'">+182%</td>
                 </tr>
                 <tr>
                     <td>흡혈</td>
@@ -197,7 +197,7 @@
                     <td th:text="${ringSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(ringSpec.life_steal, 1)} : ''">1</td>
                     <td th:text="${beltSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(beltSpec.life_steal, 1)} : ''">1</td>
                     <td th:text="${runeSpec.life_steal} &gt; 0 ? ${#numbers.formatInteger(runeSpec.life_steal, 1)} : ''">1</td>
-                    <td th:text="${#numbers.formatInteger(equipmentSpec.life_steal, 1)} + ' %'">+182%</td>
+                    <td th:text="${#numbers.formatInteger(itemSpec.life_steal, 1)} + ' %'">+182%</td>
                 </tr>
 
                 </tbody>
@@ -211,29 +211,17 @@
                 </tr>
                 <tr>
                     <td th:text="'0.5 까지'"></td>
-                    <td th:text="${hunter.getAtkSpd(0.5)}"></td>
+                    <td th:text="${hunter.getAtkSpd()} &gt; 0 ? ${#numbers.formatDecimal(hunter.getAtkSpd(0.5), 1, 1)} : '0'"></td>
                 </tr>
-                <td th:text="'0.25 까지'"></td>
-                <td th:text="${hunter.getAtkSpd(0.25)}"></td>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td th:text="'0.25 까지'"></td>
+                    <td th:text="${hunter.getAtkSpd()} &gt; 0 ? ${#numbers.formatDecimal(hunter.getAtkSpd(0.25), 1, 1)} : '0'"></td>
                 </tr>
             </table>
         </div>
     </div>
 
     <hr class="my-4">
-
-    <div class="row">
-        <div class="col">
-            <button class="w-100 btn-secondary"
-                    onclick="location.href='hunters.html'"
-                    th:onclick="|location.href='@{|/hunters/${hunter.id}|}'|"
-                    type="button">뒤로 가기</button>
-        </div>
-    </div>
-
 
 </div> <!-- /container -->
 <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>

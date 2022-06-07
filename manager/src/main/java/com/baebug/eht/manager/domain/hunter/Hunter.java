@@ -25,7 +25,9 @@ public class Hunter {
     private String desc;
 
     @Transient
-    private SpecDTO spec = new SpecDTO();
+    private final SpecDTO totalSpec = new SpecDTO();
+    @Transient
+    private final SpecDTO itemSpec = new SpecDTO();
 
     @Enumerated(EnumType.STRING)
     private Characteristic characteristic;    // Enum type
@@ -84,8 +86,8 @@ public class Hunter {
     /**
      * specDTO 를 초기화 후 장비로 오른 능력치를 합산한다.
      */
-    public void setEquipmentSpec() throws IllegalAccessException {
-        SpecDTO spec = this.getSpec();
+    public void setItemSpec() throws IllegalAccessException {
+        SpecDTO spec = this.getItemSpec();
         spec.clear();
 
         getEquipment().calculate(spec);
@@ -96,7 +98,7 @@ public class Hunter {
      * 합산 대상: 성격, 스탯, 비법, 장비
      */
     public void setTotalSpec() throws IllegalAccessException {
-        SpecDTO spec = this.getSpec();
+        SpecDTO spec = this.getTotalSpec();
         spec.clear();
 
         getCharacteristic().calculate(spec);
@@ -109,8 +111,8 @@ public class Hunter {
      * 현재 공격속도를 계산하여 반환한다.
      */
     public double getAtkSpd() {
-        double atkSpd = getSpec().getAtk_spd();
-        double spdRate = getSpec().getSpd() * .01;
+        double atkSpd = getTotalSpec().getAtk_spd();
+        double spdRate = getTotalSpec().getSpd() * .01;
         double furyRate = calcFury(getTech().getFury());
         double quickenRate = getTech().getQuicken() * .1;
 
@@ -122,8 +124,8 @@ public class Hunter {
      * @param expected      목표 공격속도
      */
     public double getAtkSpd(double expected) {
-        double atkSpd = getSpec().getAtk_spd();
-        double actualSpd = getSpec().getSpd();
+        double atkSpd = getTotalSpec().getAtk_spd();
+        double actualSpd = getTotalSpec().getSpd();
         double furyRate = calcFury(getTech().getFury());
         double quickenRate = getTech().getQuicken() * .1;
 

@@ -29,7 +29,7 @@ public class CommonBuff {
      * @param hunter    대상 헌터
      */
     public void calculate(Hunter hunter) throws IllegalAccessException {
-        SpecDTO spec = hunter.getSpec();
+        SpecDTO spec = hunter.getTotalSpec();
 
         getGuild().calculate(spec);
         getDungeon().calculate(spec);

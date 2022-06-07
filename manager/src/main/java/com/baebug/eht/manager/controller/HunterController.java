@@ -4,6 +4,7 @@ import com.baebug.eht.manager.domain.dto.*;
 import com.baebug.eht.manager.domain.hunter.*;
 import com.baebug.eht.manager.domain.item.Item;
 import com.baebug.eht.manager.domain.item.OptionList;
+import com.baebug.eht.manager.domain.item.Weapon;
 import com.baebug.eht.manager.service.HunterService;
 import com.baebug.eht.manager.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -134,7 +135,8 @@ public class HunterController {
     @GetMapping("/{hunterId}/equipments")
     public String equipment(@PathVariable Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
-        SpecDTO equipmentSpec = hunterService.getEquipmentSpec(hunter);
+        SpecDTO itemSpec = hunterService.getItemSpec(hunter);
+        SpecDTO totalSpec = hunterService.getTotalSpec(hunter);
 
         SpecDTO weaponSpec = hunterService.getItemSpec(hunter.getEquipment().getWeapon());
         SpecDTO helmetSpec = hunterService.getItemSpec(hunter.getEquipment().getHelmet());
@@ -146,8 +148,10 @@ public class HunterController {
         SpecDTO beltSpec = hunterService.getItemSpec(hunter.getEquipment().getBelt());
         SpecDTO runeSpec = hunterService.getItemSpec(hunter.getEquipment().getRune());
 
+
         model.addAttribute("hunter", hunter);
-        model.addAttribute("equipmentSpec", equipmentSpec);
+        model.addAttribute("itemSpec", itemSpec);
+        model.addAttribute("totalSpec", totalSpec);
 
         model.addAttribute("weaponSpec", weaponSpec);
         model.addAttribute("helmetSpec", helmetSpec);
@@ -168,7 +172,10 @@ public class HunterController {
                                     Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
         Item item = itemService.findItem(itemId);
-        SpecDTO equipmentSpec = hunterService.getEquipmentSpec(hunter);
+
+        if (item.getClass() == Weapon.class) {
+            model.addAttribute("isWeapon", true);
+        }
 
         model.addAttribute("hunter", hunter);
         model.addAttribute("item", item);
@@ -187,6 +194,10 @@ public class HunterController {
         if (bindingResult.hasErrors()) {
             Hunter hunter = hunterService.findHunter(hunterId);
             Item item = itemService.findItem(itemId);
+
+            if (item.getClass() == Weapon.class) {
+                model.addAttribute("isWeapon", true);
+            }
 
             model.addAttribute("hunter", hunter);
             model.addAttribute("item", item);
