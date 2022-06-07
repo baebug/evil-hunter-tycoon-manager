@@ -50,7 +50,7 @@ class HunterTest {
         weapon.changeOption(Arrays.asList(createItemOption(ATK, 10), createItemOption(CRIT, 21)));
         necklace.changeOption(Arrays.asList(createItemOption(ATK, 10), createItemOption(DEF, 12)));
         shoes.changeOption(Arrays.asList(createItemOption(EVASION, 10), createItemOption(CRIT_DMG, 12)));
-        hunter.calculate();
+        hunter.setEquipmentSpec();
 
 
         // then
@@ -64,13 +64,13 @@ class HunterTest {
     @DisplayName("성격 능력치 적용 테스트")
     public void setCharacteristic() throws Exception {
         // given
-Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
+        Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
         Hunter hunter2 = new Hunter("헌터B", Characteristic.SWIFT, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0,0)), "");
 
 
         // when
-        hunter1.calculate();
-        hunter2.calculate();
+        hunter1.setTotalSpec();
+        hunter2.setTotalSpec();
 
 
         // then
@@ -87,8 +87,8 @@ Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(ne
 
 
         // when
-        hunter1.calculate();
-        hunter2.calculate();
+        hunter1.setTotalSpec();
+        hunter2.setTotalSpec();
 
         // then
         assertEquals(0, hunter1.getSpec().getAtk());
@@ -123,7 +123,7 @@ Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(ne
 
         // when
         hunter.setTech(tech);
-        hunter.calculate();
+        hunter.setTotalSpec();
 
         // then
         assertEquals(15, hunter.getSpec().getHp());
@@ -159,7 +159,7 @@ Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(ne
         // when
         hunter1.getEquipment().getWeapon().setAtk_spd(1.8);
         hunter1.getEquipment().getWeapon().changeOption(Arrays.asList(createItemOption(ATK, 10)));
-        hunter1.calculate();
+        hunter1.setEquipmentSpec();
 
 
         // then

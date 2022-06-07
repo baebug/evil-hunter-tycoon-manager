@@ -11,36 +11,35 @@ import java.lang.reflect.Field;
 public class SpecDTO {
     /**
      * 프로그램에 사용되는 모든 능력치를 필드로 가지고 있다.
-     * 초기값 0
      */
-    private double atk_spd = 0;
+    private double atk_spd;
 
-    private double atk = 0;
-    private double def = 0;
-    private double hp = 0;
-    private double evasion = 0;
-    private double spd = 0;
-    private double crit = 0;
-    private double crit_dmg = 0;
-    private double add_dmg = 0;
-    private double primate = 0;
-    private double demon = 0;
-    private double undead = 0;
-    private double animal = 0;
-    private double boss = 0;
-    private double dmg_taken = 0;
-    private double life_steal = 0;
-    private double dark_lord = 0;
-    private double dodge = 0;
-    private double stun = 0;
-    private double material = 0;
-    private double satiety = 0;         // 소모량 감소
-    private double mood = 0;
-    private double satiety_up = 0;      // 회복
-    private double mood_up = 0;
-    private double satiety_max = 0;     // 최대치
-    private double mood_max = 0;
-    private double stamina_max = 0;
+    private double atk;
+    private double def;
+    private double hp;
+    private double evasion;
+    private double spd;
+    private double crit;
+    private double crit_dmg;
+    private double add_dmg;
+    private double primate;
+    private double demon;
+    private double undead;
+    private double animal;
+    private double boss;
+    private double dmg_taken;
+    private double life_steal;
+    private double dark_lord;
+    private double dodge;
+    private double stun;
+    private double material;
+    private double satiety;         // 소모량 감소
+    private double mood;
+    private double satiety_up;      // 회복
+    private double mood_up;
+    private double satiety_max;     // 최대치
+    private double mood_max;
+    private double stamina_max;
 
     /**
      * 클래스를 순회하며 입력받는 option 값과 일치하는 필드에 value 를 합산한다.
@@ -55,6 +54,15 @@ public class SpecDTO {
             if (option.equals(specField.getName())) {
                 specField.set(this, (double) specField.get(this) + value);
             }
+        }
+    }
+
+    public void clear() throws IllegalAccessException {
+        Field[] specFields = getClass().getDeclaredFields();
+
+        for (Field specField : specFields) {
+            specField.setAccessible(true);
+            specField.set(this, 0);
         }
     }
 

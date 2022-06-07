@@ -41,9 +41,9 @@ public class Equipment {
     private Belt belt = new Belt();
 
     /**
-     * 클래스의 필드를 순회하며 Item 클래스에 있는 calculate 메서드를 호출한다.
-     * reflection 을 통해 클래스를 찾고 invoke() 로 메서드를 실행하려 했으나 실패
-     * Item 타입으로 casting 하는 방식을 사용했다.
+     * 입력받은 specDTO 에 착용중인 장비의 능력치를 합산한다.
+     * Equipment 클래스의 모든 필드를 순회하며 calculate 메서드를 호출한다.
+     * @param specDTO      입력받은 DTO
      */
     public void calculate(SpecDTO specDTO) throws IllegalAccessException {
         Field[] fields = getClass().getDeclaredFields();

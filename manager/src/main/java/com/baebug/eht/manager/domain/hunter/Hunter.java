@@ -82,31 +82,27 @@ public class Hunter {
     }
 
     /**
-     * SpecDTO 인스턴스를 새로 생성하여 능력치를 합산 후 저장한다.
+     * specDTO 를 초기화 후 장비로 오른 능력치를 합산한다.
      */
-    public void calculate() throws IllegalAccessException {
-        SpecDTO tmp = new SpecDTO();
+    public void setEquipmentSpec() throws IllegalAccessException {
+        SpecDTO spec = this.getSpec();
+        spec.clear();
 
-        getStat().calculate(tmp);
-        getTech().calculate(tmp);
-        getCharacteristic().calculate(tmp);
-
-        getEquipment().calculate(tmp);
-
-        this.spec = tmp;
+        getEquipment().calculate(spec);
     }
 
     /**
-     * SpecDTO 인스턴스를 입력받아 능력치를 합산 후 저장한다.
+     * specDTO 를 초기화 후 종합 능력치를 합산한다.
+     * 합산 대상: 성격, 스탯, 비법, 장비
      */
-    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
-        getStat().calculate(specDTO);
-        getTech().calculate(specDTO);
-        getCharacteristic().calculate(specDTO);
+    public void setTotalSpec() throws IllegalAccessException {
+        SpecDTO spec = this.getSpec();
+        spec.clear();
 
-        getEquipment().calculate(specDTO);
-
-        this.spec = specDTO;
+        getCharacteristic().calculate(spec);
+        getStat().calculate(spec);
+        getTech().calculate(spec);
+        getEquipment().calculate(spec);
     }
 
     /**

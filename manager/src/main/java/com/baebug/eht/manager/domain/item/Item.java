@@ -56,7 +56,8 @@ public class Item {
     }
 
     /**
-     * itemOption 리스트를 순회하며 능력치를 합산한다.
+     * itemOption 리스트를 순회하며 specDTO 에 능력치를 합산한다.
+     * @param specDTO       입력받은 DTO
      */
     public void calculate(SpecDTO specDTO) throws IllegalAccessException {
         for (ItemOption itemOption : getItemOptions()) {

@@ -1,9 +1,6 @@
 package com.baebug.eht.manager.controller;
 
-import com.baebug.eht.manager.domain.dto.HunterClassDTO;
-import com.baebug.eht.manager.domain.dto.HunterDTO;
-import com.baebug.eht.manager.domain.dto.StatDTO;
-import com.baebug.eht.manager.domain.dto.TechDTO;
+import com.baebug.eht.manager.domain.dto.*;
 import com.baebug.eht.manager.domain.hunter.*;
 import com.baebug.eht.manager.service.HunterService;
 import com.baebug.eht.manager.service.ItemService;
@@ -63,8 +60,10 @@ public class HunterController {
     @GetMapping("/{hunterId}")
     public String hunter(@PathVariable("hunterId") Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
-        hunterService.calculate(hunter);
+        SpecDTO totalSpec = hunterService.getTotalSpec(hunter);
+
         model.addAttribute("hunter", hunter);
+        model.addAttribute("totalSpec", totalSpec);
 
         return "hunters/hunter";
     }
@@ -126,9 +125,12 @@ public class HunterController {
     }
 
     @GetMapping("/{hunterId}/equipment")
-    public String equipment(@PathVariable Long hunterId, Model model) {
+    public String equipment(@PathVariable Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
+        SpecDTO equipmentSpec = hunterService.getEquipmentSpec(hunter);
+
         model.addAttribute("hunter", hunter);
+        model.addAttribute("equipmentSpec", equipmentSpec);
 
         return "hunters/equipment";
     }

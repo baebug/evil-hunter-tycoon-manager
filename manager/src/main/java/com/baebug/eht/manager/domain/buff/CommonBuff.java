@@ -1,6 +1,7 @@
 package com.baebug.eht.manager.domain.buff;
 
 import com.baebug.eht.manager.domain.dto.SpecDTO;
+import com.baebug.eht.manager.domain.hunter.Hunter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,19 +25,17 @@ public class CommonBuff {
     private final CollectionSetBuff collectionSet;
 
     /**
-     * 새로운 SpecDTO 인스턴스를 생성하여 능력치를 합산한 후 반환한다.
-     * @return      합산한 공용 버프 능력치를 가진 SpecDTO
+     * hunter 의 spec 에 마을 버프로 오른 능력치를 합산한다.
+     * @param hunter    대상 헌터
      */
-    public SpecDTO calculate() throws IllegalAccessException {
-        SpecDTO specDTO = new SpecDTO();
+    public void calculate(Hunter hunter) throws IllegalAccessException {
+        SpecDTO spec = hunter.getSpec();
 
-        getGuild().calculate(specDTO);
-        getDungeon().calculate(specDTO);
-        getBuilding().calculate(specDTO);
-        getCollectionBasic().calculate(specDTO);
-        getCollectionSet().calculate(specDTO);
-
-        return specDTO;
+        getGuild().calculate(spec);
+        getDungeon().calculate(spec);
+        getBuilding().calculate(spec);
+        getCollectionBasic().calculate(spec);
+        getCollectionSet().calculate(spec);
     }
 
 }
