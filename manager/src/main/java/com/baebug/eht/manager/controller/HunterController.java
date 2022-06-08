@@ -64,11 +64,11 @@ public class HunterController {
     @GetMapping("/{hunterId}")
     public String hunter(@PathVariable("hunterId") Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
-        SpecDTO totalSpec = hunterService.getTotalSpec(hunter);
+        Map<String, SpecDTO> specMap = hunterService.getSpecMap(hunter);
         List<Double> atkSpd = hunterService.getAtkSpd(hunter);
 
         model.addAttribute("hunter", hunter);
-        model.addAttribute("totalSpec", totalSpec);
+        model.addAttribute("specMap", specMap);
         model.addAttribute("atkSpd", atkSpd);
 
         return "hunters/hunter";
@@ -140,12 +140,10 @@ public class HunterController {
     public String equipment(@PathVariable Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
         Map<String, SpecDTO> equipmentSpec = hunterService.getEquipmentSpec(hunter);
-        SpecDTO totalSpec = hunterService.getTotalSpec(hunter);
         List<Double> atkSpd = hunterService.getAtkSpd(hunter);
 
         model.addAttribute("hunter", hunter);
         model.addAttribute("equipmentSpec", equipmentSpec);
-        model.addAttribute("totalSpec", totalSpec);
         model.addAttribute("atkSpd", atkSpd);
 
         return "equipments/equipment";

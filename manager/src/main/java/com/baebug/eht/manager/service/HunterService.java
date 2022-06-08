@@ -133,11 +133,24 @@ public class HunterService {
     public SpecDTO getTotalSpec(Hunter hunter) throws IllegalAccessException {
         SpecDTO totalSpec = hunter.getTotalSpec();
         SpecDTO commonSpec = commonBuff.getCommonSpec();
-
         totalSpec.add(commonSpec);
 
         return totalSpec;
     }
+
+    public Map<String, SpecDTO> getSpecMap(Hunter hunter) throws IllegalAccessException {
+        Map<String, SpecDTO> specMap = new HashMap<>();
+        specMap.put("statSpec", hunter.getStatSpec());
+        specMap.put("characteristicSpec", hunter.getCharacteristicSpec());
+        specMap.put("techSpec", hunter.getTechSpec());
+        specMap.put("equipmentSpec", hunter.getEquipmentSpec());
+        specMap.put("guildSpec", commonBuff.getGuildSpec());
+        specMap.put("collectionSpec", commonBuff.getCollectionSpec());
+        specMap.put("totalSpec", getTotalSpec(hunter));
+
+        return specMap;
+    }
+
 
     public List<Double> getAtkSpd(Hunter hunter) throws IllegalAccessException {
         SpecDTO totalSpec = getTotalSpec(hunter);

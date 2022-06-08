@@ -85,6 +85,18 @@ public class Hunter {
         return getEquipment().calculate();
     }
 
+    public SpecDTO getTechSpec() throws IllegalAccessException {
+        return getTech().calculate();
+    }
+
+    public SpecDTO getStatSpec() throws IllegalAccessException {
+        return getStat().calculate();
+    }
+
+    public SpecDTO getCharacteristicSpec() throws IllegalAccessException {
+        return getCharacteristic().calculate();
+    }
+
     /**
      * specDTO 를 초기화 후 종합 능력치를 합산한다.
      * 합산 대상: 성격, 스탯, 비법, 장비

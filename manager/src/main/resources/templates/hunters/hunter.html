@@ -55,36 +55,71 @@
             <table class="table table-sm text-center table-hover">
                 <thead>
                 <tr>
-                    <th class="col-md-3">옵션</th>
-                    <th class="col-md-3">수치</th>
-                    <th class="col-md-6">상세</th>
+                    <th class="align-middle">옵션</th>
+                    <th class="align-middle">수치</th>
+                    <th class="align-middle">상세</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>공격력</td>
-                    <td th:text="${totalSpec.atk} + ' %'">+182%</td>
-                    <td>상세</td>
+                    <td class="align-middle">공격력</td>
+                    <td class="align-middle" th:text="${#numbers.formatDecimal(specMap.totalSpec.atk, 1, 1)} + ' %'">+182%</td>
+                    <td class="align-middle">
+                        <span th:text="${specMap.characteristicSpec.atk} &gt; 0 ? |성격(${#numbers.formatDecimal(specMap.characteristicSpec.atk, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.statSpec.atk} &gt; 0 ? |스탯(${#numbers.formatDecimal(specMap.statSpec.atk, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.techSpec.atk} &gt; 0 ? |비법(${#numbers.formatDecimal(specMap.techSpec.atk, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.equipmentSpec.atk} &gt; 0 ? |장비(${#numbers.formatDecimal(specMap.equipmentSpec.atk, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.guildSpec.atk} &gt; 0 ? |연합(${#numbers.formatDecimal(specMap.guildSpec.atk, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.collectionSpec.atk} &gt; 0 ? |도감(${#numbers.formatDecimal(specMap.collectionSpec.atk, 1, 1)})| : _ "></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>공속</td>
-                    <td th:text="${totalSpec.spd} + ' %'">+40%</td>
-                    <td> </td>
+                    <td class="align-middle">공격속도</td>
+                    <td class="align-middle" th:text="${#numbers.formatDecimal(specMap.totalSpec.spd, 1, 1)} + ' %'">+40%</td>
+                    <td class="align-middle">
+                        <span th:text="${specMap.characteristicSpec.spd} &gt; 0 ? |성격(${#numbers.formatDecimal(specMap.characteristicSpec.spd, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.statSpec.spd} &gt; 0 ? |스탯(${#numbers.formatDecimal(specMap.statSpec.spd, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.techSpec.spd} &gt; 0 ? |비법(${#numbers.formatDecimal(specMap.techSpec.spd, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.equipmentSpec.spd} &gt; 0 ? |장비(${#numbers.formatDecimal(specMap.equipmentSpec.spd, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.guildSpec.spd} &gt; 0 ? |연합(${#numbers.formatDecimal(specMap.guildSpec.spd, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.collectionSpec.spd} &gt; 0 ? |도감(${#numbers.formatDecimal(specMap.collectionSpec.spd, 1, 1)})| : _ "></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>회피</td>
-                    <td th:text="${totalSpec.evasion} + ' %'">+33%</td>
-                    <td></td>
+                    <td class="align-middle">회피</td>
+                    <td class="align-middle" th:text="${#numbers.formatDecimal(specMap.totalSpec.evasion, 1, 1)} + ' %'">+33%</td>
+                    <td class="align-middle">
+                        <span th:text="${specMap.characteristicSpec.evasion} &gt; 0 ? |성격(${#numbers.formatDecimal(specMap.characteristicSpec.evasion, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.statSpec.evasion} &gt; 0 ? |스탯(${#numbers.formatDecimal(specMap.statSpec.evasion, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.techSpec.evasion} &gt; 0 ? |비법(${#numbers.formatDecimal(specMap.techSpec.evasion, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.equipmentSpec.evasion} &gt; 0 ? |장비(${#numbers.formatDecimal(specMap.equipmentSpec.evasion, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.guildSpec.evasion} &gt; 0 ? |연합(${#numbers.formatDecimal(specMap.guildSpec.evasion, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.collectionSpec.evasion} &gt; 0 ? |도감(${#numbers.formatDecimal(specMap.collectionSpec.evasion, 1, 1)})| : _ "></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>치명</td>
-                    <td th:text="${totalSpec.crit} + ' %'">+46%</td>
-                    <td></td>
+                    <td class="align-middle">치명</td>
+                    <td class="align-middle" th:text="${#numbers.formatDecimal(specMap.totalSpec.crit, 1, 1)} + ' %'">+46%</td>
+                    <td class="align-middle">
+                        <span th:text="${specMap.characteristicSpec.crit} &gt; 0 ? |성격(${#numbers.formatDecimal(specMap.characteristicSpec.crit, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.statSpec.crit} &gt; 0 ? |스탯(${#numbers.formatDecimal(specMap.statSpec.crit, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.techSpec.crit} &gt; 0 ? |비법(${#numbers.formatDecimal(specMap.techSpec.crit, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.equipmentSpec.crit} &gt; 0 ? |장비(${#numbers.formatDecimal(specMap.equipmentSpec.crit, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.guildSpec.crit} &gt; 0 ? |연합(${#numbers.formatDecimal(specMap.guildSpec.crit, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.collectionSpec.crit} &gt; 0 ? |도감(${#numbers.formatDecimal(specMap.collectionSpec.crit, 1, 1)})| : _ "></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>치피</td>
-                    <td th:text="${totalSpec.crit_dmg} + ' %'">+101%</td>
-                    <td></td>
+                    <td class="align-middle">치피</td>
+                    <td class="align-middle" th:text="${#numbers.formatDecimal(specMap.totalSpec.crit_dmg, 1, 1)} + ' %'">+101%</td>
+                    <td class="align-middle">
+                        <span th:text="${specMap.characteristicSpec.crit_dmg} &gt; 0 ? |성격(${#numbers.formatDecimal(specMap.characteristicSpec.crit_dmg, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.statSpec.crit_dmg} &gt; 0 ? |스탯(${#numbers.formatDecimal(specMap.statSpec.crit_dmg, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.techSpec.crit_dmg} &gt; 0 ? |비법(${#numbers.formatDecimal(specMap.techSpec.crit_dmg, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.equipmentSpec.crit_dmg} &gt; 0 ? |장비(${#numbers.formatDecimal(specMap.equipmentSpec.crit_dmg, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.guildSpec.crit_dmg} &gt; 0 ? |연합(${#numbers.formatDecimal(specMap.guildSpec.crit_dmg, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.collectionSpec.crit_dmg} &gt; 0 ? |도감(${#numbers.formatDecimal(specMap.collectionSpec.crit_dmg, 1, 1)})| : _ "></span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
