@@ -6,13 +6,17 @@ import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
 import com.baebug.eht.manager.domain.hunter.TechEntity;
+import com.baebug.eht.manager.domain.item.Equipment;
 import com.baebug.eht.manager.domain.item.Item;
 import com.baebug.eht.manager.repository.HunterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -107,18 +111,19 @@ public class HunterService {
     }
 
     /**
-     * 특정 아이템의 능력치를 계산한다.
-     */
-    public SpecDTO getItemSpec(Item item) throws IllegalAccessException {
-        return item.getItemSpec();
-    }
-
-    /**
      * 헌터의 장비 능력치를 계산한다.
      * @param hunter        대상 헌터 객체
      */
-    public SpecDTO getEquipmentSpec(Hunter hunter) throws IllegalAccessException {
-        return hunter.getEquipmentSpec();
+    public Map<String, SpecDTO> getEquipmentSpec(Hunter hunter) throws IllegalAccessException {
+        Map<String, SpecDTO> equipmentMap = new HashMap<>();
+        equipmentMap.put("equipment", hunter.getEquipmentSpec());
+        Equipment equipment = hunter.getEquipment();
+        for (Field field : equipment.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            Item item = (Item) field.get(equipment);
+            equipmentMap.put(field.getName(), item.getItemSpec());
+        }
+        return equipmentMap;
     }
 
     /**

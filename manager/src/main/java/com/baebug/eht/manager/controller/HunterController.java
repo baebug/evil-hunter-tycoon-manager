@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -138,35 +139,13 @@ public class HunterController {
     @GetMapping("/{hunterId}/equipments")
     public String equipment(@PathVariable Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
-        SpecDTO itemSpec = hunterService.getEquipmentSpec(hunter);
+        Map<String, SpecDTO> equipmentSpec = hunterService.getEquipmentSpec(hunter);
         SpecDTO totalSpec = hunterService.getTotalSpec(hunter);
-
-        SpecDTO weaponSpec = hunterService.getItemSpec(hunter.getEquipment().getWeapon());
-        SpecDTO helmetSpec = hunterService.getItemSpec(hunter.getEquipment().getHelmet());
-        SpecDTO armorSpec = hunterService.getItemSpec(hunter.getEquipment().getArmor());
-        SpecDTO gloveSpec = hunterService.getItemSpec(hunter.getEquipment().getGlove());
-        SpecDTO shoesSpec = hunterService.getItemSpec(hunter.getEquipment().getShoes());
-        SpecDTO necklaceSpec = hunterService.getItemSpec(hunter.getEquipment().getNecklace());
-        SpecDTO ringSpec = hunterService.getItemSpec(hunter.getEquipment().getRing());
-        SpecDTO beltSpec = hunterService.getItemSpec(hunter.getEquipment().getBelt());
-        SpecDTO runeSpec = hunterService.getItemSpec(hunter.getEquipment().getRune());
-
         List<Double> atkSpd = hunterService.getAtkSpd(hunter);
 
         model.addAttribute("hunter", hunter);
-        model.addAttribute("itemSpec", itemSpec);
+        model.addAttribute("equipmentSpec", equipmentSpec);
         model.addAttribute("totalSpec", totalSpec);
-
-        model.addAttribute("weaponSpec", weaponSpec);
-        model.addAttribute("helmetSpec", helmetSpec);
-        model.addAttribute("armorSpec", armorSpec);
-        model.addAttribute("gloveSpec", gloveSpec);
-        model.addAttribute("shoesSpec", shoesSpec);
-        model.addAttribute("necklaceSpec", necklaceSpec);
-        model.addAttribute("ringSpec", ringSpec);
-        model.addAttribute("beltSpec", beltSpec);
-        model.addAttribute("runeSpec", runeSpec);
-
         model.addAttribute("atkSpd", atkSpd);
 
         return "equipments/equipment";
