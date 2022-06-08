@@ -2,6 +2,7 @@ package com.baebug.eht.manager.domain.item;
 
 import com.baebug.eht.manager.domain.dto.HunterClassDTO;
 import com.baebug.eht.manager.domain.dto.ItemDTO;
+import com.baebug.eht.manager.domain.dto.ItemOptionDTO;
 import com.baebug.eht.manager.domain.dto.StatDTO;
 import com.baebug.eht.manager.domain.hunter.Characteristic;
 import com.baebug.eht.manager.domain.hunter.Hunter;
@@ -41,15 +42,21 @@ class ItemTest {
 
     }
 
-    private ItemOption createItemOption() {
-        return new ItemOption(null, 0);
+    private ItemOptionDTO createItemOption() {
+        ItemOptionDTO itemOptionDTO = new ItemOptionDTO();
+        itemOptionDTO.setOption(null);
+        itemOptionDTO.setValue(0);
+        return itemOptionDTO;
     }
 
-    private ItemOption createItemOption(OptionList option, Integer value) {
-        return new ItemOption(option, value);
+    private ItemOptionDTO createItemOption(OptionList option, Integer value) {
+        ItemOptionDTO itemOptionDTO = new ItemOptionDTO();
+        itemOptionDTO.setOption(option);
+        itemOptionDTO.setValue(value);
+        return itemOptionDTO;
     }
 
-    private ItemDTO createItemDTO(ItemOption option1, ItemOption option2, ItemOption option3, ItemOption option4, ItemOption option5, ItemOption option6, ItemOption option7, ItemOption option8) {
+    private ItemDTO createItemDTO(ItemOptionDTO option1, ItemOptionDTO option2, ItemOptionDTO option3, ItemOptionDTO option4, ItemOptionDTO option5, ItemOptionDTO option6, ItemOptionDTO option7, ItemOptionDTO option8) {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setOption1(option1);
         itemDTO.setOption2(option2);

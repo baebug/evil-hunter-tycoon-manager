@@ -46,14 +46,14 @@ class HunterTest {
 
         ItemDTO itemDTO = createItemDTO(createItemOption(ATK, 10), createItemOption(CRIT, 21), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption());
         weapon.setAtk_spd(2.3);
-        weapon.changeOption(itemDTO.getOption1(), itemDTO.getOption2(), itemDTO.getOption3(), itemDTO.getOption4(), itemDTO.getOption5(), itemDTO.getOption6(), itemDTO.getOption7(), itemDTO.getOption8());
-        hunter.setEquipmentSpec();
+        weapon.changeOption(itemDTO);
+        hunter.setItemSpec();
 
 
         // then
-        assertEquals(10, hunter.getSpec().getAtk());
-        assertEquals(21, hunter.getSpec().getCrit());
-        assertEquals(2.3, hunter.getSpec().getAtk_spd());
+        assertEquals(10, hunter.getItemSpec().getAtk());
+        assertEquals(21, hunter.getItemSpec().getCrit());
+        assertEquals(2.3, hunter.getItemSpec().getAtk_spd());
     }
 
     @Test
@@ -70,8 +70,8 @@ class HunterTest {
 
 
         // then
-        assertEquals(10, hunter1.getSpec().getAtk());
-        assertEquals(10, hunter2.getSpec().getSpd());
+        assertEquals(10, hunter1.getTotalSpec().getAtk());
+        assertEquals(10, hunter2.getTotalSpec().getSpd());
     }
 
     @Test
@@ -87,13 +87,13 @@ class HunterTest {
         hunter2.setTotalSpec();
 
         // then
-        assertEquals(0, hunter1.getSpec().getAtk());
-        assertEquals(0, hunter1.getSpec().getCrit());
-        assertEquals(0, hunter1.getSpec().getEvasion());
+        assertEquals(0, hunter1.getTotalSpec().getAtk());
+        assertEquals(0, hunter1.getTotalSpec().getCrit());
+        assertEquals(0, hunter1.getTotalSpec().getEvasion());
 
-        assertEquals(10, hunter2.getSpec().getAtk());
-        assertEquals(6, hunter2.getSpec().getCrit());
-        assertEquals(4, hunter2.getSpec().getEvasion());
+        assertEquals(10, hunter2.getTotalSpec().getAtk());
+        assertEquals(6, hunter2.getTotalSpec().getCrit());
+        assertEquals(4, hunter2.getTotalSpec().getEvasion());
     }
 
     @Test
@@ -122,16 +122,16 @@ class HunterTest {
         hunter.setTotalSpec();
 
         // then
-        assertEquals(15, hunter.getSpec().getHp());
-        assertEquals(7.5, hunter.getSpec().getAtk());
-        assertEquals(0, hunter.getSpec().getDef());
+        assertEquals(15, hunter.getTotalSpec().getHp());
+        assertEquals(7.5, hunter.getTotalSpec().getAtk());
+        assertEquals(0, hunter.getTotalSpec().getDef());
 
-        assertEquals(10, hunter.getSpec().getCrit());
-        assertEquals(5, hunter.getSpec().getSpd());
-        assertEquals(0, hunter.getSpec().getEvasion());
+        assertEquals(10, hunter.getTotalSpec().getCrit());
+        assertEquals(5, hunter.getTotalSpec().getSpd());
+        assertEquals(0, hunter.getTotalSpec().getEvasion());
 
-        assertEquals(30, hunter.getSpec().getSatiety());
-        assertEquals(15, hunter.getSpec().getMood());
+        assertEquals(30, hunter.getTotalSpec().getSatiety());
+        assertEquals(15, hunter.getTotalSpec().getMood());
     }
 
     @Test
@@ -154,8 +154,7 @@ class HunterTest {
 
         // when
         hunter1.getEquipment().getWeapon().setAtk_spd(1.8);
-        hunter1.getEquipment().getWeapon().changeOption(createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption());
-        hunter1.setEquipmentSpec();
+        hunter1.setTotalSpec();
 
 
         // then
@@ -170,21 +169,29 @@ class HunterTest {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
 
+        // when
+        hunter1.setTotalSpec();
 
         // then
         System.out.println("헌터의 현재 공격속도 = " + hunter1.getAtkSpd());
         System.out.println("0.25 까지 도달을 위한 필요 공격속도 = " + hunter1.getAtkSpd(0.25));
     }
 
-    private ItemOption createItemOption() {
-        return new ItemOption(null, 0);
+    private ItemOptionDTO createItemOption() {
+        ItemOptionDTO itemOptionDTO = new ItemOptionDTO();
+        itemOptionDTO.setOption(null);
+        itemOptionDTO.setValue(0);
+        return itemOptionDTO;
     }
 
-    private ItemOption createItemOption(OptionList option, Integer value) {
-        return new ItemOption(option, value);
+    private ItemOptionDTO createItemOption(OptionList option, Integer value) {
+        ItemOptionDTO itemOptionDTO = new ItemOptionDTO();
+        itemOptionDTO.setOption(option);
+        itemOptionDTO.setValue(value);
+        return itemOptionDTO;
     }
 
-    private ItemDTO createItemDTO(ItemOption option1, ItemOption option2, ItemOption option3, ItemOption option4, ItemOption option5, ItemOption option6, ItemOption option7, ItemOption option8) {
+    private ItemDTO createItemDTO(ItemOptionDTO option1, ItemOptionDTO option2, ItemOptionDTO option3, ItemOptionDTO option4, ItemOptionDTO option5, ItemOptionDTO option6, ItemOptionDTO option7, ItemOptionDTO option8) {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setOption1(option1);
         itemDTO.setOption2(option2);

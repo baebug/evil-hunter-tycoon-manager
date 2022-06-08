@@ -79,15 +79,15 @@ class HunterServiceTest {
         Hunter hunter = new Hunter("헌터A", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDto(0,0,0,0,0,0,0,0, 0)), "");
 
 
-        hunterService.getTotalSpec(hunter);
-        System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());
+        SpecDTO totalSpec = hunterService.getTotalSpec(hunter);
+        System.out.println("totalSpec.getAtk() = " + totalSpec.getAtk());
 
         setCommonBuff();
         hunterService.getTotalSpec(hunter);
-        System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());
+        System.out.println("totalSpec.getAtk() = " + totalSpec.getAtk());
 
-        hunter.getSpec().clear();
-        System.out.println("hunter.getSpec().getAtk() = " + hunter.getSpec().getAtk());
+        hunter.getTotalSpec().clear();
+        System.out.println("totalSpec.getAtk() = " + totalSpec.getAtk());
 
     }
 
