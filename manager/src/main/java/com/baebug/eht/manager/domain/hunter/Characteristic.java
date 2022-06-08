@@ -39,11 +39,15 @@ public enum Characteristic {
     /**
      * 성격에 해당하는 능력치를 합산한다.
      */
-    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
+    public SpecDTO calculate() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
+
         if (getValue() != null)
             if (getOption() != null) {
                 specDTO.add(getOption(), (double) getValue());
             }
+
+        return specDTO;
     }
 
 }

@@ -51,11 +51,15 @@ public class CollectionSetBuff {
     /**
      * 클래스의 필드를 순회하며 입력받은 옵션을 능력치로 합산한다.
      */
-    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
+    public SpecDTO calculate() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
+
         for (Field field : getClass().getDeclaredFields()) {
             field.setAccessible(true);
             specDTO.add(field.getName(), (double) field.get(this));
         }
+
+        return specDTO;
     }
 
 }

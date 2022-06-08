@@ -24,11 +24,6 @@ public class Hunter {
     private String name;
     private String desc;
 
-    @Transient
-    private final SpecDTO totalSpec = new SpecDTO();
-    @Transient
-    private final SpecDTO itemSpec = new SpecDTO();
-
     @Enumerated(EnumType.STRING)
     private Characteristic characteristic;    // Enum type
 
@@ -84,33 +79,31 @@ public class Hunter {
     }
 
     /**
-     * specDTO 를 초기화 후 장비로 오른 능력치를 합산한다.
+     * 장비로 오른 능력치를 반환한다.
      */
-    public void setItemSpec() throws IllegalAccessException {
-        SpecDTO spec = this.getItemSpec();
-        spec.clear();
-
-        getEquipment().calculate(spec);
+    public SpecDTO getEquipmentSpec() throws IllegalAccessException {
+        return getEquipment().calculate();
     }
 
     /**
      * specDTO 를 초기화 후 종합 능력치를 합산한다.
      * 합산 대상: 성격, 스탯, 비법, 장비
      */
-    public void setTotalSpec() throws IllegalAccessException {
-        SpecDTO spec = this.getTotalSpec();
-        spec.clear();
+    public SpecDTO getTotalSpec() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
 
-        getCharacteristic().calculate(spec);
-        getStat().calculate(spec);
-        getTech().calculate(spec);
-        getEquipment().calculate(spec);
+        specDTO.add(getCharacteristic().calculate());
+        specDTO.add(getStat().calculate());
+        specDTO.add(getTech().calculate());
+        specDTO.add(getEquipment().calculate());
+
+        return specDTO;
     }
 
     /**
      * 현재 공격속도를 계산하여 반환한다.
      */
-    public double getAtkSpd() {
+    public double getAtkSpd() throws IllegalAccessException {
         double atkSpd = getTotalSpec().getAtk_spd();
         double spdRate = getTotalSpec().getSpd() * .01;
         double furyRate = calcFury(getTech().getFury());
@@ -123,7 +116,7 @@ public class Hunter {
      * 목표 공격속도를 입력받아, 필요 공격속도를 계산하여 반환한다.
      * @param expected      목표 공격속도
      */
-    public double getAtkSpd(double expected) {
+    public double getAtkSpd(double expected) throws IllegalAccessException {
         double atkSpd = getTotalSpec().getAtk_spd();
         double actualSpd = getTotalSpec().getSpd();
         double furyRate = calcFury(getTech().getFury());

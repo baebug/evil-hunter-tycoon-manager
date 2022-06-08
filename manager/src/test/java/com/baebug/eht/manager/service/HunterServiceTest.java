@@ -131,9 +131,13 @@ class HunterServiceTest {
     }
 
     private void setCommonBuff() {
-        commonBuff.getGuild().setGuildBuff(15, 0, 15, 5, 5);
-        commonBuff.getDungeon().setDungeonBuff(200);
-        commonBuff.getBuilding().setBuildingBuff(300, 300, 300, 300, 300, 300);
+        CommonBuffDTO commonBuffDTO = new CommonBuffDTO();
+        GuildBuffDTO guildBuffDTO = new GuildBuffDTO();
+        guildBuffDTO.setAtk(15);
+        commonBuffDTO.setGuild(guildBuffDTO);
+        commonBuffDTO.setCollectionBasic(new CollectionBasicBuffDTO());
+        commonBuffDTO.setCollectionSet(new CollectionSetBuffDTO());
+        commonBuff.setCommonBuff(commonBuffDTO);
     }
 
     private StatDTO createStatDto(int atk, int def, int crit, int spd, int evasion, int hp, int satiety, int mood, int stamina) {

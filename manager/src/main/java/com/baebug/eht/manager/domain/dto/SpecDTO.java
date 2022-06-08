@@ -47,14 +47,44 @@ public class SpecDTO {
      * @param value         double 타입의 옵션 값
      */
     public void add(String option, Double value) throws IllegalAccessException {
-        Field[] specFields = getClass().getDeclaredFields();
+        Field[] fields = getClass().getDeclaredFields();
 
-        for (Field specField : specFields) {
-            specField.setAccessible(true);
-            if (option.equals(specField.getName())) {
-                specField.set(this, (double) specField.get(this) + value);
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (option.equals(field.getName())) {
+                field.set(this, (double) field.get(this) + value);
             }
         }
+    }
+
+    public void add(SpecDTO specDTO) {
+        this.atk_spd += specDTO.atk_spd;
+        this.atk += specDTO.atk;
+        this.def += specDTO.def;
+        this.hp += specDTO.hp;
+        this.evasion += specDTO.evasion;
+        this.spd += specDTO.spd;
+        this.crit += specDTO.crit;
+        this.crit_dmg += specDTO.crit_dmg;
+        this.add_dmg += specDTO.add_dmg;
+        this.primate += specDTO.primate;
+        this.demon += specDTO.demon;
+        this.undead += specDTO.undead;
+        this.animal += specDTO.animal;
+        this.boss += specDTO.boss;
+        this.dmg_taken += specDTO.dmg_taken;
+        this.life_steal += specDTO.life_steal;
+        this.dark_lord += specDTO.dark_lord;
+        this.dodge += specDTO.dodge;
+        this.stun += specDTO.stun;
+        this.material += specDTO.material;
+        this.satiety += specDTO.satiety;
+        this.mood += specDTO.mood;
+        this.satiety_up += specDTO.satiety_up;
+        this.mood_up += specDTO.mood_up;
+        this.satiety_max += specDTO.satiety_max;
+        this.mood_max += specDTO.mood_max;
+        this.stamina_max += specDTO.stamina_max;
     }
 
     public void clear() throws IllegalAccessException {

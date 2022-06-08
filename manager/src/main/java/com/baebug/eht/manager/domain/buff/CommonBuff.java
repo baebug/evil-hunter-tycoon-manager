@@ -33,14 +33,28 @@ public class CommonBuff {
 
     /**
      * hunter 의 spec 에 마을 버프로 오른 능력치를 합산한다.
-     * @param hunter    대상 헌터
      */
-    public void calculate(Hunter hunter) throws IllegalAccessException {
-        SpecDTO spec = hunter.getTotalSpec();
+    public SpecDTO getGuildSpec() throws IllegalAccessException {
+        return getGuild().calculate();
+    }
 
-        getGuild().calculate(spec);
-        getCollectionBasic().calculate(spec);
-        getCollectionSet().calculate(spec);
+    public SpecDTO getCollectionSpec() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
+
+        specDTO.add(getCollectionBasic().calculate());
+        specDTO.add(getCollectionSet().calculate());
+
+        return specDTO;
+    }
+
+    public SpecDTO getCommonSpec() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
+
+        specDTO.add(getGuildSpec());
+        specDTO.add(getCollectionSpec());
+
+        return specDTO;
+
     }
 
 }

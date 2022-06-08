@@ -47,14 +47,16 @@ public class Equipment {
     /**
      * 입력받은 specDTO 에 착용중인 장비의 능력치를 합산한다.
      * Equipment 클래스의 모든 필드를 순회하며 calculate 메서드를 호출한다.
-     * @param specDTO      입력받은 DTO
      */
-    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
+    public SpecDTO calculate() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
+
         Field[] fields = getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
             Item item = (Item) field.get(this);
             item.calculate(specDTO);
         }
+        return specDTO;
     }
 }

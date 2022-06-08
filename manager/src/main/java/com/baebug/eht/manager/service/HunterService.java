@@ -121,9 +121,7 @@ public class HunterService {
      * @param hunter        대상 헌터 객체
      */
     public SpecDTO getItemSpec(Hunter hunter) throws IllegalAccessException {
-        hunter.setItemSpec();
-
-        return hunter.getItemSpec();
+        return hunter.getEquipmentSpec();
     }
 
     /**
@@ -131,10 +129,12 @@ public class HunterService {
      * @param hunter        대상 헌터 객체
      */
     public SpecDTO getTotalSpec(Hunter hunter) throws IllegalAccessException {
-        hunter.setTotalSpec();
-        commonBuff.calculate(hunter);
+        SpecDTO totalSpec = hunter.getTotalSpec();
+        SpecDTO commonSpec = commonBuff.getCommonSpec();
 
-        return hunter.getTotalSpec();
+        totalSpec.add(commonSpec);
+
+        return totalSpec;
     }
 
     public CommonBuff getCommonBuff() {

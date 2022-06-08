@@ -47,13 +47,13 @@ class HunterTest {
         ItemDTO itemDTO = createItemDTO(createItemOption(ATK, 10), createItemOption(CRIT, 21), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption(), createItemOption());
         weapon.setAtk_spd(2.3);
         weapon.changeOption(itemDTO);
-        hunter.setItemSpec();
+        SpecDTO equipmentSpec = hunter.getEquipmentSpec();
 
 
         // then
-        assertEquals(10, hunter.getItemSpec().getAtk());
-        assertEquals(21, hunter.getItemSpec().getCrit());
-        assertEquals(2.3, hunter.getItemSpec().getAtk_spd());
+        assertEquals(10, equipmentSpec.getAtk());
+        assertEquals(21, equipmentSpec.getCrit());
+        assertEquals(2.3, equipmentSpec.getAtk_spd());
     }
 
     @Test
@@ -62,12 +62,6 @@ class HunterTest {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
         Hunter hunter2 = new Hunter("헌터B", Characteristic.SWIFT, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
-
-
-        // when
-        hunter1.setTotalSpec();
-        hunter2.setTotalSpec();
-
 
         // then
         assertEquals(10, hunter1.getTotalSpec().getAtk());
@@ -80,11 +74,6 @@ class HunterTest {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
         Hunter hunter2 = new Hunter("헌터B", Characteristic.OTHERS, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(1,0,3,0,2,0,0,0,0)), "");
-
-
-        // when
-        hunter1.setTotalSpec();
-        hunter2.setTotalSpec();
 
         // then
         assertEquals(0, hunter1.getTotalSpec().getAtk());
@@ -119,19 +108,19 @@ class HunterTest {
 
         // when
         hunter.setTech(tech);
-        hunter.setTotalSpec();
+        SpecDTO totalSpec = hunter.getTotalSpec();
 
         // then
-        assertEquals(15, hunter.getTotalSpec().getHp());
-        assertEquals(7.5, hunter.getTotalSpec().getAtk());
-        assertEquals(0, hunter.getTotalSpec().getDef());
+        assertEquals(15, totalSpec.getHp());
+        assertEquals(7.5, totalSpec.getAtk());
+        assertEquals(0, totalSpec.getDef());
 
-        assertEquals(10, hunter.getTotalSpec().getCrit());
-        assertEquals(5, hunter.getTotalSpec().getSpd());
-        assertEquals(0, hunter.getTotalSpec().getEvasion());
+        assertEquals(10, totalSpec.getCrit());
+        assertEquals(5, totalSpec.getSpd());
+        assertEquals(0, totalSpec.getEvasion());
 
-        assertEquals(30, hunter.getTotalSpec().getSatiety());
-        assertEquals(15, hunter.getTotalSpec().getMood());
+        assertEquals(30, totalSpec.getSatiety());
+        assertEquals(15, totalSpec.getMood());
     }
 
     @Test
@@ -151,11 +140,8 @@ class HunterTest {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
 
-
         // when
         hunter1.getEquipment().getWeapon().setAtk_spd(1.8);
-        hunter1.setTotalSpec();
-
 
         // then
         System.out.println("헌터A 의 현재 공격속도 = " + hunter1.getAtkSpd());
@@ -168,9 +154,6 @@ class HunterTest {
     public void getAtkSpdTest2() throws Exception {
         // given
         Hunter hunter1 = new Hunter("헌터A", Characteristic.STRONG, new HunterClass(new HunterClassDTO()), new StatEntity(createStatDTO(0,0,0,0,0,0,0,0,0)), "");
-
-        // when
-        hunter1.setTotalSpec();
 
         // then
         System.out.println("헌터의 현재 공격속도 = " + hunter1.getAtkSpd());

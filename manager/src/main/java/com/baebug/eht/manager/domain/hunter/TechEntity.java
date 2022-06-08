@@ -71,7 +71,9 @@ public class TechEntity {
      * 클래스의 필드를 순회하며 입력받은 옵션을 능력치로 합산한다.
      * TechList 를 통해 옵션별 가중치를 적용한다.
      */
-    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
+    public SpecDTO calculate() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
+
         for (Field field : getClass().getDeclaredFields()) {
             field.setAccessible(true);
             if (!field.getName().equals("id") && !field.getName().equals("fury") && !field.getName().equals("quicken")) {
@@ -79,5 +81,6 @@ public class TechEntity {
                 specDTO.add(field.getName(), (Integer) field.get(this) * weight);
             }
         }
+        return specDTO;
     }
 }

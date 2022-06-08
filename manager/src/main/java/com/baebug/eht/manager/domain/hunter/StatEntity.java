@@ -59,7 +59,9 @@ public class StatEntity {
      * StatList 를 통해 옵션별 가중치를 적용한다.
      * Integer 를 Double 로 casting 하기 위해 String 타입으로 감싸준다.
      */
-    public void calculate(SpecDTO specDTO) throws IllegalAccessException {
+    public SpecDTO calculate() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
+
         for (Field field : getClass().getDeclaredFields()) {
             field.setAccessible(true);
             if (!field.getName().equals("id")) {
@@ -67,6 +69,8 @@ public class StatEntity {
                 specDTO.add(field.getName(), (Integer) field.get(this) * weight);
             }
         }
+
+        return specDTO;
     }
 
     /**
