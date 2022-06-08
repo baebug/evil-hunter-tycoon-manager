@@ -69,9 +69,6 @@ public class Item {
     })
     private ItemOption option8 = new ItemOption();
 
-    @Transient
-    private SpecDTO itemSpec = new SpecDTO();
-
     /**
      * 아이템 정보를 수정하는 메서드
      */
@@ -89,10 +86,11 @@ public class Item {
     /**
      *
      */
-    public void setItemSpec() throws IllegalAccessException {
-        SpecDTO itemSpec = this.itemSpec;
-        itemSpec.clear();
-        calculate(itemSpec);
+    public SpecDTO getItemSpec() throws IllegalAccessException {
+        SpecDTO specDTO = new SpecDTO();
+        calculate(specDTO);
+
+        return specDTO;
     }
 
 

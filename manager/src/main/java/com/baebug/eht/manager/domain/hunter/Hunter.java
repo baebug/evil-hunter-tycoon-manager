@@ -103,9 +103,9 @@ public class Hunter {
     /**
      * 현재 공격속도를 계산하여 반환한다.
      */
-    public double getAtkSpd() throws IllegalAccessException {
-        double atkSpd = getTotalSpec().getAtk_spd();
-        double spdRate = getTotalSpec().getSpd() * .01;
+    public double getAtkSpd(SpecDTO totalSpec) throws IllegalAccessException {
+        double atkSpd = totalSpec.getAtk_spd();
+        double spdRate = totalSpec.getSpd() * .01;
         double furyRate = calcFury(getTech().getFury());
         double quickenRate = getTech().getQuicken() * .1;
 
@@ -116,9 +116,9 @@ public class Hunter {
      * 목표 공격속도를 입력받아, 필요 공격속도를 계산하여 반환한다.
      * @param expected      목표 공격속도
      */
-    public double getAtkSpd(double expected) throws IllegalAccessException {
-        double atkSpd = getTotalSpec().getAtk_spd();
-        double actualSpd = getTotalSpec().getSpd();
+    public double getAtkSpd(SpecDTO totalSpec, double expected) throws IllegalAccessException {
+        double atkSpd = totalSpec.getAtk_spd();
+        double actualSpd = totalSpec.getSpd();
         double furyRate = calcFury(getTech().getFury());
         double quickenRate = getTech().getQuicken() * .1;
 

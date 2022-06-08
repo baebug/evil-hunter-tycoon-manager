@@ -64,9 +64,11 @@ public class HunterController {
     public String hunter(@PathVariable("hunterId") Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
         SpecDTO totalSpec = hunterService.getTotalSpec(hunter);
+        List<Double> atkSpd = hunterService.getAtkSpd(hunter);
 
         model.addAttribute("hunter", hunter);
         model.addAttribute("totalSpec", totalSpec);
+        model.addAttribute("atkSpd", atkSpd);
 
         return "hunters/hunter";
     }
@@ -136,7 +138,7 @@ public class HunterController {
     @GetMapping("/{hunterId}/equipments")
     public String equipment(@PathVariable Long hunterId, Model model) throws IllegalAccessException {
         Hunter hunter = hunterService.findHunter(hunterId);
-        SpecDTO itemSpec = hunterService.getItemSpec(hunter);
+        SpecDTO itemSpec = hunterService.getEquipmentSpec(hunter);
         SpecDTO totalSpec = hunterService.getTotalSpec(hunter);
 
         SpecDTO weaponSpec = hunterService.getItemSpec(hunter.getEquipment().getWeapon());
@@ -149,6 +151,7 @@ public class HunterController {
         SpecDTO beltSpec = hunterService.getItemSpec(hunter.getEquipment().getBelt());
         SpecDTO runeSpec = hunterService.getItemSpec(hunter.getEquipment().getRune());
 
+        List<Double> atkSpd = hunterService.getAtkSpd(hunter);
 
         model.addAttribute("hunter", hunter);
         model.addAttribute("itemSpec", itemSpec);
@@ -163,6 +166,8 @@ public class HunterController {
         model.addAttribute("ringSpec", ringSpec);
         model.addAttribute("beltSpec", beltSpec);
         model.addAttribute("runeSpec", runeSpec);
+
+        model.addAttribute("atkSpd", atkSpd);
 
         return "equipments/equipment";
     }

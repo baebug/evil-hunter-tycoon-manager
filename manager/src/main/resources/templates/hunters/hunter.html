@@ -63,27 +63,27 @@
                 <tbody>
                 <tr>
                     <td>공격력</td>
-                    <td th:text="${hunter.totalSpec.atk} + ' %'">+182%</td>
+                    <td th:text="${totalSpec.atk} + ' %'">+182%</td>
                     <td>상세</td>
                 </tr>
                 <tr>
                     <td>공속</td>
-                    <td th:text="${hunter.totalSpec.spd} + ' %'">+40%</td>
+                    <td th:text="${totalSpec.spd} + ' %'">+40%</td>
                     <td> </td>
                 </tr>
                 <tr>
                     <td>회피</td>
-                    <td th:text="${hunter.totalSpec.evasion} + ' %'">+33%</td>
+                    <td th:text="${totalSpec.evasion} + ' %'">+33%</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>치명</td>
-                    <td th:text="${hunter.totalSpec.crit} + ' %'">+46%</td>
+                    <td th:text="${totalSpec.crit} + ' %'">+46%</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>치피</td>
-                    <td th:text="${hunter.totalSpec.crit_dmg} + ' %'">+101%</td>
+                    <td th:text="${totalSpec.crit_dmg} + ' %'">+101%</td>
                     <td></td>
                 </tr>
                 </tbody>
@@ -93,15 +93,15 @@
             <table th:border="0" th:class="d-inline-block">
                 <tr>
                     <th th:text="'현재 공격속도'"></th>
-                    <th th:text="${hunter.getAtkSpd()} &gt; 0 ? ${#numbers.formatDecimal(hunter.getAtkSpd(), 1, 2)} : '0'"></th>
+                    <th th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[0], 1, 2)} : '0'"></th>
                 </tr>
                 <tr>
                     <td th:text="'0.5 까지'"></td>
-                    <td th:text="${hunter.getAtkSpd()} &gt; 0 ? ${#numbers.formatDecimal(hunter.getAtkSpd(0.5), 1, 1)} : '0'"></td>
+                    <td th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[1], 1, 1)} : '0'"></td>
                 </tr>
                 <tr>
                     <td th:text="'0.25 까지'"></td>
-                    <td th:text="${hunter.getAtkSpd()} &gt; 0 ? ${#numbers.formatDecimal(hunter.getAtkSpd(0.25), 1, 1)} : '0'"></td>
+                    <td th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[2], 1, 1)} : '0'"></td>
                 </tr>
             </table>
         </div>

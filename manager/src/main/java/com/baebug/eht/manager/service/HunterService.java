@@ -110,17 +110,14 @@ public class HunterService {
      * 특정 아이템의 능력치를 계산한다.
      */
     public SpecDTO getItemSpec(Item item) throws IllegalAccessException {
-        item.setItemSpec();
-
         return item.getItemSpec();
     }
-
 
     /**
      * 헌터의 장비 능력치를 계산한다.
      * @param hunter        대상 헌터 객체
      */
-    public SpecDTO getItemSpec(Hunter hunter) throws IllegalAccessException {
+    public SpecDTO getEquipmentSpec(Hunter hunter) throws IllegalAccessException {
         return hunter.getEquipmentSpec();
     }
 
@@ -136,6 +133,17 @@ public class HunterService {
 
         return totalSpec;
     }
+
+    public List<Double> getAtkSpd(Hunter hunter) throws IllegalAccessException {
+        SpecDTO totalSpec = getTotalSpec(hunter);
+
+        double atkSpd = hunter.getAtkSpd(totalSpec);
+        double atkSpdHalf = hunter.getAtkSpd(totalSpec, 0.5);
+        double atkSpdQuarter = hunter.getAtkSpd(totalSpec, 0.25);
+
+        return List.of(atkSpd, atkSpdHalf, atkSpdQuarter);
+    }
+
 
     public CommonBuff getCommonBuff() {
         return commonBuff;
