@@ -1,5 +1,6 @@
 package com.baebug.eht.manager.controller;
 
+import com.baebug.eht.manager.domain.buff.CommonBuff;
 import com.baebug.eht.manager.domain.dto.*;
 import com.baebug.eht.manager.domain.hunter.*;
 import com.baebug.eht.manager.domain.item.Item;
@@ -211,6 +212,29 @@ public class HunterController {
         itemService.update(itemId, itemDTO);
 
         return "redirect:/hunters/{hunterId}/equipments";
+    }
+
+    @GetMapping("/buffs")
+    public String editBuffForm(Model model) {
+        CommonBuff commonBuff = hunterService.getCommonBuff();
+        model.addAttribute("commonBuff", commonBuff);
+
+        return "hunters/buffs";
+    }
+
+    @PostMapping("/buffs")
+    public String editBuff(@Valid @ModelAttribute CommonBuffDTO commonBuffDTO,
+                           BindingResult bindingResult,
+                           Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("commonBuff", commonBuffDTO);
+            return "hunters/buffs";
+        }
+
+        hunterService.setCommonBuff(commonBuffDTO);
+
+        return "redirect:/hunters";
     }
 
 

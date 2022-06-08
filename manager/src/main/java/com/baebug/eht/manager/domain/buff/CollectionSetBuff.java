@@ -1,5 +1,6 @@
 package com.baebug.eht.manager.domain.buff;
 
+import com.baebug.eht.manager.domain.dto.CollectionSetBuffDTO;
 import com.baebug.eht.manager.domain.dto.SpecDTO;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -34,17 +35,17 @@ public class CollectionSetBuff {
     /**
      * 도감 세트 버프를 입력받는 메서드
      */
-    public void setCollectionSetBuff(double atk, double def, double hp, double crit, double crit_dmg, double boss, double primate, double animal, double demon, double undead) {
-        this.atk = atk;
-        this.def = def;
-        this.hp = hp;
-        this.crit = crit;
-        this.crit_dmg = crit_dmg;
-        this.boss = boss;
-        this.primate = primate;
-        this.animal = animal;
-        this.demon = demon;
-        this.undead = undead;
+    public void setCollectionSetBuff(CollectionSetBuffDTO collectionSetBuffDTO) {
+        this.atk = collectionSetBuffDTO.getAtk();
+        this.def = collectionSetBuffDTO.getDef();
+        this.hp = collectionSetBuffDTO.getHp();
+        this.crit = collectionSetBuffDTO.getCrit();
+        this.crit_dmg = collectionSetBuffDTO.getCrit_dmg();
+        this.boss = collectionSetBuffDTO.getBoss();
+        this.primate = collectionSetBuffDTO.getPrimate();
+        this.animal = collectionSetBuffDTO.getAnimal();
+        this.demon = collectionSetBuffDTO.getDemon();
+        this.undead = collectionSetBuffDTO.getUndead();
     }
 
     /**

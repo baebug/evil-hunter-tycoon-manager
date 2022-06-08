@@ -93,7 +93,7 @@
             <table th:border="0" th:class="d-inline-block">
                 <tr>
                     <th th:text="'현재 공격속도'"></th>
-                    <th th:text="${hunter.getAtkSpd()}"></th>
+                    <th th:text="${hunter.getAtkSpd()} &gt; 0 ? ${#numbers.formatDecimal(hunter.getAtkSpd(), 1, 2)} : '0'"></th>
                 </tr>
                 <tr>
                     <td th:text="'0.5 까지'"></td>

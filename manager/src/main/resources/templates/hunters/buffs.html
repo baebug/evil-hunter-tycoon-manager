@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>마을 버프 입력</h2>
+    </div>
+
+    <form action="hunter.html" th:action th:object="${commonBuff}" method="post">
+        <h4>연합 버프</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'공격력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{guild.atk}" type="number" step="3" min="0" max="15" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'방어력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{guild.def}" type="number" step="3" min="0" max="15" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'체력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{guild.hp}" type="number" step="3" min="0" max="15" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'공격속도'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{guild.spd}" type="number" step="1" min="0" max="5" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'치명타'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{guild.crit}" type="number" step="1" min="0" max="5" required>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h4>도감 수집 버프</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'공격력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.atk}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'방어력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.def}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'체력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.hp}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'치명타'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.crit}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'치명타 피해'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.crit_dmg}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'영장류'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.primate}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'허기 소모량'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.satiety}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'기분 소모량'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.mood}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'기력 소모량'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionBasic.stamina}" step="0.1" min="0" type="number" required>
+                </div>
+
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h4>도감 세트 버프</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'공격력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.atk}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'방어력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.def}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'체력'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.hp}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'치명타'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.crit}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'치명타 피해'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.crit_dmg}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'영장류'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.primate}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'보스류'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.boss}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'악마류'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.demon}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'동물류'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.animal}" step="0.1" min="0" type="number" required>
+                </div>
+                <div class="col-sm-4 d-flex align-items-center justify-content-between">
+                    <div>
+                        <label th:text="'언데드류'"></label>
+                    </div>
+                    <input class="col-2 col-sm-5 text-center" th:field="*{collectionSet.undead}" step="0.1" min="0" type="number" required>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn-primary" type="submit">저장</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn-secondary"
+                        onclick="location.href='hunters.html'"
+                        th:onclick="|location.href='@{/hunters}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+
+    </form>
+
+</div> <!-- /container -->
+</body>
+</html>

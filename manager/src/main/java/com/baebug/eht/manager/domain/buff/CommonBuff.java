@@ -1,5 +1,6 @@
 package com.baebug.eht.manager.domain.buff;
 
+import com.baebug.eht.manager.domain.dto.CommonBuffDTO;
 import com.baebug.eht.manager.domain.dto.SpecDTO;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import lombok.Getter;
@@ -19,10 +20,16 @@ public class CommonBuff {
      * RequiredArgsConstructor 어노테이션을 통해 DI 받고 싱글톤으로 관리한다.
      */
     private final GuildBuff guild;
-    private final DungeonBuff dungeon;
-    private final BuildingBuff building;
+//    private final DungeonBuff dungeon;
+//    private final BuildingBuff building;
     private final CollectionBasicBuff collectionBasic;
     private final CollectionSetBuff collectionSet;
+
+    public void setCommonBuff(CommonBuffDTO commonBuffDTO) {
+        this.guild.setGuildBuff(commonBuffDTO.getGuild());
+        this.collectionBasic.setCollectionBasicBuff(commonBuffDTO.getCollectionBasic());
+        this.collectionSet.setCollectionSetBuff(commonBuffDTO.getCollectionSet());
+    }
 
     /**
      * hunter 의 spec 에 마을 버프로 오른 능력치를 합산한다.
@@ -32,8 +39,6 @@ public class CommonBuff {
         SpecDTO spec = hunter.getTotalSpec();
 
         getGuild().calculate(spec);
-        getDungeon().calculate(spec);
-        getBuilding().calculate(spec);
         getCollectionBasic().calculate(spec);
         getCollectionSet().calculate(spec);
     }

@@ -1,12 +1,9 @@
 package com.baebug.eht.manager.service;
 
 import com.baebug.eht.manager.domain.buff.CommonBuff;
-import com.baebug.eht.manager.domain.dto.HunterItemDTO;
-import com.baebug.eht.manager.domain.dto.SpecDTO;
-import com.baebug.eht.manager.domain.dto.TechDTO;
+import com.baebug.eht.manager.domain.dto.*;
 import com.baebug.eht.manager.domain.hunter.Hunter;
 import com.baebug.eht.manager.domain.hunter.HunterClass;
-import com.baebug.eht.manager.domain.dto.HunterDTO;
 import com.baebug.eht.manager.domain.hunter.StatEntity;
 import com.baebug.eht.manager.domain.hunter.TechEntity;
 import com.baebug.eht.manager.domain.item.Item;
@@ -138,6 +135,14 @@ public class HunterService {
         commonBuff.calculate(hunter);
 
         return hunter.getTotalSpec();
+    }
+
+    public CommonBuff getCommonBuff() {
+        return commonBuff;
+    }
+
+    public void setCommonBuff(CommonBuffDTO commonBuffDTO) {
+        commonBuff.setCommonBuff(commonBuffDTO);
     }
 
 

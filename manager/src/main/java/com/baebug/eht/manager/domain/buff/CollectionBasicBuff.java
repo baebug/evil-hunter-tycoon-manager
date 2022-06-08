@@ -1,5 +1,6 @@
 package com.baebug.eht.manager.domain.buff;
 
+import com.baebug.eht.manager.domain.dto.CollectionBasicBuffDTO;
 import com.baebug.eht.manager.domain.dto.SpecDTO;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -33,16 +34,16 @@ public class CollectionBasicBuff {
     /**
      * 도감 수집 버프를 입력받는 메서드
      */
-    public void setCollectionBasicBuff(double atk, double def, double hp, double crit, double crit_dmg, double satiety, double mood, double stamina, double primate) {
-        this.atk = atk;
-        this.def = def;
-        this.hp = hp;
-        this.crit = crit;
-        this.crit_dmg = crit_dmg;
-        this.satiety = satiety;
-        this.mood = mood;
-        this.stamina = stamina;
-        this.primate = primate;
+    public void setCollectionBasicBuff(CollectionBasicBuffDTO collectionBasicBuffDTO) {
+        this.atk = collectionBasicBuffDTO.getAtk();
+        this.def = collectionBasicBuffDTO.getDef();
+        this.hp = collectionBasicBuffDTO.getHp();
+        this.crit = collectionBasicBuffDTO.getCrit();
+        this.crit_dmg = collectionBasicBuffDTO.getCrit_dmg();
+        this.satiety = collectionBasicBuffDTO.getSatiety();
+        this.mood = collectionBasicBuffDTO.getMood();
+        this.stamina = collectionBasicBuffDTO.getStamina();
+        this.primate = collectionBasicBuffDTO.getPrimate();
     }
 
     /**
