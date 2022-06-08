@@ -12,7 +12,7 @@ public enum OptionList {
     CRIT("치명타 확률", "crit"),
     CRIT_DMG("치명타 피해량", "crit_dmg"),
     ADD_DMG("추가 데미지", "add_dmg"),
-    PRIMATE("영장 데미지", "primate"),
+    PRIMATE("영장류 데미지", "primate"),
     DEMON("악마류 데미지", "demon"),
     UNDEAD("언데드 데미지", "undead"),
     ANIMAL("동물류 데미지", "animal"),

@@ -121,24 +121,48 @@
                         <span th:text="${specMap.collectionSpec.crit_dmg} &gt; 0 ? |도감(${#numbers.formatDecimal(specMap.collectionSpec.crit_dmg, 1, 1)})| : _ "></span>
                     </td>
                 </tr>
+                <tr>
+                    <td class="align-middle">영장</td>
+                    <td class="align-middle" th:text="${#numbers.formatDecimal(specMap.totalSpec.primate, 1, 1)} + ' %'">+101%</td>
+                    <td class="align-middle">
+                        <span th:text="${specMap.characteristicSpec.primate} &gt; 0 ? |성격(${#numbers.formatDecimal(specMap.characteristicSpec.primate, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.statSpec.primate} &gt; 0 ? |스탯(${#numbers.formatDecimal(specMap.statSpec.primate, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.techSpec.primate} &gt; 0 ? |비법(${#numbers.formatDecimal(specMap.techSpec.primate, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.equipmentSpec.primate} &gt; 0 ? |장비(${#numbers.formatDecimal(specMap.equipmentSpec.primate, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.guildSpec.primate} &gt; 0 ? |연합(${#numbers.formatDecimal(specMap.guildSpec.primate, 1, 0)})| : _ "></span>
+                        <span th:text="${specMap.collectionSpec.primate} &gt; 0 ? |도감(${#numbers.formatDecimal(specMap.collectionSpec.primate, 1, 1)})| : _ "></span>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
-        <div class="text-center">
-            <table th:border="0" th:class="d-inline-block">
-                <tr>
-                    <th th:text="'현재 공격속도'"></th>
-                    <th th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[0], 1, 2)} : '0'"></th>
-                </tr>
-                <tr>
-                    <td th:text="'0.5 까지'"></td>
-                    <td th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[1], 1, 1)} : '0'"></td>
-                </tr>
-                <tr>
-                    <td th:text="'0.25 까지'"></td>
-                    <td th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[2], 1, 1)} : '0'"></td>
-                </tr>
-            </table>
+        <div class="row align-items-center">
+            <div class="col text-center">
+                <table th:border="0" th:class="d-inline-block">
+                    <tr>
+                        <th th:text="'영장 + 전공 + 치피'"></th>
+                    </tr>
+                    <tr>
+                        <td th:text="${specMap.totalSpec.primate} + ${specMap.totalSpec.atk} + ${specMap.totalSpec.crit_dmg}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col text-center">
+                <table th:border="0" th:class="d-inline-block">
+                    <tr>
+                        <th th:text="'현재 공격속도'"></th>
+                        <th th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[0], 1, 2)} : '0'"></th>
+                    </tr>
+                    <tr>
+                        <td th:text="'0.5 까지'"></td>
+                        <td th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[1], 1, 1)} : '0'"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="'0.25 까지'"></td>
+                        <td th:text="${atkSpd[0]} &gt; 0 ? ${#numbers.formatDecimal(atkSpd[2], 1, 1)} : '0'"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 
